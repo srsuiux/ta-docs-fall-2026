@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fall 2026 Weekly Schedule — Sundar Raj Sharma</title>
+<style>
+  :root{
+    --hour: 52px;
+    --ink: #1c1c1a;
+    --ink-2: #5f5e5a;
+    --ink-3: #8a8981;
+    --rule: #e2e0d8;
+    --paper: #ffffff;
+    --mark: #185fa5;
+    --mark-bg: #e6f1fb;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#f4f3ef;color:var(--ink);
+    font-family:"Iowan Old Style","Charter","Georgia",serif;
+    -webkit-font-smoothing:antialiased}
+  .sheet{max-width:1120px;margin:28px auto 48px;background:var(--paper);
+    padding:38px 44px 44px;border:1px solid var(--rule)}
+  .sans{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+
+  h1{font-size:26px;font-weight:600;margin:0 0 5px;letter-spacing:-0.01em}
+  h2{font-size:15px;font-weight:600;margin:0 0 10px}
+  .meta{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:13px;color:var(--ink-2);margin:0 0 2px}
+  .rule{height:1px;background:var(--rule);margin:22px 0}
+
+  .topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+  button{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:13px;
+    padding:8px 16px;border:1px solid var(--ink);background:transparent;color:var(--ink);
+    border-radius:2px;cursor:pointer}
+  button:hover{background:var(--ink);color:var(--paper)}
+  button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;
+    background:var(--rule);border:1px solid var(--rule);margin:0 0 22px}
+  .stat{background:var(--paper);padding:12px 16px}
+  .stat .n{font-family:system-ui,-apple-system,sans-serif;font-size:25px;font-weight:600;
+    line-height:1.1;font-variant-numeric:tabular-nums}
+  .stat .k{font-family:system-ui,-apple-system,sans-serif;font-size:11.5px;
+    color:var(--ink-2);margin-top:3px}
+  .stat .w{font-family:system-ui,-apple-system,sans-serif;font-size:11px;color:var(--ink-3);margin-top:1px}
+
+  #banner{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;
+    color:var(--ink-2);border-left:3px solid var(--mark);padding:9px 0 9px 14px;margin:0 0 20px}
+  #banner b{color:var(--ink);font-weight:600}
+
+  .legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 14px;
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:11.5px;color:var(--ink-2)}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .sw{width:11px;height:11px;border-radius:2px;display:inline-block;border:1px solid rgba(0,0,0,.09)}
+
+  .grid{display:grid;grid-template-columns:46px repeat(5,minmax(0,1fr));gap:4px}
+  .dayhead{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:13px;
+    font-weight:600;text-align:center;padding:5px 0;border-radius:3px;margin-bottom:4px}
+  .dayhead small{display:block;font-size:10.5px;font-weight:400;color:var(--ink-3)}
+  .dayhead.today{background:var(--mark-bg);color:var(--mark)}
+  .dayhead.today small{color:var(--mark)}
+
+  .gutter,.col{position:relative;height:calc(11 * var(--hour))}
+  .gutter div{position:absolute;right:7px;font-family:system-ui,-apple-system,sans-serif;
+    font-size:11px;color:var(--ink-3);transform:translateY(-6px)}
+  .col{border-left:1px solid #f0efe9}
+
+  .blk{position:absolute;left:0;right:0;border-radius:4px;padding:3px 7px;overflow:hidden;
+    border:1px solid rgba(0,0,0,.09);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:11px;line-height:1.25}
+  .blk .t{font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .blk .tm{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.9}
+  .blk .sub{display:block;overflow:hidden;opacity:.9}
+  .blk.oneline{display:flex;align-items:center;gap:5px;padding:0 7px}
+  .blk.oneline .t{font-size:10.5px;flex:0 1 auto;min-width:0}
+  .blk.oneline .tm{font-size:10px;flex:0 0 auto}
+  .blk.oneline .sub{display:none}
+  .blk.hide-sub .sub{display:none}
+  .blk.hide-tm .tm{display:none}
+  .blk.remote{border:1px dashed #0f6e56}
+  .blk.now{box-shadow:inset 0 0 0 2px var(--mark)}
+  .blk.dim{opacity:.62}
+  .pill{position:absolute;top:3px;right:5px;background:var(--mark);color:#fff;font-size:10px;
+    font-weight:600;padding:0 6px;border-radius:8px;line-height:15px}
+  #nowline{position:absolute;left:-3px;right:-3px;height:2px;background:var(--mark);
+    z-index:9;border-radius:1px;pointer-events:none}
+
+  table{width:100%;border-collapse:collapse;
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:12.5px}
+  th{text-align:left;font-weight:600;color:var(--ink-2);padding:7px 10px;
+    border-bottom:1px solid var(--ink)}
+  td{padding:7px 10px;border-bottom:1px solid var(--rule);color:var(--ink)}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.total td{font-weight:600;border-bottom:none;border-top:1px solid var(--ink)}
+  tr.sub td{color:var(--ink-2);padding-left:24px}
+  .two{display:grid;grid-template-columns:1.35fr 1fr;gap:36px;margin-top:14px}
+  .note{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:12.5px;
+    color:var(--ink-2);line-height:1.6;margin:16px 0 0}
+  .note b{color:var(--ink)}
+
+  @media (max-width:860px){
+    .sheet{padding:24px 18px;margin:0}
+    .two{grid-template-columns:1fr;gap:26px}
+    .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+
+  @page{size:landscape;margin:12mm}
+  @media print{
+    :root{--hour:46px}
+    html,body{background:#fff}
+    .sheet{margin:0;padding:0;border:none;max-width:none}
+    .noprint{display:none !important}
+    .blk,.dayhead,.sw,.stats{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .blk.dim{opacity:1}
+    .blk.now{box-shadow:none}
+    .pill,#nowline{display:none}
+    .two,.oh,.stats{page-break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="topbar">
+    <div>
+      <h1>Fall 2026 weekly schedule</h1>
+      <p class="meta">Academic year 2026&ndash;2027, fall semester &nbsp;·&nbsp; 24 August &ndash; 12 December 2026</p>
+      <p class="meta">Sundar Raj Sharma &nbsp;·&nbsp; MCIS, Youngstown State University &nbsp;·&nbsp; STEM-TA under Dr. Astorga</p>
+      <p class="meta">Office: Meshel 466 &nbsp;·&nbsp; On campus Monday&ndash;Thursday &nbsp;·&nbsp; Friday remote</p>
+    </div>
+    <button class="noprint" onclick="window.print()">Save as PDF</button>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">15.0</div><div class="k">Hours in office</div><div class="w">Meshel 466 and 324, Mon&ndash;Thu</div></div>
+    <div class="stat"><div class="n">5.0</div><div class="k">Hours remote</div><div class="w">Friday morning</div></div>
+    <div class="stat"><div class="n">3.0</div><div class="k">Student office hours</div><div class="w">Tue, Wed, Thu &mdash; inside the 15</div></div>
+    <div class="stat"><div class="n">20.0</div><div class="k">Total TA hours</div><div class="w">At the assignment cap</div></div>
+  </div>
+
+  <p id="banner" class="noprint">Checking the time&hellip;</p>
+
+  <div class="legend" id="legend"></div>
+
+  <div class="grid" id="heads"></div>
+  <div class="grid" id="grid"></div>
+
+  <p class="note" style="margin-top:12px">Unmarked time is personal and not part of the assistantship. Coursework and meals are kept off this grid.</p>
+
+  <div class="rule"></div>
+
+  <div class="oh">
+    <h2>Office hours</h2>
+    <p class="note" style="margin:0 0 12px">Open drop-in for students in Dr. Astorga's sections. No appointment needed. Held in Meshel 466 and counted inside the 15 in-office hours, not added on top.</p>
+    <table style="max-width:560px">
+      <thead><tr><th>Day</th><th>Time</th><th>Room</th><th class="num">Hours</th></tr></thead>
+      <tbody>
+        <tr><td>Tuesday</td><td>11:00 AM &ndash; 12:00 PM</td><td>Meshel 466</td><td class="num">1.0</td></tr>
+        <tr><td>Wednesday</td><td>12:00 PM &ndash; 1:00 PM</td><td>Meshel 466</td><td class="num">1.0</td></tr>
+        <tr><td>Thursday</td><td>11:00 AM &ndash; 12:00 PM</td><td>Meshel 466</td><td class="num">1.0</td></tr>
+        <tr class="total"><td>Total office hours</td><td></td><td></td><td class="num">3.0</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="two">
+    <div>
+      <h2>Where the 20 TA hours go</h2>
+      <table>
+        <thead><tr><th>Component</th><th>Location</th><th class="num">Hours</th></tr></thead>
+        <tbody>
+          <tr><td>TA work &mdash; prep, zyBooks, labs, grading</td><td>Meshel 466</td><td class="num">10.0</td></tr>
+          <tr><td>Student office hours</td><td>Meshel 466</td><td class="num">3.0</td></tr>
+          <tr><td>Daily meeting with Dr. Astorga, Mon&ndash;Thu</td><td>Meshel 324</td><td class="num">2.0</td></tr>
+          <tr class="total"><td>In office</td><td>On campus</td><td class="num">15.0</td></tr>
+          <tr><td>TA work, remote</td><td>Friday, from home</td><td class="num">4.5</td></tr>
+          <tr><td>Meeting with Dr. Astorga, Teams</td><td>Friday, remote</td><td class="num">0.5</td></tr>
+          <tr class="total"><td>Remote</td><td>Off campus</td><td class="num">5.0</td></tr>
+          <tr class="total"><td>Total</td><td></td><td class="num">20.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h2>Full weekly load</h2>
+      <table>
+        <thead><tr><th>Commitment</th><th class="num">Hours</th></tr></thead>
+        <tbody>
+          <tr><td>TA assignment</td><td class="num">20</td></tr>
+          <tr><td>Thesis</td><td class="num">15</td></tr>
+          <tr><td>Independent study</td><td class="num">3</td></tr>
+          <tr><td>CSCI 6971 class</td><td class="num">3</td></tr>
+          <tr><td>Coursework, not on grid</td><td class="num">3</td></tr>
+          <tr class="total"><td>Total</td><td class="num">44</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p class="note"><b>Reaching me.</b> Start times carry a 10-minute buffer either side. Friday after 2:00 PM and the full weekend are unavailable &mdash; email gets picked up in the next TA block; text for anything genuinely urgent.</p>
+
+</div>
+
+<script>
+const START = 540, END = 1200;
+
+const CATS = {
+  class:  { bg:'#b5d4f4', fg:'#042c53', label:'Class' },
+  meet:   { bg:'#9fe1cb', fg:'#04342c', label:'Meeting with Dr. Astorga' },
+  ta:     { bg:'#e1f5ee', fg:'#04342c', label:'TA work' },
+  hours:  { bg:'#5dcaa5', fg:'#04342c', label:'Student office hours' },
+  thesis: { bg:'#cecbf6', fg:'#26215c', label:'Thesis' },
+  study:  { bg:'#f5c4b3', fg:'#4a1b0c', label:'Independent study' },
+  off:    { bg:'#f1efe8', fg:'#2c2c2a', label:'Break / unavailable' }
+};
+
+const t = (h, m) => h * 60 + m;
+
+const DAYS = [
+  { short:'Mon', long:'Monday', where:'On campus', blocks:[
+    { s:t(9,0),  e:t(10,30), cat:'class',  title:'CSCI 6971',      sub:'Cloud computing<br>Meshel 352', name:'CSCI 6971 class' },
+    { s:t(10,30),e:t(11,0),  cat:'meet',   title:'Meet — Astorga', sub:'Meshel 324', name:'the meeting with Dr. Astorga' },
+    { s:t(11,0), e:t(13,30), cat:'ta',     title:'TA work',        sub:'2.5 hrs<br>Meshel 466', name:'TA work in Meshel 466' },
+    { s:t(13,30),e:t(14,0),  cat:'off',    title:'Break',          sub:'', name:'a break' },
+    { s:t(14,0), e:t(18,0),  cat:'thesis', title:'Thesis',         sub:'4 hrs', name:'thesis work' }
+  ]},
+  { short:'Tue', long:'Tuesday', where:'On campus', blocks:[
+    { s:t(9,0),  e:t(9,30),  cat:'meet',   title:'Meet — Astorga', sub:'Meshel 324', name:'the meeting with Dr. Astorga' },
+    { s:t(9,30), e:t(11,0),  cat:'ta',     title:'TA work',        sub:'1.5 hrs<br>Meshel 466', name:'TA work in Meshel 466' },
+    { s:t(11,0), e:t(12,0),  cat:'hours',  title:'Office hours',   sub:'Meshel 466', name:'student office hours' },
+    { s:t(12,0), e:t(13,0),  cat:'ta',     title:'TA work',        sub:'1 hr<br>Meshel 466', name:'TA work in Meshel 466' },
+    { s:t(13,0), e:t(13,30), cat:'off',    title:'Break',          sub:'', name:'a break' },
+    { s:t(13,30),e:t(17,0),  cat:'thesis', title:'Thesis',         sub:'3.5 hrs', name:'thesis work' },
+    { s:t(17,0), e:t(18,0),  cat:'study',  title:'Ind. study',     sub:'1 hr', name:'independent study' }
+  ]},
+  { short:'Wed', long:'Wednesday', where:'On campus', blocks:[
+    { s:t(9,0),  e:t(10,30), cat:'class',  title:'CSCI 6971',      sub:'Cloud computing<br>Meshel 352', name:'CSCI 6971 class' },
+    { s:t(10,30),e:t(11,0),  cat:'meet',   title:'Meet — Astorga', sub:'Meshel 324', name:'the meeting with Dr. Astorga' },
+    { s:t(11,0), e:t(12,0),  cat:'ta',     title:'TA work',        sub:'1 hr<br>Meshel 466', name:'TA work in Meshel 466' },
+    { s:t(12,0), e:t(13,0),  cat:'hours',  title:'Office hours',   sub:'Meshel 466', name:'student office hours' },
+    { s:t(13,0), e:t(14,30), cat:'ta',     title:'TA work',        sub:'1.5 hrs<br>Meshel 466', name:'TA work in Meshel 466' },
+    { s:t(14,30),e:t(15,0),  cat:'off',    title:'Break',          sub:'', name:'a break' },
+    { s:t(15,0), e:t(18,30), cat:'thesis', title:'Thesis',         sub:'3.5 hrs', name:'thesis work' },
+    { s:t(18,30),e:t(19,30), cat:'study',  title:'Ind. study',     sub:'Dr. Yu slot', name:'independent study with Dr. Yu' }
+  ]},
+  { short:'Thu', long:'Thursday', where:'On campus', blocks:[
+    { s:t(9,0),  e:t(9,30),  cat:'meet',   title:'Meet — Astorga', sub:'Meshel 324', name:'the meeting with Dr. Astorga' },
+    { s:t(9,30), e:t(11,0),  cat:'ta',     title:'TA work',        sub:'1.5 hrs<br>Meshel 466', name:'TA work in Meshel 466' },
+    { s:t(11,0), e:t(12,0),  cat:'hours',  title:'Office hours',   sub:'Meshel 466', name:'student office hours' },
+    { s:t(12,0), e:t(13,0),  cat:'ta',     title:'TA work',        sub:'1 hr<br>Meshel 466', name:'TA work in Meshel 466' },
+    { s:t(13,0), e:t(13,30), cat:'off',    title:'Break',          sub:'', name:'a break' },
+    { s:t(13,30),e:t(17,30), cat:'thesis', title:'Thesis',         sub:'4 hrs', name:'thesis work' },
+    { s:t(17,30),e:t(18,30), cat:'study',  title:'Ind. study',     sub:'Dr. Yu / reporting', name:'independent study with Dr. Yu' }
+  ]},
+  { short:'Fri', long:'Friday', where:'Remote', blocks:[
+    { s:t(9,0),  e:t(9,30),  cat:'meet',   title:'Meet — Astorga', sub:'Teams', name:'the Teams meeting with Dr. Astorga', remote:true },
+    { s:t(9,30), e:t(14,0),  cat:'ta',     title:'TA work',        sub:'4.5 hrs<br>Remote', name:'remote TA work', remote:true },
+    { s:t(14,0), e:t(20,0),  cat:'off',    title:'Unavailable',    sub:'Off from 2:00 PM', name:'time off' }
+  ]}
+];
+
+function fmt(m){
+  const h = Math.floor(m/60), mm = String(m%60).padStart(2,'0');
+  const ap = h >= 12 ? 'PM' : 'AM';
+  let hh = h % 12; if (hh === 0) hh = 12;
+  return hh + ':' + mm + ' ' + ap;
+}
+function hm(m){
+  const h = Math.floor(m/60), mm = String(m%60).padStart(2,'0');
+  let hh = h % 12; if (hh === 0) hh = 12;
+  return hh + ':' + mm;
+}
+
+const legend = document.getElementById('legend');
+for (const k in CATS) {
+  const c = CATS[k];
+  legend.insertAdjacentHTML('beforeend',
+    '<span><span class="sw" style="background:' + c.bg + '"></span>' + c.label + '</span>');
+}
+legend.insertAdjacentHTML('beforeend',
+  '<span><span class="sw" style="background:#fff;border:1px dashed #0f6e56"></span>Dashed border = remote</span>');
+
+const heads = document.getElementById('heads');
+heads.insertAdjacentHTML('beforeend', '<div></div>');
+DAYS.forEach((d, i) => {
+  heads.insertAdjacentHTML('beforeend',
+    '<div class="dayhead" id="hd' + (i+1) + '">' + d.short + '<small>' + d.where + '</small></div>');
+});
+
+const grid = document.getElementById('grid');
+let gut = '<div class="gutter">';
+for (let h = 9; h <= 20; h++) {
+  let hh = h % 12; if (hh === 0) hh = 12;
+  gut += '<div style="top:calc(' + (h - 9) + ' * var(--hour))">' + hh + ':00</div>';
+}
+gut += '</div>';
+grid.insertAdjacentHTML('beforeend', gut);
+
+DAYS.forEach((d, i) => {
+  let html = '<div class="col" id="col' + (i+1) + '">';
+  d.blocks.forEach(b => {
+    const c = CATS[b.cat];
+    const top = (b.s - START) / 60;
+    const hgt = (b.e - b.s) / 60;
+    const range = hm(b.s) + '\u2013' + fmt(b.e);
+    const plain = (b.sub || '').replace(/<br>/g, ', ');
+    html += '<div class="blk' + (b.remote ? ' remote' : '') + '"'
+      + ' data-d="' + (i+1) + '" data-s="' + b.s + '" data-e="' + b.e + '"'
+      + ' data-n="' + b.name + '"'
+      + ' title="' + b.title + ' \u2014 ' + range + (plain ? ' \u2014 ' + plain : '') + '"'
+      + ' style="background:' + c.bg + ';color:' + c.fg + ';'
+      + 'top:calc(' + top + ' * var(--hour));'
+      + 'height:calc(' + hgt + ' * var(--hour) - 4px)">'
+      + '<span class="t">' + b.title + '</span>'
+      + '<span class="tm">' + range + '</span>'
+      + (b.sub ? '<span class="sub">' + b.sub + '</span>' : '')
+      + '</div>';
+  });
+  html += '</div>';
+  grid.insertAdjacentHTML('beforeend', html);
+});
+
+const blocks = Array.from(document.querySelectorAll('.blk'));
+const banner = document.getElementById('banner');
+
+function overflows(el){ return el.scrollHeight > el.clientHeight + 1; }
+
+function fit(){
+  blocks.forEach(b => {
+    b.classList.remove('oneline','hide-sub','hide-tm');
+    if (!overflows(b)) return;
+    b.classList.add('hide-sub');
+    if (!overflows(b)) return;
+    b.classList.remove('hide-sub');
+    b.classList.add('oneline');
+    if (!overflows(b)) return;
+    b.classList.add('hide-tm');
+  });
+}
+
+function tick(){
+  blocks.forEach(b => {
+    b.classList.remove('now','dim');
+    const p = b.querySelector('.pill');
+    if (p) p.remove();
+  });
+  for (let i = 1; i <= 5; i++) document.getElementById('hd' + i).classList.remove('today');
+  const old = document.getElementById('nowline');
+  if (old) old.remove();
+
+  const now = new Date();
+  const d = now.getDay();
+  const mins = now.getHours() * 60 + now.getMinutes();
+
+  if (d < 1 || d > 5) {
+    banner.innerHTML = '<b>Weekend \u2014 unavailable.</b> Email gets picked up Monday morning; text for anything urgent.';
+    return;
+  }
+
+  document.getElementById('hd' + d).classList.add('today');
+
+  if (mins >= START && mins <= END) {
+    const line = document.createElement('div');
+    line.id = 'nowline';
+    line.style.top = 'calc(' + ((mins - START) / 60) + ' * var(--hour))';
+    document.getElementById('col' + d).appendChild(line);
+  }
+
+  let cur = null, next = null;
+  blocks.forEach(b => {
+    if (+b.dataset.d !== d) return;
+    const s = +b.dataset.s, e = +b.dataset.e;
+    if (mins >= s && mins < e) cur = b;
+    else if (mins < s && (!next || s < +next.dataset.s)) next = b;
+  });
+
+  if (cur) {
+    cur.classList.add('now');
+    const pill = document.createElement('div');
+    pill.className = 'pill';
+    pill.textContent = 'Now';
+    cur.appendChild(pill);
+    blocks.forEach(b => { if (b !== cur) b.classList.add('dim'); });
+    banner.innerHTML = '<b>Now: ' + cur.dataset.n + '</b> \u2014 until ' + fmt(+cur.dataset.e)
+      + ' (' + ((+cur.dataset.e) - mins) + ' min left)';
+  } else if (next) {
+    banner.innerHTML = '<b>Nothing scheduled right now.</b> Next up: ' + next.dataset.n
+      + ' at ' + fmt(+next.dataset.s) + '.';
+  } else {
+    banner.innerHTML = '<b>Done for the day.</b> ' + DAYS[d-1].long + ' is finished.';
+  }
+}
+
+fit();
+tick();
+window.addEventListener('resize', fit);
+window.addEventListener('beforeprint', fit);
+window.addEventListener('afterprint', fit);
+if (window.matchMedia) {
+  const mq = window.matchMedia('print');
+  if (mq.addEventListener) mq.addEventListener('change', fit);
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+setInterval(tick, 30000);
+</script>
+</body>
+</html>
