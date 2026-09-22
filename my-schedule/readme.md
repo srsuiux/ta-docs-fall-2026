@@ -17,77 +17,48 @@
 
 ---
 
-## Weekly Grid
-
-### Legend
-
-| Category | Color |
-|---|---|
-| Class | #b5d4f4 |
-| Meeting with Dr. Astorga | #9fe1cb |
-| TA work | #e1f5ee |
-| Student office hours | #5dcaa5 |
-| Thesis | #cecbf6 |
-| Independent study | #f5c4b3 |
-| Break / unavailable | #f1efe8 |
-| Dashed border | Remote |
+## Weekly Schedule
 
 ### Monday (On campus)
 
-| Time | Category | Activity | Location |
-|---|---|---|---|
-| 9:00 – 10:30 AM | Class | CSCI 6971 — Cloud computing | Meshel 352 |
-| 10:30 – 11:00 AM | Meeting | Meet — Astorga | Meshel 324 |
-| 11:00 AM – 1:30 PM | TA work | TA work (2.5 hrs) | Meshel 466 |
-| 1:30 – 2:00 PM | Break | Break | — |
-| 2:00 – 6:00 PM | Thesis | Thesis (4 hrs) | — |
+| Time | Activity | Location |
+|---|---|---|
+| 10:30 – 11:00 AM | Meet — Astorga | Meshel 324 |
+| 11:00 AM – 1:30 PM | TA work (2.5 hrs) | Meshel 466 |
 
 ### Tuesday (On campus)
 
-| Time | Category | Activity | Location |
-|---|---|---|---|
-| 9:00 – 9:30 AM | Meeting | Meet — Astorga | Meshel 324 |
-| 9:30 – 11:00 AM | TA work | TA work (1.5 hrs) | Meshel 466 |
-| 11:00 AM – 12:00 PM | Office hours | Office hours | Meshel 466 |
-| 12:00 – 1:00 PM | TA work | TA work (1 hr) | Meshel 466 |
-| 1:00 – 1:30 PM | Break | Break | — |
-| 1:30 – 5:00 PM | Thesis | Thesis (3.5 hrs) | — |
-| 5:00 – 6:00 PM | Ind. study | Ind. study (1 hr) | — |
+| Time | Activity | Location |
+|---|---|---|
+| 9:00 – 9:30 AM | Meet — Astorga | Meshel 324 |
+| 9:30 – 11:00 AM | TA work (1.5 hrs) | Meshel 466 |
+| 11:00 AM – 12:00 PM | Office hours | Meshel 466 |
+| 12:00 – 1:00 PM | TA work (1 hr) | Meshel 466 |
 
 ### Wednesday (On campus)
 
-| Time | Category | Activity | Location |
-|---|---|---|---|
-| 9:00 – 10:30 AM | Class | CSCI 6971 — Cloud computing | Meshel 352 |
-| 10:30 – 11:00 AM | Meeting | Meet — Astorga | Meshel 324 |
-| 11:00 AM – 12:00 PM | TA work | TA work (1 hr) | Meshel 466 |
-| 12:00 – 1:00 PM | Office hours | Office hours | Meshel 466 |
-| 1:00 – 2:30 PM | TA work | TA work (1.5 hrs) | Meshel 466 |
-| 2:30 – 3:00 PM | Break | Break | — |
-| 3:00 – 6:30 PM | Thesis | Thesis (3.5 hrs) | — |
-| 6:30 – 7:30 PM | Ind. study | Ind. study — Dr. Yu slot | — |
+| Time | Activity | Location |
+|---|---|---|
+| 10:30 – 11:00 AM | Meet — Astorga | Meshel 324 |
+| 11:00 AM – 12:00 PM | TA work (1 hr) | Meshel 466 |
+| 12:00 – 1:00 PM | Office hours | Meshel 466 |
+| 1:00 – 2:30 PM | TA work (1.5 hrs) | Meshel 466 |
 
 ### Thursday (On campus)
 
-| Time | Category | Activity | Location |
-|---|---|---|---|
-| 9:00 – 9:30 AM | Meeting | Meet — Astorga | Meshel 324 |
-| 9:30 – 11:00 AM | TA work | TA work (1.5 hrs) | Meshel 466 |
-| 11:00 AM – 12:00 PM | Office hours | Office hours | Meshel 466 |
-| 12:00 – 1:00 PM | TA work | TA work (1 hr) | Meshel 466 |
-| 1:00 – 1:30 PM | Break | Break | — |
-| 1:30 – 5:30 PM | Thesis | Thesis (4 hrs) | — |
-| 5:30 – 6:30 PM | Ind. study | Ind. study — Dr. Yu / reporting | — |
+| Time | Activity | Location |
+|---|---|---|
+| 9:00 – 9:30 AM | Meet — Astorga | Meshel 324 |
+| 9:30 – 11:00 AM | TA work (1.5 hrs) | Meshel 466 |
+| 11:00 AM – 12:00 PM | Office hours | Meshel 466 |
+| 12:00 – 1:00 PM | TA work (1 hr) | Meshel 466 |
 
 ### Friday (Remote)
 
-| Time | Category | Activity | Location |
-|---|---|---|---|
-| 9:00 – 9:30 AM | Meeting | Meet — Astorga | Teams (remote) |
-| 9:30 AM – 2:00 PM | TA work | TA work (4.5 hrs) | Remote |
-| 2:00 – 8:00 PM | Unavailable | Unavailable — off from 2:00 PM | — |
-
-> Unmarked time is personal and not part of the assistantship. Coursework and meals are kept off this grid.
+| Time | Activity | Location |
+|---|---|---|
+| 9:00 – 9:30 AM | Meet — Astorga | Teams (remote) |
+| 9:30 AM – 2:00 PM | TA work (4.5 hrs) | Remote |
 
 ---
 
@@ -101,34 +72,6 @@ Open drop-in for students in Dr. Astorga's sections. No appointment needed. Held
 | Wednesday | 12:00 PM – 1:00 PM | Meshel 466 | 1.0 |
 | Thursday | 11:00 AM – 12:00 PM | Meshel 466 | 1.0 |
 | **Total office hours** | | | **3.0** |
-
----
-
-## Where the 20 TA Hours Go
-
-| Component | Location | Hours |
-|---|---|---|
-| TA work — prep, zyBooks, labs, grading | Meshel 466 | 10.0 |
-| Student office hours | Meshel 466 | 3.0 |
-| Daily meeting with Dr. Astorga, Mon–Thu | Meshel 324 | 2.0 |
-| **In office** | **On campus** | **15.0** |
-| TA work, remote | Friday, from home | 4.5 |
-| Meeting with Dr. Astorga, Teams | Friday, remote | 0.5 |
-| **Remote** | **Off campus** | **5.0** |
-| **Total** | | **20.0** |
-
----
-
-## Full Weekly Load
-
-| Commitment | Hours |
-|---|---|
-| TA assignment | 20 |
-| Thesis | 15 |
-| Independent study | 3 |
-| CSCI 6971 class | 3 |
-| Coursework, not on grid | 3 |
-| **Total** | **44** |
 
 ---
 
