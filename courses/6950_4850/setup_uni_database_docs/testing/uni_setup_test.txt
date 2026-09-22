@@ -1,0 +1,264 @@
+-- ============================================================
+-- University Database - Test Queries (simple -> nested)
+-- Run AFTER create_university_database.sql and university_seed_data.sql
+-- Expected row counts noted per query; verified against the seed data.
+-- ============================================================
+
+
+-- ============================================================
+-- LEVEL 1 - SINGLE TABLE
+-- ============================================================
+
+-- 1. Everything in one table.                              [11 rows]
+SELECT * FROM Student;
+
+-- 2. Projection + restriction.                             [5 rows]
+SELECT StdFirstName, StdLastName, StdClass, StdGPA
+FROM Student
+WHERE StdMajor = 'IS';
+
+-- 3. NULL handling. Note: StdGPA = NULL returns NOTHING.    [1 row]
+SELECT StdNo, StdLastName
+FROM Student
+WHERE StdGPA IS NULL;
+
+-- 4. DISTINCT + ORDER BY.                                  [4 rows: NULL, ACCT, FIN, IS]
+SELECT DISTINCT StdMajor
+FROM Student
+ORDER BY StdMajor;
+
+-- 5. Range restriction.                                    [4 rows]
+SELECT FacLastName, FacSalary, FacRank
+FROM Faculty
+WHERE FacSalary BETWEEN 40000 AND 80000
+ORDER BY FacSalary DESC;
+
+-- 6. COUNT(*) vs COUNT(column) - the NULL difference.      [1 row: 11, 10]
+SELECT COUNT(*) AS AllStudents, COUNT(StdGPA) AS WithGPA
+FROM Student;
+
+
+-- ============================================================
+-- LEVEL 2 - GROUPING
+-- ============================================================
+
+-- 7. GROUP BY with a NULL group.                           [4 rows]
+--    The NULL major becomes its own group.
+SELECT StdMajor, COUNT(*) AS NumStudents, ROUND(AVG(StdGPA),2) AS AvgGPA
+FROM Student
+GROUP BY StdMajor
+ORDER BY StdMajor;
+
+-- 8. GROUP BY + HAVING.                                    [2 rows]
+SELECT OffTerm, OffYear, COUNT(*) AS NumOfferings
+FROM Offering
+GROUP BY OffTerm, OffYear
+HAVING COUNT(*) >= 3
+ORDER BY OffYear, OffTerm;
+
+-- 9. WHERE vs HAVING in one query.                         [2 rows]
+SELECT FacDept, COUNT(*) AS NumFaculty, AVG(FacSalary) AS AvgSalary
+FROM Faculty
+WHERE FacRank IS NOT NULL
+GROUP BY FacDept
+HAVING COUNT(*) > 1;
+
+
+-- ============================================================
+-- LEVEL 3 - JOINS
+-- ============================================================
+
+-- 10. Two-table join.                                      [13 rows]
+SELECT o.OfferNo, o.CourseNo, c.CrsDesc, o.OffTerm, o.OffYear
+FROM Offering o
+     INNER JOIN Course c ON o.CourseNo = c.CourseNo
+ORDER BY o.OfferNo;
+
+-- 11. Three-table join with the instructor.                [12 rows]
+--     Offering 2222 disappears - its FacNo is NULL.
+SELECT o.OfferNo, c.CrsDesc, f.FacFirstName, f.FacLastName
+FROM Offering o
+     INNER JOIN Course c ON o.CourseNo = c.CourseNo
+     INNER JOIN Faculty f ON o.FacNo = f.FacNo
+ORDER BY o.OfferNo;
+
+-- 12. *** THE ASSIGNMENT QUERY ***                          [29 rows]
+--     Every student, every class they took, the class name, the grade.
+--     Four tables: Student -> Enrollment -> Offering -> Course
+SELECT s.StdNo,
+       s.StdFirstName,
+       s.StdLastName,
+       c.CourseNo,
+       c.CrsDesc,
+       o.OffTerm,
+       o.OffYear,
+       e.EnrGrade
+FROM Student s
+     INNER JOIN Enrollment e ON s.StdNo    = e.StdNo
+     INNER JOIN Offering   o ON e.OfferNo  = o.OfferNo
+     INNER JOIN Course     c ON o.CourseNo = c.CourseNo
+ORDER BY s.StdLastName, s.StdFirstName, c.CourseNo;
+
+-- 13. Self-join: faculty and their supervisor.             [4 rows]
+--     Only the 4 with a supervisor appear.
+SELECT f.FacLastName AS Faculty, s.FacLastName AS Supervisor
+FROM Faculty f
+     INNER JOIN Faculty s ON f.FacSupervisor = s.FacNo
+ORDER BY s.FacLastName;
+
+-- 14. Self-join, outer version - keeps the bosses.         [7 rows]
+SELECT f.FacLastName AS Faculty, s.FacLastName AS Supervisor
+FROM Faculty f
+     LEFT JOIN Faculty s ON f.FacSupervisor = s.FacNo
+ORDER BY f.FacLastName;
+
+
+-- ============================================================
+-- LEVEL 4 - OUTER JOINS (the rows INNER JOIN hides)
+-- ============================================================
+
+-- 15. Courses that have never been offered.                [3 rows: ACC201, FIN480, IS490]
+SELECT c.CourseNo, c.CrsDesc
+FROM Course c
+     LEFT JOIN Offering o ON c.CourseNo = o.CourseNo
+WHERE o.OfferNo IS NULL;
+
+-- 16. Students who have not enrolled in anything.          [1 row: Phillip Lee]
+SELECT s.StdNo, s.StdFirstName, s.StdLastName
+FROM Student s
+     LEFT JOIN Enrollment e ON s.StdNo = e.StdNo
+WHERE e.StdNo IS NULL;
+
+-- 17. Compare with #12: every student, enrolled or not.    [30 rows]
+--     29 enrollment rows + Phillip Lee with NULLs.
+SELECT s.StdLastName, c.CrsDesc, e.EnrGrade
+FROM Student s
+     LEFT JOIN Enrollment e ON s.StdNo   = e.StdNo
+     LEFT JOIN Offering   o ON e.OfferNo = o.OfferNo
+     LEFT JOIN Course     c ON o.CourseNo = c.CourseNo
+ORDER BY s.StdLastName;
+
+-- 18. Offerings with nobody enrolled.                      [1 row: 9999]
+SELECT o.OfferNo, o.CourseNo, o.OffTerm, o.OffYear
+FROM Offering o
+     LEFT JOIN Enrollment e ON o.OfferNo = e.OfferNo
+WHERE e.OfferNo IS NULL;
+
+
+-- ============================================================
+-- LEVEL 5 - SUBQUERIES
+-- ============================================================
+
+-- 19. Scalar subquery in WHERE.                            [5 rows]
+SELECT StdLastName, StdGPA
+FROM Student
+WHERE StdGPA > (SELECT AVG(StdGPA) FROM Student)
+ORDER BY StdGPA DESC;
+
+-- 20. Subquery with IN.                                    [9 rows]
+SELECT StdNo, StdLastName
+FROM Student
+WHERE StdNo IN (SELECT StdNo
+                FROM Enrollment
+                WHERE EnrGrade >= 3.5);
+
+-- 21. *** THE NOT IN TRAP ***                              [0 rows - WRONG]
+--     Looks correct, returns nothing. Offering.FacNo contains a
+--     NULL (offering 2222), and "x NOT IN (set containing NULL)"
+--     is never true. Classic exam question.
+SELECT FacNo, FacLastName
+FROM Faculty
+WHERE FacNo NOT IN (SELECT FacNo FROM Offering);
+
+-- 22. Fix A - filter the NULL out.                         [1 row: Tang]
+SELECT FacNo, FacLastName
+FROM Faculty
+WHERE FacNo NOT IN (SELECT FacNo FROM Offering WHERE FacNo IS NOT NULL);
+
+-- 23. Fix B - NOT EXISTS, immune to the NULL.              [1 row: Tang]
+SELECT f.FacNo, f.FacLastName
+FROM Faculty f
+WHERE NOT EXISTS (SELECT 1
+                  FROM Offering o
+                  WHERE o.FacNo = f.FacNo);
+
+-- 24. Correlated subquery with EXISTS.                     [6 rows]
+SELECT f.FacLastName, f.FacDept
+FROM Faculty f
+WHERE EXISTS (SELECT 1
+              FROM Offering o
+              WHERE o.FacNo = f.FacNo
+                AND o.OffYear = 2026);
+
+-- 25. Correlated subquery in the SELECT list.              [11 rows]
+SELECT s.StdLastName,
+       (SELECT COUNT(*)
+        FROM Enrollment e
+        WHERE e.StdNo = s.StdNo) AS ClassesTaken
+FROM Student s
+ORDER BY ClassesTaken DESC, s.StdLastName;
+
+-- 26. Subquery in FROM (inline view).                      [2 rows]
+SELECT t.CrsDesc, t.NumEnrolled
+FROM (SELECT c.CrsDesc, COUNT(*) AS NumEnrolled
+      FROM Enrollment e
+           INNER JOIN Offering o ON e.OfferNo  = o.OfferNo
+           INNER JOIN Course   c ON o.CourseNo = c.CourseNo
+      GROUP BY c.CrsDesc) t
+WHERE t.NumEnrolled >= 5
+ORDER BY t.NumEnrolled DESC;
+
+
+-- ============================================================
+-- LEVEL 6 - NESTED + AGGREGATE COMBINED
+-- ============================================================
+
+-- 27. Graded vs taken - AVG silently skips NULL grades.    [10 rows]
+--     Estrada took 3, only 2 are graded. Compare the columns.
+SELECT s.StdLastName,
+       COUNT(*)            AS ClassesTaken,
+       COUNT(e.EnrGrade)   AS ClassesGraded,
+       ROUND(AVG(e.EnrGrade),2) AS ComputedGPA
+FROM Student s
+     INNER JOIN Enrollment e ON s.StdNo = e.StdNo
+GROUP BY s.StdNo, s.StdLastName
+ORDER BY ComputedGPA DESC;
+
+-- 28. Stored GPA vs computed GPA - they disagree on purpose.
+SELECT s.StdLastName,
+       s.StdGPA AS StoredGPA,
+       ROUND(AVG(e.EnrGrade),2) AS ComputedGPA
+FROM Student s
+     INNER JOIN Enrollment e ON s.StdNo = e.StdNo
+GROUP BY s.StdNo, s.StdLastName, s.StdGPA
+HAVING s.StdGPA IS NULL
+    OR ABS(s.StdGPA - AVG(e.EnrGrade)) > 0.3
+ORDER BY s.StdLastName;
+
+-- 29. Nested aggregate: the course with the most enrollments.
+SELECT c.CrsDesc, COUNT(*) AS NumEnrolled
+FROM Enrollment e
+     INNER JOIN Offering o ON e.OfferNo  = o.OfferNo
+     INNER JOIN Course   c ON o.CourseNo = c.CourseNo
+GROUP BY c.CrsDesc
+HAVING COUNT(*) = (SELECT MAX(Total)
+                   FROM (SELECT COUNT(*) AS Total
+                         FROM Enrollment e2
+                              INNER JOIN Offering o2 ON e2.OfferNo  = o2.OfferNo
+                              INNER JOIN Course   c2 ON o2.CourseNo = c2.CourseNo
+                         GROUP BY c2.CrsDesc));
+
+-- 30. Students who took every offering of FIN450 (division). [1 row: Estrada]
+--     "No FIN450 offering exists that this student did not take."
+SELECT s.StdNo, s.StdLastName
+FROM Student s
+WHERE NOT EXISTS
+      (SELECT 1
+       FROM Offering o
+       WHERE o.CourseNo = 'FIN450'
+         AND NOT EXISTS
+             (SELECT 1
+              FROM Enrollment e
+              WHERE e.OfferNo = o.OfferNo
+                AND e.StdNo   = s.StdNo))
+  AND EXISTS (SELECT 1 FROM Enrollment e3 WHERE e3.StdNo = s.StdNo);

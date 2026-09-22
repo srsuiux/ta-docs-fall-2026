@@ -1,0 +1,54 @@
+CREATE TABLE Course
+( CourseNo      CHAR(6),
+  CrsDesc       VARCHAR(250),
+  CrsUnits      SMALLINT,
+CONSTRAINT PKCourse PRIMARY KEY (CourseNo),
+CONSTRAINT UniqueCrsDesc UNIQUE (CrsDesc) );
+
+CREATE TABLE Faculty
+( FacNo         CHAR(11),
+  FacFirstName  VARCHAR(50) CONSTRAINT FacFirstNameRequired NOT NULL,
+  FacLastName   VARCHAR(50) CONSTRAINT FacLastNameRequired NOT NULL,
+  FacCity       VARCHAR(50) CONSTRAINT FacCityRequired NOT NULL,
+  FacState      CHAR(2)     CONSTRAINT FacStateRequired NOT NULL,
+  FacZipCode    CHAR(10)    CONSTRAINT FacZipRequired NOT NULL,
+  FacHireDate   DATE,
+  FacDept       CHAR(6),
+  FacRank       CHAR(4),
+  FacSalary     DECIMAL(10,2),
+  FacSupervisor CHAR(11),
+CONSTRAINT PKFaculty PRIMARY KEY (FacNo),
+CONSTRAINT FKFacSupervisor FOREIGN KEY (FacSupervisor) REFERENCES Faculty );
+
+CREATE TABLE Student
+( StdNo         CHAR(11),
+  StdFirstName  VARCHAR(50),
+  StdLastName   VARCHAR(50),
+  StdCity       VARCHAR(50),
+  StdState      CHAR(2),
+  StdZip        CHAR(10),
+  StdMajor      CHAR(6),
+  StdClass      CHAR(2),
+  StdGPA        DECIMAL(3,2),
+CONSTRAINT PKStudent PRIMARY KEY (StdNo) );
+
+CREATE TABLE Offering
+( OfferNo       INTEGER,
+  CourseNo      CHAR(6)     CONSTRAINT OffCourseNoRequired NOT NULL,
+  OffLocation   VARCHAR(50) NULL,
+  OffDays       CHAR(6),
+  OffTerm       CHAR(6)     CONSTRAINT OffTermRequired NOT NULL,
+  OffYear       INTEGER     CONSTRAINT OffYearRequired NOT NULL,
+  FacNo         CHAR(11),
+  OffTime       DATE,
+CONSTRAINT PKOffering PRIMARY KEY (OfferNo),
+CONSTRAINT FKCourseNo FOREIGN KEY (CourseNo) REFERENCES Course,
+CONSTRAINT FKFacNo FOREIGN KEY (FacNo) REFERENCES Faculty );
+
+CREATE TABLE Enrollment
+( OfferNo       INTEGER,
+  StdNo         CHAR(11),
+  EnrGrade      DECIMAL(3,2),
+CONSTRAINT PKEnrollment PRIMARY KEY (OfferNo, StdNo),
+CONSTRAINT FKOfferNo FOREIGN KEY (OfferNo) REFERENCES Offering,
+CONSTRAINT FKStdNo FOREIGN KEY (StdNo) REFERENCES Student );

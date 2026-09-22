@@ -1,0 +1,115 @@
+-- ============================================================
+-- University Database - Sample Data
+-- Run AFTER create_university_database.sql
+-- Oracle APEX: SQL Workshop > SQL Scripts
+-- Insert order matters: Course, Faculty, Student, Offering, Enrollment
+-- ============================================================
+
+
+-- ---------- COURSE ----------
+-- IS490, FIN480 and ACC201 intentionally have NO offerings
+-- (so INNER JOIN drops them and LEFT JOIN keeps them)
+-- IS490 has a NULL CrsUnits
+INSERT INTO Course VALUES ('IS320',  'FUNDAMENTALS OF BUSINESS PROGRAMMING', 4);
+INSERT INTO Course VALUES ('IS460',  'SYSTEMS ANALYSIS', 4);
+INSERT INTO Course VALUES ('IS480',  'FUNDAMENTALS OF DATABASE MANAGEMENT', 4);
+INSERT INTO Course VALUES ('IS490',  'INFORMATION SYSTEMS CAPSTONE', NULL);
+INSERT INTO Course VALUES ('FIN300', 'FUNDAMENTALS OF BUSINESS FINANCE', 4);
+INSERT INTO Course VALUES ('FIN450', 'PRINCIPLES OF INVESTMENTS', 4);
+INSERT INTO Course VALUES ('FIN480', 'CORPORATE FINANCE', 4);
+INSERT INTO Course VALUES ('ACC201', 'PRINCIPLES OF ACCOUNTING I', 3);
+
+
+-- ---------- FACULTY ----------
+-- Supervisors inserted first (self-referencing FK)
+-- Emmanuel, Macon and Tang have NULL FacSupervisor (top of the chain)
+-- Tang teaches NO offerings; has NULL hire date, rank and salary
+INSERT INTO Faculty VALUES ('543-21-0987', 'VICTORIA', 'EMMANUEL', 'BOTHELL', 'WA', '98011-2242',
+       TO_DATE('1991-04-15','YYYY-MM-DD'), 'MS',   'PROF', 120000, NULL);
+INSERT INTO Faculty VALUES ('654-32-1098', 'NICKI',    'MACON',    'BELLEVUE', 'WA', '98015-9999',
+       TO_DATE('1990-04-11','YYYY-MM-DD'), 'FIN',  'PROF', 65000,  NULL);
+INSERT INTO Faculty VALUES ('111-22-3333', 'AMY',      'TANG',     'SEATTLE',  'WA', '98105-0021',
+       NULL,                               'ACCT', NULL,   NULL,   NULL);
+INSERT INTO Faculty VALUES ('098-76-5432', 'LEONARD',  'FIBON',    'SEATTLE',  'WA', '98123-1141',
+       TO_DATE('1990-04-15','YYYY-MM-DD'), 'MS',   'ASSC', 70000,  '543-21-0987');
+INSERT INTO Faculty VALUES ('876-54-3210', 'CRISTOPHER','COLAN',   'SEATTLE',  'WA', '98114-1332',
+       TO_DATE('1989-04-11','YYYY-MM-DD'), 'MS',   'ASST', 40000,  '654-32-1098');
+INSERT INTO Faculty VALUES ('765-43-2109', 'JULIA',    'MILLS',    'SEATTLE',  'WA', '98114-9954',
+       TO_DATE('1995-04-11','YYYY-MM-DD'), 'FIN',  'ASSC', 75000,  '654-32-1098');
+INSERT INTO Faculty VALUES ('987-65-4321', 'JOHN',     'MILLER',   'SEATTLE',  'WA', '98105-3211',
+       TO_DATE('2001-04-11','YYYY-MM-DD'), 'MS',   'INST', NULL,   '098-76-5432');
+
+-- ---------- STUDENT ----------
+-- LEE has NO enrollments (INNER vs LEFT JOIN test)
+-- MORALES has a NULL StdGPA; GRANGER has a NULL StdMajor (undeclared)
+INSERT INTO Student VALUES ('123-45-6789', 'HOMER',   'WELLS',   'SEATTLE', 'WA', '98121-1111', 'IS',   'FR', 3.00);
+INSERT INTO Student VALUES ('124-56-7890', 'BOB',     'NORBERT', 'BOTHELL', 'WA', '98011-2121', 'FIN',  'JR', 2.70);
+INSERT INTO Student VALUES ('234-56-7890', 'CANDY',   'KENDALL', 'TACOMA',  'WA', '99042-3321', 'ACCT', 'JR', 3.50);
+INSERT INTO Student VALUES ('345-67-8901', 'WALLY',   'KENDALL', 'SEATTLE', 'WA', '98123-1141', 'IS',   'SO', 2.80);
+INSERT INTO Student VALUES ('456-78-9012', 'JOE',     'ESTRADA', 'SEATTLE', 'WA', '98121-2333', 'FIN',  'SR', 3.20);
+INSERT INTO Student VALUES ('567-89-0123', 'MARIAH',  'DODGE',   'SEATTLE', 'WA', '98114-0021', 'IS',   'JR', 3.60);
+INSERT INTO Student VALUES ('678-90-1234', 'TESS',    'DODGE',   'REDMOND', 'WA', '98116-2344', 'ACCT', 'SO', 3.30);
+INSERT INTO Student VALUES ('789-01-2345', 'ROBERTO', 'MORALES', 'SEATTLE', 'WA', '98121-2333', 'FIN',  'SR', NULL);
+INSERT INTO Student VALUES ('890-12-3456', 'LUKE',    'BRAZZI',  'SEATTLE', 'WA', '98116-0021', 'IS',   'SR', 2.20);
+INSERT INTO Student VALUES ('901-23-4567', 'BONNIE',  'GRANGER', 'SEATTLE', 'WA', '98114-1332', NULL,   'FR', 3.90);
+INSERT INTO Student VALUES ('012-34-5678', 'PHILLIP', 'LEE',     'SEATTLE', 'WA', '98111-9921', 'IS',   'SO', 2.50);
+
+-- ---------- OFFERING ----------
+-- Offer 2222 has NULL OffLocation and NULL FacNo (instructor not yet assigned)
+-- Offer 9999 has a NULL OffTime and no enrollments
+-- Same course appears in several terms/years (IS320 five times)
+INSERT INTO Offering VALUES (1111, 'IS320',  'BLM302', 'MW',  'FALL',   2025, '098-76-5432', TO_DATE('2026-01-01 10:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (1234, 'IS320',  'BLM302', 'MW',  'FALL',   2025, '098-76-5432', TO_DATE('2026-01-01 13:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (2222, 'IS460',  NULL,     'TTH', 'SUMMER', 2025, NULL,          TO_DATE('2026-01-01 13:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (3333, 'IS320',  'BLM214', 'TTH', 'SPRING', 2026, '098-76-5432', TO_DATE('2026-01-01 08:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (4321, 'IS320',  'BLM214', 'TTH', 'FALL',   2025, '098-76-5432', TO_DATE('2026-01-01 15:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (4444, 'IS320',  'BLM302', 'TTH', 'WINTER', 2026, '543-21-0987', TO_DATE('2026-01-01 15:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (5555, 'FIN300', 'BLM207', 'MW',  'WINTER', 2026, '765-43-2109', TO_DATE('2026-01-01 08:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (5678, 'IS480',  'BLM302', 'MW',  'WINTER', 2026, '987-65-4321', TO_DATE('2026-01-01 13:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (5679, 'IS480',  'BLM412', 'TTH', 'SPRING', 2026, '876-54-3210', TO_DATE('2026-01-01 15:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (6666, 'FIN450', 'BLM212', 'TTH', 'WINTER', 2026, '987-65-4321', TO_DATE('2026-01-01 13:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (7777, 'FIN450', 'BLM214', 'TTH', 'SUMMER', 2026, '654-32-1098', TO_DATE('2026-01-01 13:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (8888, 'IS460',  'BLM412', 'MW',  'SUMMER', 2026, '654-32-1098', TO_DATE('2026-01-01 13:30','YYYY-MM-DD HH24:MI'));
+INSERT INTO Offering VALUES (9999, 'IS460',  'BLM307', 'TTH', 'FALL',   2026, '765-43-2109', NULL);
+
+-- ---------- ENROLLMENT ----------
+-- NULL EnrGrade = course in progress, no grade yet
+-- Offering 5679 is entirely ungraded; offering 9999 has no enrollments at all
+INSERT INTO Enrollment VALUES (1111, '123-45-6789', 3.2);
+INSERT INTO Enrollment VALUES (1111, '124-56-7890', 3.7);
+INSERT INTO Enrollment VALUES (1111, '345-67-8901', 3.5);
+INSERT INTO Enrollment VALUES (1234, '234-56-7890', 3.8);
+INSERT INTO Enrollment VALUES (1234, '567-89-0123', 3.0);
+INSERT INTO Enrollment VALUES (1234, '890-12-3456', 2.0);
+INSERT INTO Enrollment VALUES (2222, '123-45-6789', 3.5);
+INSERT INTO Enrollment VALUES (2222, '567-89-0123', 3.3);
+INSERT INTO Enrollment VALUES (3333, '123-45-6789', 3.3);
+INSERT INTO Enrollment VALUES (3333, '234-56-7890', 3.1);
+INSERT INTO Enrollment VALUES (3333, '678-90-1234', 3.6);
+INSERT INTO Enrollment VALUES (4321, '789-01-2345', 3.5);
+INSERT INTO Enrollment VALUES (4321, '124-56-7890', 3.2);
+INSERT INTO Enrollment VALUES (4444, '345-67-8901', 3.1);
+INSERT INTO Enrollment VALUES (4444, '901-23-4567', 4.0);
+INSERT INTO Enrollment VALUES (5555, '124-56-7890', 3.2);
+INSERT INTO Enrollment VALUES (5555, '456-78-9012', 3.4);
+INSERT INTO Enrollment VALUES (5555, '789-01-2345', NULL);
+INSERT INTO Enrollment VALUES (5678, '123-45-6789', 3.7);
+INSERT INTO Enrollment VALUES (5678, '567-89-0123', 3.8);
+INSERT INTO Enrollment VALUES (5678, '890-12-3456', 2.5);
+INSERT INTO Enrollment VALUES (5678, '901-23-4567', 4.0);
+INSERT INTO Enrollment VALUES (5679, '234-56-7890', NULL);
+INSERT INTO Enrollment VALUES (5679, '678-90-1234', NULL);
+INSERT INTO Enrollment VALUES (6666, '456-78-9012', 3.9);
+INSERT INTO Enrollment VALUES (6666, '124-56-7890', 3.5);
+INSERT INTO Enrollment VALUES (7777, '456-78-9012', NULL);
+INSERT INTO Enrollment VALUES (8888, '678-90-1234', 3.4);
+INSERT INTO Enrollment VALUES (8888, '890-12-3456', 2.8);
+
+COMMIT;
+
+-- ---------- VERIFY ----------
+SELECT 'Course'     AS TableName, COUNT(*) AS NumRows FROM Course
+UNION ALL SELECT 'Faculty',    COUNT(*) FROM Faculty
+UNION ALL SELECT 'Student',    COUNT(*) FROM Student
+UNION ALL SELECT 'Offering',   COUNT(*) FROM Offering
+UNION ALL SELECT 'Enrollment', COUNT(*) FROM Enrollment;
