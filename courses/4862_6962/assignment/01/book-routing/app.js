@@ -38,6 +38,12 @@ app.get("/select/:variable", (req, res) => {
     });
 });
 
+// fix added after v1.1
+// If no route above matched, the page does not exist, so send File Not Found
+app.use((req, res) => {
+    res.status(404).send("File Not Found");
+});
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
