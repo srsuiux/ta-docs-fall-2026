@@ -1,49 +1,96 @@
 # OS files
 .DS_Store
+.DS_Store?
 Thumbs.db
+Desktop.ini
 
 # IDE / Editor
 .vscode/
 .idea/
 *.swp
 *.swo
+*.swn
+*~
 
 # Temporary files
 *.tmp
 *.temp
 *.bak
-*~
+*.old
+*.orig
 
 # Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Environment / secrets
+# Environment variables / secrets
 .env
 .env.*
 !.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
 
-# Python cache (if using Python scripts)
+# Node.js dependencies (root and all subprojects)
+**/node_modules/
+
+# Node.js package manager / local caches
+.npm/
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/install-state.gz
+
+# Python cache and virtual environments
 __pycache__/
 *.py[cod]
 .venv/
 venv/
-
-# Node.js (if applicable)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-pnpm-debug.log*
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
 
 # Build / generated files
 dist/
 build/
 coverage/
+.next/
+.nuxt/
+out/
+target/
+*.tsbuildinfo
+
+# Test and coverage output
+.nyc_output/
+junit.xml
+coverage.xml
+
+# Temporary databases
+*.sqlite
+*.sqlite3
+*.db
 
 # Personal / private documents
 private/
 confidential/
 
-# Temporary exports
+# Temporary archives and exports
 *.zip
 *.tar
 *.gz
+*.7z
+*.rar
+
+# OS / application generated files
+.cache/
+.tmp/
+temp/
