@@ -1,0 +1,20 @@
+{
+  "student": "Pratiksha Bam",
+  "books": [
+    {
+      "isbn": "9780593440872",
+      "title": "Book Lovers",
+      "price": "17.00"
+    },
+    {
+      "isbn": "9780593441190",
+      "title": "Happy Place",
+      "price": "19.00"
+    },
+    {
+      "isbn": "9780593441213",
+      "title": "Funny Story",
+      "price": "19.00"
+    }
+  ]
+}

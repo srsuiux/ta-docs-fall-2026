@@ -1,0 +1,20 @@
+{
+  "student": "Joshua Smith",
+  "books": [
+    {
+      "isbn": "9781421586205",
+      "title": "Goodnight Punpun, Vol.1",
+      "price": "24.99"
+    },
+    {
+      "isbn": "9781421586212",
+      "title": "Goodnight Punpun, Vol. 2",
+      "price": "24.99"
+    },
+    {
+      "isbn": "9781421586229",
+      "title": "Goodnight Punpun, Vol. 3",
+      "price": "24.99"
+    }
+  ]
+}

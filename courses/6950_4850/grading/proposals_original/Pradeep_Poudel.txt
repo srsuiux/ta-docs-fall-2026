@@ -1,0 +1,13 @@
+Name: Pradeep Poudel (ppoudel05)
+Assignment: Assignment 0: Project Proposal
+Date Submitted: Monday, September 14, 2026 1:02:03 PM EDT
+Current Grade: 0.00000
+
+Submission Field:
+<p>Author: Frank Herbert</p><p>Book 1</p><p>Title: Dune</p><p>Price: $18</p><p>ISBN: 978-0441172719</p><p>Book 2</p><p>Title: Dune Messaih</p><p>Price: $17</p><p>ISBN:978-0441172696</p><p>Book 3</p><p>Title: Children of Dune</p><p>Price: $18</p><p>ISBN:978-0441104024</p>
+
+Comments:
+There are no student comments for this assignment.
+
+Files:
+No files were attached to this submission.

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book selection | Lowerre Books</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <a class="brand" href="/">LOWERRE BOOKS</a>
+    <p class="tagline">A small collection of science fiction</p>
+  </header>
+  <main>
+    <p class="eyebrow">The Dune Chronicles</p>
+    <h1>Books by Frank Herbert</h1>
+    <p class="intro">Explore the first three books in the Dune series. Select a book to see its cover, ISBN, and price.</p>
+    <ul class="books">
+      <li class="book-card">
+        <div class="cover-area"><img src="/images/dune.jpg" alt="Cover of Dune by Frank Herbert"></div>
+        <p class="eyebrow">Book 1</p>
+        <h2>Dune</h2>
+        <p class="author">Frank Herbert</p>
+        <p class="price">$11.00</p>
+        <!-- Book selection goes through Express rather than linking to HTML. -->
+        <a class="button" href="http://localhost:3000/select/9780441172719">View book</a>
+      </li>
+      <li class="book-card">
+        <div class="cover-area"><img src="/images/dune-messiah.jpg" alt="Cover of Dune Messiah by Frank Herbert"></div>
+        <p class="eyebrow">Book 2</p>
+        <h2>Dune Messiah</h2>
+        <p class="author">Frank Herbert</p>
+        <p class="price">$8.50</p>
+        <!-- Book selection goes through Express rather than linking to HTML. -->
+        <a class="button" href="http://localhost:3000/select/9780441172696">View book</a>
+      </li>
+      <li class="book-card">
+        <div class="cover-area"><img src="/images/children-of-dune.jpg" alt="Cover of Children of Dune by Frank Herbert"></div>
+        <p class="eyebrow">Book 3</p>
+        <h2>Children of Dune</h2>
+        <p class="author">Frank Herbert</p>
+        <p class="price">$10.00</p>
+        <!-- Book selection goes through Express rather than linking to HTML. -->
+        <a class="button" href="http://localhost:3000/select/9780441104055">View book</a>
+      </li>
+    </ul>
+  </main>
+  <footer><p>Charles Lowerre</p></footer>
+</body>
+</html>

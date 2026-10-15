@@ -1,0 +1,37 @@
+Grade report: ritu_tripathi
+============================================================
+
+Project Structure: 5 / 5
+  [     2 / 2 ] Pages/ folder exists
+  [     2 / 2 ] Pages/images/ holds cover images  -- 3 image(s) found
+  [     1 / 1 ] Dependencies listed in package.json
+
+Naming Conventions: 5 / 5
+  [     2 / 2 ] Main file named app.js
+  [     1 / 1 ] index.html in Pages/
+  [     2 / 2 ] Book pages named ISBN.html  -- 3/3 matched (pages found: 9780765382030.html, 9780765386632.html, 9780765386694.html)
+
+app.js: 65 / 65
+  [    10 / 10] Single /select/:variable route with request.params
+  [     8 / 8 ] sendFile with {root: ...}
+  [     7 / 7 ] path.resolve for the path
+  [     5 / 5 ] / returns index.html
+  [     7 / 7 ] Images served at /images/...  -- 3/3 image files loaded from /images/
+  [    10 / 10] Nonexistent ISBN returns File Not Found
+  [     6 / 6 ] Unknown route returns File Not Found
+  [     7 / 7 ] Other errors return Server Error
+  [     5 / 5 ] Well documented  -- 60% comment lines (check by eye)
+
+HTML Content: 24 / 25
+  [    10 / 10] Index links use /select/ISBN  -- 3 /select/ links
+  [     2 / 3 ] Title on each book page  -- 2/3
+  [     5 / 5 ] Cover image uses /images/... and file exists  -- 3/3
+  [     3 / 3 ] Price on each book page  -- 3/3
+  [     4 / 4 ] Student name at bottom of each page  -- 3/3 (name found in the bottom part of the page)
+
+============================================================
+TOTAL: 99 / 100
+GRADE OUT OF 20: 19.8 / 20
+
+Flags for feedback (no points taken):
+  - README.txt included in the project (not part of the assignment)

@@ -1,0 +1,20 @@
+{
+  "student": "Shreeyan Simkhada",
+  "books": [
+    {
+      "isbn": "9781504074025",
+      "title": "When The King Comes Home",
+      "price": "89.96"
+    },
+    {
+      "isbn": "9781466819481",
+      "title": "A College of Magics",
+      "price": "7.93"
+    },
+    {
+      "isbn": "9781504074032",
+      "title": "The Serpent's Egg",
+      "price": "9.50"
+    }
+  ]
+}

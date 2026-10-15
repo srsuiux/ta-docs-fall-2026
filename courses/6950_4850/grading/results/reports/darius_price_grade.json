@@ -1,0 +1,172 @@
+{
+  "student": "darius_price",
+  "total": 28,
+  "outOf100": 100,
+  "grade20": 5.6,
+  "manualPoints": 0,
+  "started": true,
+  "startNote": "",
+  "flags": [],
+  "items": [
+    {
+      "section": "Project Structure",
+      "item": "Pages/ folder exists",
+      "max": 2,
+      "score": 0,
+      "note": "Pages/ not found",
+      "manual": false
+    },
+    {
+      "section": "Project Structure",
+      "item": "Pages/images/ holds cover images",
+      "max": 2,
+      "score": 0,
+      "note": "0 image(s) found",
+      "manual": false
+    },
+    {
+      "section": "Project Structure",
+      "item": "Dependencies listed in package.json",
+      "max": 1,
+      "score": 1,
+      "note": "",
+      "manual": false
+    },
+    {
+      "section": "Naming Conventions",
+      "item": "Main file named app.js",
+      "max": 2,
+      "score": 2,
+      "note": "",
+      "manual": false
+    },
+    {
+      "section": "Naming Conventions",
+      "item": "index.html in Pages/",
+      "max": 1,
+      "score": 0,
+      "note": "Pages/index.html not found",
+      "manual": false
+    },
+    {
+      "section": "Naming Conventions",
+      "item": "Book pages named ISBN.html",
+      "max": 2,
+      "score": 0,
+      "note": "0/3 matched (pages found: none)",
+      "manual": false
+    },
+    {
+      "section": "app.js",
+      "item": "Single /select/:variable route with request.params",
+      "max": 10,
+      "score": 10,
+      "note": "",
+      "manual": false
+    },
+    {
+      "section": "app.js",
+      "item": "sendFile with {root: ...}",
+      "max": 8,
+      "score": 0,
+      "note": "sendFile used without root (check by eye)",
+      "manual": false
+    },
+    {
+      "section": "app.js",
+      "item": "path.resolve for the path",
+      "max": 7,
+      "score": 0,
+      "note": "uses path.join instead of path.resolve",
+      "manual": false
+    },
+    {
+      "section": "app.js",
+      "item": "/ returns index.html",
+      "max": 5,
+      "score": 3,
+      "note": "returns a selection page, but not the same as Pages/index.html",
+      "manual": false
+    },
+    {
+      "section": "app.js",
+      "item": "Images served at /images/...",
+      "max": 7,
+      "score": 0,
+      "note": "0/0 image files loaded from /images/",
+      "manual": false
+    },
+    {
+      "section": "app.js",
+      "item": "Nonexistent ISBN returns File Not Found",
+      "max": 10,
+      "score": 0,
+      "note": "no 'File Not Found' message (status 404)",
+      "manual": false
+    },
+    {
+      "section": "app.js",
+      "item": "Unknown route returns File Not Found",
+      "max": 6,
+      "score": 0,
+      "note": "no 'File Not Found' message (status 404)",
+      "manual": false
+    },
+    {
+      "section": "app.js",
+      "item": "Other errors return Server Error",
+      "max": 7,
+      "score": 0,
+      "note": "no 'Server Error' response found",
+      "manual": false
+    },
+    {
+      "section": "app.js",
+      "item": "Well documented",
+      "max": 5,
+      "score": 3,
+      "note": "11% comment lines (check by eye)",
+      "manual": false
+    },
+    {
+      "section": "HTML Content",
+      "item": "Index links use /select/ISBN",
+      "max": 10,
+      "score": 0,
+      "note": "0 /select/ links",
+      "manual": false
+    },
+    {
+      "section": "HTML Content",
+      "item": "Title on each book page",
+      "max": 3,
+      "score": 2,
+      "note": "2/3",
+      "manual": false
+    },
+    {
+      "section": "HTML Content",
+      "item": "Cover image uses /images/... and file exists",
+      "max": 5,
+      "score": 0,
+      "note": "0/3",
+      "manual": false
+    },
+    {
+      "section": "HTML Content",
+      "item": "Price on each book page",
+      "max": 3,
+      "score": 3,
+      "note": "3/3",
+      "manual": false
+    },
+    {
+      "section": "HTML Content",
+      "item": "Student name at bottom of each page",
+      "max": 4,
+      "score": 4,
+      "note": "3/3 (name found in the bottom part of the page)",
+      "manual": false
+    }
+  ]
+}

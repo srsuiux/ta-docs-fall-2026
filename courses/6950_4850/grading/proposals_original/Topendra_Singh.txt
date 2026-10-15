@@ -1,0 +1,13 @@
+Name: Topendra Singh (tsingh01)
+Assignment: Assignment 0: Project Proposal
+Date Submitted: Thursday, September 10, 2026 2:35:46 PM EDT
+Current Grade: 5.00000
+
+Submission Field:
+<p><strong>Author: Osamu Dazai</strong></p><table><tbody><tr><td><p style="text-align: center;">Title</p></td><td><p style="text-align: center;">ISBN</p></td><td><p style="text-align: center;">Price</p></td></tr><tr><td><p>No Longer Human</p></td><td><p>9780811204811</p></td><td><p>$10.90</p></td></tr><tr><td><p>The Setting Sun</p></td><td><p>9780811200325</p></td><td><p>$10.54</p></td></tr><tr><td><p>The Flowers of Buffoonery</p></td><td><p>9780811234542</p></td><td><p>$9.10</p></td></tr></tbody></table><br/>
+
+Comments:
+There are no student comments for this assignment.
+
+Files:
+No files were attached to this submission.

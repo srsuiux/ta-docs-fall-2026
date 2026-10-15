@@ -1,0 +1,41 @@
+Name: Tirsan Sapkota (tsapkota)
+Assignment: Assignment 0: Project Proposal
+Date Submitted: Friday, September 11, 2026 6:29:48 PM EDT
+Current Grade: 5.00000
+
+Submission Field:
+<p>Author: Matt Dinniman</p>
+<br/>
+<br/>
+<p><strong>Book#1</strong></p>
+<p>Title: Dungeon Crawler Carl</p>
+<p>Price: $14.98 (Paperback)</p>
+<p>ISBN: <span style="color: rgb(15,17,17);">978-0593820254</span></p>
+<br/>
+<p><strong>Book#2</strong></p>
+<p>Title: Carl's Doomsday Scenario</p>
+<p>Price: $12.98 (Paperback)</p>
+<p>ISBN: <span style="color: rgb(15,17,17);">978-0593820278</span></p>
+<br/>
+<p><strong>Book#3</strong></p>
+<p>The Dungeon Anarchist's Cookbook</p>
+<p>Price: $25 (Paperback)</p>
+<p>ISBN: <span style="color: rgb(15,17,17);">978-0593820285</span></p>
+<br/>
+<br/>
+<br/>
+<p>Book Covers in order: </p>
+<p>1</p>
+<p><img src="https://m.media-amazon.com/images/I/71CC6vq83nL._SL1500_.jpg"/></p>
+<p>2</p>
+<p><img src="https://m.media-amazon.com/images/I/819IWxXw2dL._SL1500_.jpg"/></p>
+<p>3</p>
+<p><img src="https://m.media-amazon.com/images/I/819qGxineEL._SL1500_.jpg"/></p>
+<br/>
+<br/>
+
+Comments:
+There are no student comments for this assignment.
+
+Files:
+No files were attached to this submission.

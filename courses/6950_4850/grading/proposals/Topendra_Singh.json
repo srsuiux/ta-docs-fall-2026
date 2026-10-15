@@ -1,0 +1,20 @@
+{
+  "student": "Topendra Singh",
+  "books": [
+    {
+      "isbn": "9780811204811",
+      "title": "No Longer Human",
+      "price": "10.90"
+    },
+    {
+      "isbn": "9780811200325",
+      "title": "The Setting Sun",
+      "price": "10.54"
+    },
+    {
+      "isbn": "9780811234542",
+      "title": "The Flowers of Buffoonery",
+      "price": "9.10"
+    }
+  ]
+}

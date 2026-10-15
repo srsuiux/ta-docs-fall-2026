@@ -1,0 +1,13 @@
+Name: Mia Semple (mmsemple)
+Assignment: Assignment 0: Project Proposal
+Date Submitted: Wednesday, September 9, 2026 1:12:43 PM EDT
+Current Grade: 5.00000
+
+Submission Field:
+<p>Name of author: Nora Sakavic</p><p>Book One: The Foxhole Court</p><p>Price: $9.99</p><p>ISBN: <span style="color: rgb(15,17,17);">1516801512</span></p><p>Book Two: The Raven King</p><p>Price: $10.47</p><p>ISBN: <span style="color: rgb(15,17,17);">1517197708</span></p><p>Book Three: The King's Men</p><p>Price: $11.99</p><p>ISBN: <span style="color: rgb(15,17,17);">1517198003</span></p>
+
+Comments:
+There are no student comments for this assignment.
+
+Files:
+No files were attached to this submission.
