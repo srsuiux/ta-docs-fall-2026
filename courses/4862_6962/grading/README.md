@@ -2,7 +2,7 @@
 
 CSCI 4862 / 6962 Server-Side Development
 
-`grade-all-student.sh` grades every student project in `submissions/` using the rules in `rubric.md` and builds one summary. The rubric is worth 100 points; the final grade is the total ÷ 5 (out of 20).
+`grade-all-student.sh` grades every student project in `submissions/` using the rules in `rubric.md` and builds one summary. The rubric is worth 17 points, which is the final grade. It also builds a `feedback/` folder with one detailed page per student (`feedback/<student>.html`) that has a button to copy the feedback as plain text.
 
 ## Requirements
 
@@ -36,7 +36,7 @@ Exactly 3 books. The ISBNs, titles and prices are what the pages are checked aga
 }
 ```
 
-Without a usable proposal, the ISBNs are taken from the index links, and title and price become a rough check (some heading, or a `$` amount, is present).
+The pages tested are the ISBNs in the student's own index links (hyphens ignored), matched to the proposal. Without a usable proposal, or when a linked ISBN is not in it, title and price become a rough check (some heading, or a `$` amount, is present).
 
 ## Running
 
@@ -58,14 +58,16 @@ The terminal shows one line per student. Everything else goes to the logs.
 7. If the app does not start, every item that needs the running app scores 0, and the last lines of its output are shown at the end of the report.
 8. If another program is using the app's port, the report says "could not test", so a busy port is never mistaken for a student's mistake.
 
-Project layout and file names are not graded. Only the behavior the assignment asks for is graded. Any wording that says "not found" is accepted for missing pages, letter case of paths does not matter, and logging with morgan is not required.
+Layout and file names (`app.js`, `Pages/`, `express` listed) are not scored; they appear in the "Project structure" part of the feedback page. Only the behavior the assignment asks for is scored. Any wording that says "not found" is accepted for missing pages, letter case of paths does not matter, and logging with morgan is not required.
 
 ## Results
 
+Next to `results/`, the script also writes `feedback/index.html` (all students) and `feedback/<student>.html` (details and a Copy button).
+
 ```
 results/
-├── summary.csv                      one row per student: grade, category scores, zero items, flags
-├── reports/<student>_grade.txt      the report to send as feedback (and _grade.json)
+├── summary.csv                      one row per student: grade (out of 17), category scores, items to review, flags
+├── reports/<student>_grade.txt      the score report for the grader (and _grade.json)
 ├── logs/<student>.log               copy, npm and grader output
 ├── logs/<student>/<n>-<category>.log   one log per rubric category (requests, answers, points)
 ├── logs/<student>_app.log           what the student's own app printed while tested
@@ -82,12 +84,14 @@ A full run starts clean. `--only` keeps the other students' results and replaces
 - Several folders for one student
 - App did not start, or could not be tested
 - Proposal with no matching submission
+- Index links to ISBNs that are not in the proposal
 
 ## What the script does not check (look by eye)
 
-- Any 0 in Routing & File Handling: the code checks read only the entry file, so routes in another file score 0.
+- Any lost point in Proper Routing of Books: the code checks read only the entry file, so routes in another file score 0.
 - The quality of the comments (only the share of comment lines is counted).
+- Whether the student's name is at the bottom of the page (only that it appears on the page).
 - Extra requirements such as logging with morgan.
-- Status codes (404 / 500). Only the messages "not found" and "Server Error" are checked.
+- Status codes (404 / 500). Only the messages are scored; a wrong status code is mentioned in the feedback page.
 
 Anything the rubric cannot capture (for example, a project submitted inside the wrong folder) is handled by hand, outside the script.

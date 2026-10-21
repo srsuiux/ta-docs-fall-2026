@@ -1,0 +1,256 @@
+ASSIGNMENT 1 (EXPRESS ROUTING) - FEEDBACK
+Graded out of 17. A score with a fraction is rounded up to the next whole point.
+
+
+============================================================
+Charles Lowerre: 17 / 17
+============================================================
+Points: 17 out of 17.
+
+Proper Routing of Books: 8 / 8
+  - Single route for all books: 3 / 3.  One route handles every book and reads request.params [app.js line 40: app.get('/select/:isbn', (request, response, next) => {].
+  - sendFile with root: 0.5 / 0.5.  sendFile is used with the root option [app.js line 26: response.sendFile('styles.css', { root: pagesDirectory }, (error) => {].
+  - path.resolve: 0.5 / 0.5.  path.resolve builds the folder path [app.js line 15: const pagesDirectory = path.resolve(__dirname, 'Pages');].
+  - Index page and /select links: 1 / 1.  GET / serves the index page and all three links go through /select/ISBN.
+  - Book pages served: 3 / 3.  All three books load at /select/ISBN.
+
+Error Handling: 7 / 7
+  - Book not found: 3 / 3.  A fake ISBN gets a not found message [app.js line 43: return response.status(404).type('text/plain').send('File Not Found');].
+  - Page not found (own handler): 2 / 2.  A wrong URL gets its own "not found" message, separate from the missing-book one [app.js line 52: app.use((request, response) => {].
+  - Server Error: 2 / 2.  "Server Error" came back when I forced an error [app.js line 66: response.status(500).type('text/plain').send('Server Error');].
+
+Documentation: 1 / 1
+  - Comments: 1 / 1.  23% of the lines in the main file are comments.
+
+HTML Content: 1 / 1
+  - Cover image tag: 0.25 / 0.25.  All 3 book pages have <img src="/images/...">.
+  - Price on the pages: 0.25 / 0.25.  The price from the proposal is on all 3 pages.
+  - Title on the pages: 0.25 / 0.25.  The title from the proposal is on all 3 pages.
+  - Your name on the pages: 0.25 / 0.25.  Your name is on all 3 pages.
+
+
+============================================================
+Darius Price: 15 / 17
+============================================================
+Points: 14.5 out of 17, rounded up to 15.
+
+Proper Routing of Books: 7.5 / 8
+  - Single route for all books: 3 / 3.  One route handles every book and reads request.params [app.js line 16: app.get("/select/:isbn", (req, res) => {].
+  - sendFile with root: 0.25 / 0.5.  You use sendFile, but not with the {root: ...} option. The assignment wants the Pages folder passed as root, like sendFile(file, {root: ...}). It also keeps people from asking for files outside that folder.
+  - path.resolve: 0.25 / 0.5.  You used path.join for the paths. The assignment asked for path.resolve, so swap them, e.g. path.resolve(__dirname, "Pages").
+  - Index page and /select links: 1 / 1.  GET / serves the index page and all three links go through /select/ISBN.
+  - Book pages served: 3 / 3.  All three books load at /select/ISBN.
+
+Error Handling: 5 / 7
+  - Book not found: 3 / 3.  A fake ISBN gets a not found message [app.js line 29: <h1>404 - Book Not Found</h1>].
+  - Page not found (own handler): 2 / 2.  A wrong URL gets its own "not found" message, separate from the missing-book one [app.js line 36: app.use((req, res) => {].
+  - Server Error: 0 / 2.  I didn't find a "Server Error" response anywhere. Add an error handler at the bottom, app.use((err, req, res, next) => ...), that sends "Server Error".
+
+Documentation: 1 / 1
+  - Comments: 1 / 1.  11% of the lines in the main file are comments.
+
+HTML Content: 1 / 1
+  - Cover image tag: 0.25 / 0.25.  All 3 book pages have <img src="/images/...">.
+  - Price on the pages: 0.25 / 0.25.  The price from the proposal is on all 3 pages.
+  - Title on the pages: 0.25 / 0.25.  The title from the proposal is on all 3 pages.
+  - Your name on the pages: 0.25 / 0.25.  Your name is on all 3 pages.
+
+Project folder (not scored, but fix it): app.js, package.json and node_modules are all inside the Pages folder. Pages should only hold the html files and the images folder. Move app.js and package.json up next to Pages and run npm install there. You also have 2 package.json files and 2 node_modules folders, and the package.json at the top has no start script, so node app.js or npm start from the main folder fails. I only got it running by going into Pages. Rename Index.html to index.html (lowercase).
+
+Also: you keep your own list of valid ISBNs in app.js. You don't need it. If sendFile can't find the file, its callback tells you, and you can send "File Not Found" from there.
+
+
+============================================================
+Mia Semple: 14 / 17
+============================================================
+Points: 13.75 out of 17, rounded up to 14.
+
+Proper Routing of Books: 7.75 / 8
+  - Single route for all books: 3 / 3.  One route handles every book and reads request.params [app.js line 32: app.get("/select/:variable", (req, res) => {].
+  - sendFile with root: 0.25 / 0.5.  You use sendFile, but not with the {root: ...} option. The assignment wants the Pages folder passed as root, like sendFile(file, {root: ...}). It also keeps people from asking for files outside that folder.
+  - path.resolve: 0.5 / 0.5.  path.resolve builds the folder path [app.js line 10: app.use(express.static(path.resolve(__dirname, "Pages")));].
+  - Index page and /select links: 1 / 1.  GET / serves the index page and all three links go through /select/ISBN.
+  - Book pages served: 3 / 3.  All three books load at /select/ISBN.
+
+Error Handling: 4 / 7
+  - Book not found: 3 / 3.  A fake ISBN gets a not found message [app.js line 43: res.status(404).send("File Not Found");].
+  - Page not found (own handler): 0 / 2.  A wrong URL still shows Express's own "Cannot GET ..." page. Add an app.use(...) after all your routes that sends "Page Not Found". Keep it separate from the missing-book message.
+  - Server Error: 1 / 2.  I can see "Server Error" in your code, but when I forced an error it never came back. An Express error handler needs four parameters, app.use((err, req, res, next) => ...), and has to come after your routes.
+
+Documentation: 1 / 1
+  - Comments: 1 / 1.  18% of the lines in the main file are comments.
+
+HTML Content: 1 / 1
+  - Cover image tag: 0.25 / 0.25.  All 3 book pages have <img src="/images/...">.
+  - Price on the pages: 0.25 / 0.25.  The price from the proposal is on all 3 pages.
+  - Title on the pages: 0.25 / 0.25.  The title from the proposal is on all 3 pages.
+  - Your name on the pages: 0.25 / 0.25.  Your name is on all 3 pages.
+
+
+============================================================
+Pradeep Poudel: 17 / 17
+============================================================
+Points: 17 out of 17.
+
+Proper Routing of Books: 8 / 8
+  - Single route for all books: 3 / 3.  One route handles every book and reads request.params [script.js line 57: app.get("/select/:isbn", function (request, response) {].
+  - sendFile with root: 0.5 / 0.5.  sendFile is used with the root option [script.js line 31: response.sendFile(filename, { root: PAGES_DIR }, function (err) {].
+  - path.resolve: 0.5 / 0.5.  path.resolve builds the folder path [script.js line 22: const PAGES_DIR = path.resolve(__dirname, "Pages");].
+  - Index page and /select links: 1 / 1.  GET / serves the index page and all three links go through /select/ISBN.
+  - Book pages served: 3 / 3.  All three books load at /select/ISBN.
+
+Error Handling: 7 / 7
+  - Book not found: 3 / 3.  A fake ISBN gets a not found message [script.js line 38: response.status(404).send("File Not Found");].
+  - Page not found (own handler): 2 / 2.  A wrong URL gets its own "not found" message, separate from the missing-book one [script.js line 63: app.use(function (request, response) {].
+  - Server Error: 2 / 2.  "Server Error" came back when I forced an error [script.js line 43: response.status(500).send("Server Error");].
+
+Documentation: 1 / 1
+  - Comments: 1 / 1.  43% of the lines in the main file are comments.
+
+HTML Content: 1 / 1
+  - Cover image tag: 0.25 / 0.25.  All 3 book pages have <img src="/images/...">.
+  - Price on the pages: 0.25 / 0.25.  The price from the proposal is on all 3 pages.
+  - Title on the pages: 0.25 / 0.25.  The title from the proposal is on all 3 pages.
+  - Your name on the pages: 0.25 / 0.25.  Your name is on all 3 pages.
+
+Not scored, but note: your main file is script.js and the assignment asks for app.js. Also your index links go to ISBNs that aren't in your proposal (9780441013593, 9780593098233, 9780593098240), so I could only check that each page has some title and price, not the proposed ones.
+
+
+============================================================
+Pratiksha Bam: 17 / 17
+============================================================
+Points: 17 out of 17.
+
+Proper Routing of Books: 8 / 8
+  - Single route for all books: 3 / 3.  One route handles every book and reads request.params [app.js line 23: app.get('/select/:isbn', (request, response, next) => {].
+  - sendFile with root: 0.5 / 0.5.  sendFile is used with the root option [app.js line 17: response.sendFile('index.html', { root: pagesDirectory }, (error) => {].
+  - path.resolve: 0.5 / 0.5.  path.resolve builds the folder path [app.js line 9: const pagesDirectory = path.resolve(__dirname, 'Pages');].
+  - Index page and /select links: 1 / 1.  GET / serves the index page and all three links go through /select/ISBN.
+  - Book pages served: 3 / 3.  All three books load at /select/ISBN.
+
+Error Handling: 7 / 7
+  - Book not found: 3 / 3.  A fake ISBN gets a not found message [app.js line 27: return response.status(404).type('text').send('File Not Found');].
+  - Page not found (own handler): 2 / 2.  A wrong URL gets its own "not found" message, separate from the missing-book one [app.js line 35: app.use((request, response) => {].
+  - Server Error: 2 / 2.  "Server Error" came back when I forced an error [app.js line 46: response.status(500).type('text').send('Server Error');].
+
+Documentation: 1 / 1
+  - Comments: 1 / 1.  24% of the lines in the main file are comments.
+
+HTML Content: 1 / 1
+  - Cover image tag: 0.25 / 0.25.  All 3 book pages have <img src="/images/...">.
+  - Price on the pages: 0.25 / 0.25.  The price from the proposal is on all 3 pages.
+  - Title on the pages: 0.25 / 0.25.  The title from the proposal is on all 3 pages.
+  - Your name on the pages: 0.25 / 0.25.  Your name is on all 3 pages.
+
+
+============================================================
+Ritu Tripathi: 17 / 17
+============================================================
+Points: 17 out of 17.
+
+Proper Routing of Books: 8 / 8
+  - Single route for all books: 3 / 3.  One route handles every book and reads request.params [app.js line 60: app.get("/select/:variable", function (request, response) {].
+  - sendFile with root: 0.5 / 0.5.  sendFile is used with the root option [app.js line 46: response.sendFile("index.html", { root: pagesPath }, function (error) {].
+  - path.resolve: 0.5 / 0.5.  path.resolve builds the folder path [app.js line 33: const pagesPath = path.resolve(__dirname, "Pages");].
+  - Index page and /select links: 1 / 1.  GET / serves the index page and all three links go through /select/ISBN.
+  - Book pages served: 3 / 3.  All three books load at /select/ISBN.
+
+Error Handling: 7 / 7
+  - Book not found: 3 / 3.  A fake ISBN gets a not found message [app.js line 68: response.status(404).send("File Not Found");].
+  - Page not found (own handler): 2 / 2.  A wrong URL gets its own "not found" message, separate from the missing-book one [app.js line 81: app.use(function (request, response) {].
+  - Server Error: 2 / 2.  "Server Error" came back when I forced an error [app.js line 49: response.status(500).send("Server Error");].
+
+Documentation: 1 / 1
+  - Comments: 1 / 1.  60% of the lines in the main file are comments.
+
+HTML Content: 1 / 1
+  - Cover image tag: 0.25 / 0.25.  All 3 book pages have <img src="/images/...">.
+  - Price on the pages: 0.25 / 0.25.  The price from the proposal is on all 3 pages.
+  - Title on the pages: 0.25 / 0.25.  The title from the proposal is on all 3 pages.
+  - Your name on the pages: 0.25 / 0.25.  Your name is on all 3 pages.
+
+
+============================================================
+Samuel Bassham: 14 / 17
+============================================================
+Points: 14 out of 17.
+
+Proper Routing of Books: 8 / 8
+  - Single route for all books: 3 / 3.  One route handles every book and reads request.params [app.js line 18: app.get("/select/:book", function(request, response, next) {].
+  - sendFile with root: 0.5 / 0.5.  sendFile is used with the root option [app.js line 20: response.sendFile(bookfile, {root: bookPath}, function(err) {].
+  - path.resolve: 0.5 / 0.5.  path.resolve builds the folder path [app.js line 9: var bookPath = path.resolve(__dirname, 'Pages');].
+  - Index page and /select links: 1 / 1.  GET / serves the index page and all three links go through /select/ISBN.
+  - Book pages served: 3 / 3.  All three books load at /select/ISBN.
+
+Error Handling: 4 / 7
+  - Book not found: 0 / 3.  A made-up ISBN didn't give me "File Not Found". Handle the missing-file case in the sendFile callback and send that message.
+  - Page not found (own handler): 2 / 2.  A wrong URL gets its own "not found" message, separate from the missing-book one [app.js line 45: app.use(function(request, response) {].
+  - Server Error: 2 / 2.  "Server Error" came back when I forced an error [app.js line 54: response.end('<html><body><h2>Server error!</h2></body></html>');].
+
+Documentation: 1 / 1
+  - Comments: 1 / 1.  24% of the lines in the main file are comments.
+
+HTML Content: 1 / 1
+  - Cover image tag: 0.25 / 0.25.  All 3 book pages have <img src="/images/...">.
+  - Price on the pages: 0.25 / 0.25.  The price from the proposal is on all 3 pages.
+  - Title on the pages: 0.25 / 0.25.  The title from the proposal is on all 3 pages.
+  - Your name on the pages: 0.25 / 0.25.  Your name is on all 3 pages.
+
+What happened with the fake ISBN: your app answered "Error: Bad ISBN! Try again!" with a normal 200 status. The assignment wants "File Not Found". In the sendFile callback, if the file isn't there, send "File Not Found" with status 404.
+
+
+============================================================
+Shreeyan Simkhada: 17 / 17
+============================================================
+Points: 17 out of 17.
+
+Proper Routing of Books: 8 / 8
+  - Single route for all books: 3 / 3.  One route handles every book and reads request.params [app.js line 37: app.get("/select/:book", function(request, response) {].
+  - sendFile with root: 0.5 / 0.5.  sendFile is used with the root option [app.js line 21: response.sendFile("index.html", {root: pagesPath}, function(error) {].
+  - path.resolve: 0.5 / 0.5.  path.resolve builds the folder path [app.js line 11: var pagesPath = path.resolve(__dirname, "Pages");].
+  - Index page and /select links: 1 / 1.  GET / serves the index page and all three links go through /select/ISBN.
+  - Book pages served: 3 / 3.  All three books load at /select/ISBN.
+
+Error Handling: 7 / 7
+  - Book not found: 3 / 3.  A fake ISBN gets a not found message [app.js line 25: response.status(404).send("File Not Found");].
+  - Page not found (own handler): 2 / 2.  A wrong URL gets its own "not found" message, separate from the missing-book one [app.js line 62: app.use(function(request, response) {].
+  - Server Error: 2 / 2.  "Server Error" came back when I forced an error [app.js line 28: response.status(500).send("Server Error");].
+
+Documentation: 1 / 1
+  - Comments: 1 / 1.  27% of the lines in the main file are comments.
+
+HTML Content: 1 / 1
+  - Cover image tag: 0.25 / 0.25.  All 3 book pages have <img src="/images/...">.
+  - Price on the pages: 0.25 / 0.25.  The price from the proposal is on all 3 pages.
+  - Title on the pages: 0.25 / 0.25.  The title from the proposal is on all 3 pages.
+  - Your name on the pages: 0.25 / 0.25.  Your name is on all 3 pages.
+
+
+============================================================
+Tirsan Sapkota: 16 / 17
+============================================================
+Points: 15.75 out of 17, rounded up to 16.
+
+Proper Routing of Books: 7.75 / 8
+  - Single route for all books: 3 / 3.  One route handles every book and reads request.params [app.js line 30: app.get("/select/:isbn", function (request, response) {].
+  - sendFile with root: 0.25 / 0.5.  You use sendFile, but not with the {root: ...} option. The assignment wants the Pages folder passed as root, like sendFile(file, {root: ...}). It also keeps people from asking for files outside that folder.
+  - path.resolve: 0.5 / 0.5.  path.resolve builds the folder path [app.js line 13: var imagesPath = path.resolve(__dirname, "Pages", "images");].
+  - Index page and /select links: 1 / 1.  GET / serves the index page and all three links go through /select/ISBN.
+  - Book pages served: 3 / 3.  All three books load at /select/ISBN.
+
+Error Handling: 6 / 7
+  - Book not found: 3 / 3.  A fake ISBN gets a not found message [app.js line 39: response.end("File Not Found");].
+  - Page not found (own handler): 2 / 2.  A wrong URL gets its own "not found" message, separate from the missing-book one [app.js line 56: app.use(function (request, response) {].
+  - Server Error: 1 / 2.  I can see "Server Error" in your code, but when I forced an error it never came back. An Express error handler needs four parameters, app.use((err, req, res, next) => ...), and has to come after your routes.
+
+Documentation: 1 / 1
+  - Comments: 1 / 1.  21% of the lines in the main file are comments.
+
+HTML Content: 1 / 1
+  - Cover image tag: 0.25 / 0.25.  All 3 book pages have <img src="/images/...">.
+  - Price on the pages: 0.25 / 0.25.  The price from the proposal is on all 3 pages.
+  - Title on the pages: 0.25 / 0.25.  The title from the proposal is on all 3 pages.
+  - Your name on the pages: 0.25 / 0.25.  Your name is on all 3 pages.
+
+
+Not graded: Joshua Smith and Topendra Singh (I have their proposals but no submission).

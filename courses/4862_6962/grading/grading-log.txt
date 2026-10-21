@@ -1,0 +1,616 @@
+==============================================================================
+CSCI 4862 / 6962 SERVER-SIDE DEVELOPMENT
+ASSIGNMENT 1 (EXPRESS ROUTING): COMPLETE GRADING LOG
+==============================================================================
+Grading date : 2026-10-21
+Graded out of: 17 points (final grade = points rounded up to the next whole number, maximum 17)
+Submissions  : 9 graded, 2 not graded (no submission)
+Method      : every project was copied to a temporary folder, started with node from the
+              entry file in package.json, and tested with real HTTP requests by the grading
+              script (grade-all-student.sh). Original submissions were never modified.
+
+------------------------------------------------------------------------------
+1. RUBRIC (17 points)
+------------------------------------------------------------------------------
+Source: revised rubric (Angello): Proper Routing of Books 8, Error Handling 7, Documentation 1, HTML Content 1.
+The split inside each category is the grader's own and is marked with * below.
+
+Proper Routing of Books (8)
+  Single route for all 3 books, using request.params ...... 3   (route without params 1.5; separate route per book 1)
+  All 3 book pages served at /select/<ISBN> * ............. 3   (3 x pages loaded / 3)
+  Index page at / with /select/<ISBN> links * ............. 1   (0.5 index served, 0.5 for the links; direct .html links cancel good ones)
+  sendFile with {root: ...} * ............................. 0.5 (sendFile without root 0.25)
+  path.resolve * .......................................... 0.5 (path.join 0.25)
+Error Handling (7)
+  Book not found returns "File Not Found" * ............... 3   ("Server Error" instead 1)
+  Unknown page returns its own "not found" response * ..... 2   (Express default "Cannot GET" 0)
+  Other errors return "Server Error" * ..................... 2   (text only in the code, not returned 1)
+Documentation (1)
+  Comments in the entry file * ............................ 1   (10% or more of lines 1; some 0.5; none 0)
+HTML Content (1)  [each item 0.25, scaled by pages / 3]
+  Cover <img src="/images/...">, price, title *, student name *
+
+Not scored (reported in feedback only): main file named app.js, express listed in package.json,
+node_modules included, Pages/ and Pages/images layout, 404/500 status codes, ISBNs that are not in the proposal.
+
+------------------------------------------------------------------------------
+2. RESULTS SUMMARY
+------------------------------------------------------------------------------
+Student               Grade  Points  Routing(8)  Errors(7)  Docs(1)  HTML(1)
+Charles Lowerre         17      17           8          7        1       1
+Darius Price            15    14.5         7.5          5        1       1
+Mia Semple              14   13.75        7.75          4        1       1
+Pradeep Poudel          17      17           8          7        1       1
+Pratiksha Bam           17      17           8          7        1       1
+Ritu Tripathi           17      17           8          7        1       1
+Samuel Bassham          14      14           8          4        1       1
+Shreeyan Simkhada       17      17           8          7        1       1
+Tirsan Sapkota          16   15.75        7.75          6        1       1
+Joshua Smith           --    not graded: proposal found but no submission
+Topendra Singh         --    not graded: proposal found but no submission
+
+Average grade 16 / 17 (raw points average 15.89); highest 17, lowest 14.
+Distribution: 17: 5, 16: 1, 15: 1, 14: 2
+
+------------------------------------------------------------------------------
+3. ADJUSTMENTS MADE TO THE GRADER DURING GRADING (so results are fair)
+------------------------------------------------------------------------------
+- Pages are tested with the ISBNs in the student's own index links, with hyphens ignored (one student names
+  files 978-1504074025.html), then matched to the proposal.
+- Title comparison treats "&" and "and", curly and straight quotes, and spaces around hyphens as equal.
+  (Three titles were first marked missing only for these reasons: "Crime & Punishment" vs "Crime and
+  Punishment", "King's" with a curly apostrophe, and a stray space in a proposal title.)
+- Student name check accepts a spelling variant of the first name (one page shows "Pratikshya Bam").
+- Scores with a fraction are rounded up to the next whole point, maximum 17.
+
+------------------------------------------------------------------------------
+4. OPEN ITEM FOR THE PROFESSOR
+------------------------------------------------------------------------------
+Samuel Bassham - missing-book message. A fake ISBN returns status 200 with "Error: Bad ISBN! Try again!"
+(deliberate: line 36 of app.js uses writeHead(200)). It was scored 0 / 3 because the response is not of the
+form "File Not Found". He did write a separate missing-book handler (the design the rubric asks for), so
+partial credit (1 or 2 of 3, grade 15 or 16 instead of 14) is a fair alternative. Current grade: 14.
+
+------------------------------------------------------------------------------
+5. DETAILED RESULTS PER STUDENT
+------------------------------------------------------------------------------
+
+==============================================================================
+Charles Lowerre  --  GRADE 17 / 17   (17 points)
+==============================================================================
+Folder      : submissions/Charles_Lowerre_project
+Entry file  : app.js    App started: yes    node_modules: included
+Proposal    : Charles_Lowerre.json
+
+Proper Routing of Books: 8 / 8
+  [    3 / 3   ] One route handles all 3 books (request.params)
+      checked: I scanned app.js for app.get routes: 1 with a path variable (/select/:x), 0 separate per-book routes; request.params used: yes.
+      code   : app.js line 40:  app.get('/select/:isbn', (request, response, next) => {
+  [  0.5 / 0.5 ] sendFile with {root: ...}
+      checked: I looked for response.sendFile(file, {root: ...}) in the code.
+      code   : app.js line 26:  response.sendFile('styles.css', { root: pagesDirectory }, (error) => {
+  [  0.5 / 0.5 ] path.resolve builds the path
+      checked: I looked for path.resolve(...) in the code.
+      code   : app.js line 15:  const pagesDirectory = path.resolve(__dirname, 'Pages');
+  [    1 / 1   ] '/' serves the index; links use /select/ISBN  -- 3 /select/ links (index served at /)
+      checked: GET / returned 200. Index page (served at /) has 3 links of the form /select/ISBN and 0 direct links to .html files.
+  [    3 / 3   ] The 3 book pages are served at /select/ISBN  -- 3/3 book pages returned
+      checked: GET /select/9780441172719 returned 200; GET /select/9780441172696 returned 200; GET /select/9780441104055 returned 200.
+
+Error Handling: 7 / 7
+  [    3 / 3   ] A book that does not exist returns 'File Not Found'
+      checked: GET /select/0000000000000 returned 404: File Not Found
+      code   : app.js line 43:  return response.status(404).type('text/plain').send('File Not Found');
+  [    2 / 2   ] An unknown page returns a 'not found' response (separate handler)
+      checked: GET /no-such-route/xyz returned 404: File Not Found
+      code   : app.js line 52:  app.use((request, response) => {
+  [    2 / 2   ] Any other error returns 'Server Error'
+      checked: I forced two errors. GET /select/%E0%A4%A returned 500: Server Error; GET /select/..%2Fapp returned 404: File Not Found
+      code   : app.js line 66:  response.status(500).type('text/plain').send('Server Error');
+
+Documentation: 1 / 1
+  [    1 / 1   ] Comments in the main file  -- 23% comment lines
+      checked: 14 of 60 non-empty lines in app.js contain comments (23%). Full marks need 10% or more.
+
+HTML Content: 1 / 1
+  [ 0.25 / 0.25] Cover <img src="/images/..."> on each book page  -- 3/3
+      checked: I looked for <img src="/images/..."> in the HTML of each book page: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Price on each book page  -- 3/3
+      checked: I compared the page text with the price in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Title on each book page  -- 3/3
+      checked: I compared the page text with the title in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Student name on each book page  -- 3/3
+      checked: I looked for your name in the text of each book page: 3 of 3 book pages have it.
+
+Requests made to the running app:
+  GET / -> 200
+  GET /select/9780441172719 -> 200
+  GET /select/9780441172696 -> 200
+  GET /select/9780441104055 -> 200
+  GET /select/0000000000000 -> 404: File Not Found
+  GET /no-such-route/xyz -> 404: File Not Found
+  GET /select/%E0%A4%A -> 500: Server Error
+  GET /select/..%2Fapp -> 404: File Not Found
+
+Project structure: no problems found.
+
+==============================================================================
+Darius Price  --  GRADE 15 / 17   (14.5 points)
+==============================================================================
+Folder      : submissions/Darius_Price_project
+Entry file  : app.js    App started: yes    node_modules: included
+Proposal    : Darius_Price.json
+
+Proper Routing of Books: 7.5 / 8
+  [    3 / 3   ] One route handles all 3 books (request.params)
+      checked: I scanned app.js for app.get routes: 1 with a path variable (/select/:x), 0 separate per-book routes; request.params used: yes.
+      code   : app.js line 16:  app.get("/select/:isbn", (req, res) => {
+  [ 0.25 / 0.5 ] sendFile with {root: ...}  -- sendFile used without root
+      checked: I looked for response.sendFile(file, {root: ...}) in the code.
+      code   : app.js line 12:  res.sendFile(path.join(__dirname, "Index.html"));
+  [ 0.25 / 0.5 ] path.resolve builds the path  -- uses path.join instead of path.resolve
+      checked: I looked for path.resolve(...) in the code.
+      code   : app.js line 8:  app.use("/images", express.static(path.join(__dirname, "images")));
+  [    1 / 1   ] '/' serves the index; links use /select/ISBN  -- 3 /select/ links (index served at /)
+      checked: GET / returned 200. Index page (served at /) has 3 links of the form /select/ISBN and 0 direct links to .html files.
+  [    3 / 3   ] The 3 book pages are served at /select/ISBN  -- 3/3 book pages returned
+      checked: GET /select/014044792X returned 200; GET /select/0140449132 returned 200; GET /select/1685781152 returned 200.
+
+Error Handling: 5 / 7
+  [    3 / 3   ] A book that does not exist returns 'File Not Found'
+      checked: GET /select/0000000000000 returned 404:  <h1>404 - Book Not Found</h1> <p>The ISBN 0000000000000
+      code   : app.js line 29:  <h1>404 - Book Not Found</h1>
+  [    2 / 2   ] An unknown page returns a 'not found' response (separate handler)
+      checked: GET /no-such-route/xyz returned 404:  <h1>404 - Page Not Found</h1> <p>The page you requested does no
+      code   : app.js line 36:  app.use((req, res) => {
+  [    0 / 2   ] Any other error returns 'Server Error'  -- no 'Server Error' response found
+      checked: I forced two errors. GET /select/%E0%A4%A returned 400: <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</tit; GET /select/..%2Fapp returned 404:  <h1>404 - Book Not Found</h1> <p>The ISBN ../app does n
+
+Documentation: 1 / 1
+  [    1 / 1   ] Comments in the main file  -- 11% comment lines
+      checked: 4 of 37 non-empty lines in app.js contain comments (11%). Full marks need 10% or more.
+
+HTML Content: 1 / 1
+  [ 0.25 / 0.25] Cover <img src="/images/..."> on each book page  -- 3/3
+      checked: I looked for <img src="/images/..."> in the HTML of each book page: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Price on each book page  -- 3/3
+      checked: I compared the page text with the price in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Title on each book page  -- 3/3
+      checked: I compared the page text with the title in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Student name on each book page  -- 3/3
+      checked: I looked for your name in the text of each book page: 3 of 3 book pages have it.
+
+Requests made to the running app:
+  GET / -> 200
+  GET /select/014044792X -> 200
+  GET /select/0140449132 -> 200
+  GET /select/1685781152 -> 200
+  GET /select/0000000000000 -> 404:  <h1>404 - Book Not Found</h1> <p>The ISBN 0000000000000
+  GET /no-such-route/xyz -> 404:  <h1>404 - Page Not Found</h1> <p>The page you requested does no
+  GET /select/%E0%A4%A -> 400: <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</tit
+  GET /select/..%2Fapp -> 404:  <h1>404 - Book Not Found</h1> <p>The ISBN ../app does n
+
+Project structure notes (not scored):
+  - Your app is inside the Pages folder: app.js, package.json and node_modules are all sitting inside Pages/. That folder is only supposed to hold the html pages and the images folder. Move app.js and package.json up to the main project folder, next to Pages, and run npm install there. Then you start it with node app.js from the project folder and it serves the files in ./Pages.
+  - You have 2 package.json files: I found them in: Pages/package.json, package.json. You only need one, at the top. This usually happens when npm init or npm install gets run in the wrong folder, and then it's not clear which one is the real project.
+  - You have 2 node_modules folders: I found them in: Pages/node_modules, node_modules. Install once, in the folder that has package.json. Right now the same packages are stored twice.
+  - The package.json at the top doesn't say how to start the app: It has no "main" and no "start" script, so node app.js or npm start from the top folder fails with "Cannot find module". I had to dig into Pages/ to find your app.
+  - The index page is called Index.html: Rename it to index.html, all lowercase. On Linux and most web hosts file names are case-sensitive, so Index.html and index.html are different files.
+Other notes (not scored):
+  - Your code keeps its own list of valid ISBNs. You don't need that. Just ask sendFile for the file and, if it isn't there, the callback gives you err.code === "ENOENT" and you can send "File Not Found". Then adding a book is only adding a file.
+
+==============================================================================
+Mia Semple  --  GRADE 14 / 17   (13.75 points)
+==============================================================================
+Folder      : submissions/Mia_Semple_project
+Entry file  : app.js    App started: yes    node_modules: included
+Proposal    : Mia_Semple.json
+
+Proper Routing of Books: 7.75 / 8
+  [    3 / 3   ] One route handles all 3 books (request.params)
+      checked: I scanned app.js for app.get routes: 1 with a path variable (/select/:x), 0 separate per-book routes; request.params used: yes.
+      code   : app.js line 32:  app.get("/select/:variable", (req, res) => {
+  [ 0.25 / 0.5 ] sendFile with {root: ...}  -- sendFile used without root
+      checked: I looked for response.sendFile(file, {root: ...}) in the code.
+      code   : app.js line 18:  res.sendFile(indexPath, (err) => {
+  [  0.5 / 0.5 ] path.resolve builds the path
+      checked: I looked for path.resolve(...) in the code.
+      code   : app.js line 10:  app.use(express.static(path.resolve(__dirname, "Pages")));
+  [    1 / 1   ] '/' serves the index; links use /select/ISBN  -- 3 /select/ links (index served at /)
+      checked: GET / returned 200. Index page (served at /) has 3 links of the form /select/ISBN and 0 direct links to .html files.
+  [    3 / 3   ] The 3 book pages are served at /select/ISBN  -- 3/3 book pages returned
+      checked: GET /select/1516801512 returned 200; GET /select/1517197708 returned 200; GET /select/1517198003 returned 200.
+
+Error Handling: 4 / 7
+  [    3 / 3   ] A book that does not exist returns 'File Not Found'
+      checked: GET /select/0000000000000 returned 404: File Not Found
+      code   : app.js line 43:  res.status(404).send("File Not Found");
+  [    0 / 2   ] An unknown page returns a 'not found' response (separate handler)  -- Express default 'Cannot GET' page, no catch-all handler
+      checked: GET /no-such-route/xyz returned 404: <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</tit
+  [    1 / 2   ] Any other error returns 'Server Error'  -- 'Server Error' is in the code but was not returned when an error was forced
+      checked: I forced two errors. GET /select/%E0%A4%A returned 400: <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</tit; GET /select/..%2Fapp returned 404: File Not Found
+      code   : app.js line 22:  res.status(500).send("Server Error");
+
+Documentation: 1 / 1
+  [    1 / 1   ] Comments in the main file  -- 18% comment lines
+      checked: 6 of 34 non-empty lines in app.js contain comments (18%). Full marks need 10% or more.
+
+HTML Content: 1 / 1
+  [ 0.25 / 0.25] Cover <img src="/images/..."> on each book page  -- 3/3
+      checked: I looked for <img src="/images/..."> in the HTML of each book page: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Price on each book page  -- 3/3
+      checked: I compared the page text with the price in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Title on each book page  -- 3/3
+      checked: I compared the page text with the title in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Student name on each book page  -- 3/3
+      checked: I looked for your name in the text of each book page: 3 of 3 book pages have it.
+
+Requests made to the running app:
+  GET / -> 200
+  GET /select/1516801512 -> 200
+  GET /select/1517197708 -> 200
+  GET /select/1517198003 -> 200
+  GET /select/0000000000000 -> 404: File Not Found
+  GET /no-such-route/xyz -> 404: <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</tit
+  GET /select/%E0%A4%A -> 400: <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</tit
+  GET /select/..%2Fapp -> 404: File Not Found
+
+Project structure: no problems found.
+
+==============================================================================
+Pradeep Poudel  --  GRADE 17 / 17   (17 points)
+==============================================================================
+Folder      : submissions/Pradeep_Poudel_project
+Entry file  : script.js    App started: yes    node_modules: included
+Proposal    : Pradeep_Poudel.json
+
+Proper Routing of Books: 8 / 8
+  [    3 / 3   ] One route handles all 3 books (request.params)
+      checked: I scanned script.js for app.get routes: 1 with a path variable (/select/:x), 0 separate per-book routes; request.params used: yes.
+      code   : script.js line 57:  app.get("/select/:isbn", function (request, response) {
+  [  0.5 / 0.5 ] sendFile with {root: ...}
+      checked: I looked for response.sendFile(file, {root: ...}) in the code.
+      code   : script.js line 31:  response.sendFile(filename, { root: PAGES_DIR }, function (err) {
+  [  0.5 / 0.5 ] path.resolve builds the path
+      checked: I looked for path.resolve(...) in the code.
+      code   : script.js line 22:  const PAGES_DIR = path.resolve(__dirname, "Pages");
+  [    1 / 1   ] '/' serves the index; links use /select/ISBN  -- 3 /select/ links (index served at /)
+      checked: GET / returned 200. Index page (served at /) has 3 links of the form /select/ISBN and 0 direct links to .html files.
+  [    3 / 3   ] The 3 book pages are served at /select/ISBN  -- 3/3 book pages returned
+      checked: GET /select/9780441013593 returned 200; GET /select/9780593098233 returned 200; GET /select/9780593098240 returned 200.
+
+Error Handling: 7 / 7
+  [    3 / 3   ] A book that does not exist returns 'File Not Found'
+      checked: GET /select/0000000000000 returned 404: File Not Found
+      code   : script.js line 38:  response.status(404).send("File Not Found");
+  [    2 / 2   ] An unknown page returns a 'not found' response (separate handler)
+      checked: GET /no-such-route/xyz returned 404: File Not Found
+      code   : script.js line 63:  app.use(function (request, response) {
+  [    2 / 2   ] Any other error returns 'Server Error'
+      checked: I forced two errors. GET /select/%E0%A4%A returned 500: Server Error; GET /select/..%2Fapp returned 500: Server Error
+      code   : script.js line 43:  response.status(500).send("Server Error");
+
+Documentation: 1 / 1
+  [    1 / 1   ] Comments in the main file  -- 43% comment lines
+      checked: 28 of 65 non-empty lines in script.js contain comments (43%). Full marks need 10% or more.
+
+HTML Content: 1 / 1
+  [ 0.25 / 0.25] Cover <img src="/images/..."> on each book page  -- 3/3
+      checked: I looked for <img src="/images/..."> in the HTML of each book page: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Price on each book page  -- 3/3
+      checked: I compared the page text with the price in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Title on each book page  -- 3/3
+      checked: I compared the page text with the title in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Student name on each book page  -- 3/3
+      checked: I looked for your name in the text of each book page: 3 of 3 book pages have it.
+
+Requests made to the running app:
+  GET / -> 200
+  GET /select/9780441013593 -> 200
+  GET /select/9780593098233 -> 200
+  GET /select/9780593098240 -> 200
+  GET /select/0000000000000 -> 404: File Not Found
+  GET /no-such-route/xyz -> 404: File Not Found
+  GET /select/%E0%A4%A -> 500: Server Error
+  GET /select/..%2Fapp -> 500: Server Error
+
+Project structure notes (not scored):
+  - Your main file is script.js, not app.js: The assignment asks for app.js. Rename it and update "main" / "scripts.start" in package.json.
+Other notes (not scored):
+  - Your index links to 9780441013593, 9780593098233, 9780593098240, which aren't in your proposal. The pages should be for the three books you proposed. Because of that I could only check that each page has some title and some price, not the right ones.
+
+==============================================================================
+Pratiksha Bam  --  GRADE 17 / 17   (17 points)
+==============================================================================
+Folder      : submissions/Pratiksha_Bam_project
+Entry file  : app.js    App started: yes    node_modules: included
+Proposal    : Pratiksha_Bam.json
+
+Proper Routing of Books: 8 / 8
+  [    3 / 3   ] One route handles all 3 books (request.params)
+      checked: I scanned app.js for app.get routes: 1 with a path variable (/select/:x), 0 separate per-book routes; request.params used: yes.
+      code   : app.js line 23:  app.get('/select/:isbn', (request, response, next) => {
+  [  0.5 / 0.5 ] sendFile with {root: ...}
+      checked: I looked for response.sendFile(file, {root: ...}) in the code.
+      code   : app.js line 17:  response.sendFile('index.html', { root: pagesDirectory }, (error) => {
+  [  0.5 / 0.5 ] path.resolve builds the path
+      checked: I looked for path.resolve(...) in the code.
+      code   : app.js line 9:  const pagesDirectory = path.resolve(__dirname, 'Pages');
+  [    1 / 1   ] '/' serves the index; links use /select/ISBN  -- 3 /select/ links (index served at /)
+      checked: GET / returned 200. Index page (served at /) has 3 links of the form /select/ISBN and 0 direct links to .html files.
+  [    3 / 3   ] The 3 book pages are served at /select/ISBN  -- 3/3 book pages returned
+      checked: GET /select/9780593440872 returned 200; GET /select/9780593441190 returned 200; GET /select/9780593441213 returned 200.
+
+Error Handling: 7 / 7
+  [    3 / 3   ] A book that does not exist returns 'File Not Found'
+      checked: GET /select/0000000000000 returned 404: File Not Found
+      code   : app.js line 27:  return response.status(404).type('text').send('File Not Found');
+  [    2 / 2   ] An unknown page returns a 'not found' response (separate handler)
+      checked: GET /no-such-route/xyz returned 404: 404 Page not found
+      code   : app.js line 35:  app.use((request, response) => {
+  [    2 / 2   ] Any other error returns 'Server Error'
+      checked: I forced two errors. GET /select/%E0%A4%A returned 500: Server Error; GET /select/..%2Fapp returned 404: File Not Found
+      code   : app.js line 46:  response.status(500).type('text').send('Server Error');
+
+Documentation: 1 / 1
+  [    1 / 1   ] Comments in the main file  -- 24% comment lines
+      checked: 12 of 49 non-empty lines in app.js contain comments (24%). Full marks need 10% or more.
+
+HTML Content: 1 / 1
+  [ 0.25 / 0.25] Cover <img src="/images/..."> on each book page  -- 3/3
+      checked: I looked for <img src="/images/..."> in the HTML of each book page: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Price on each book page  -- 3/3
+      checked: I compared the page text with the price in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Title on each book page  -- 3/3
+      checked: I compared the page text with the title in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Student name on each book page  -- 3/3
+      checked: I looked for your name in the text of each book page: 3 of 3 book pages have it.
+
+Requests made to the running app:
+  GET / -> 200
+  GET /select/9780593440872 -> 200
+  GET /select/9780593441190 -> 200
+  GET /select/9780593441213 -> 200
+  GET /select/0000000000000 -> 404: File Not Found
+  GET /no-such-route/xyz -> 404: 404 Page not found
+  GET /select/%E0%A4%A -> 500: Server Error
+  GET /select/..%2Fapp -> 404: File Not Found
+
+Project structure: no problems found.
+
+==============================================================================
+Ritu Tripathi  --  GRADE 17 / 17   (17 points)
+==============================================================================
+Folder      : submissions/Ritu_Tripathi_project
+Entry file  : app.js    App started: yes    node_modules: included
+Proposal    : Ritu_Tripathi.json
+
+Proper Routing of Books: 8 / 8
+  [    3 / 3   ] One route handles all 3 books (request.params)
+      checked: I scanned app.js for app.get routes: 1 with a path variable (/select/:x), 0 separate per-book routes; request.params used: yes.
+      code   : app.js line 60:  app.get("/select/:variable", function (request, response) {
+  [  0.5 / 0.5 ] sendFile with {root: ...}
+      checked: I looked for response.sendFile(file, {root: ...}) in the code.
+      code   : app.js line 46:  response.sendFile("index.html", { root: pagesPath }, function (error) {
+  [  0.5 / 0.5 ] path.resolve builds the path
+      checked: I looked for path.resolve(...) in the code.
+      code   : app.js line 33:  const pagesPath = path.resolve(__dirname, "Pages");
+  [    1 / 1   ] '/' serves the index; links use /select/ISBN  -- 3 /select/ links (index served at /)
+      checked: GET / returned 200. Index page (served at /) has 3 links of the form /select/ISBN and 0 direct links to .html files.
+  [    3 / 3   ] The 3 book pages are served at /select/ISBN  -- 3/3 book pages returned
+      checked: GET /select/9780765382030 returned 200; GET /select/9780765386694 returned 200; GET /select/9780765386632 returned 200.
+
+Error Handling: 7 / 7
+  [    3 / 3   ] A book that does not exist returns 'File Not Found'
+      checked: GET /select/0000000000000 returned 404: File Not Found
+      code   : app.js line 68:  response.status(404).send("File Not Found");
+  [    2 / 2   ] An unknown page returns a 'not found' response (separate handler)
+      checked: GET /no-such-route/xyz returned 404: File Not Found
+      code   : app.js line 81:  app.use(function (request, response) {
+  [    2 / 2   ] Any other error returns 'Server Error'
+      checked: I forced two errors. GET /select/%E0%A4%A returned 500: Server Error; GET /select/..%2Fapp returned 500: Server Error
+      code   : app.js line 49:  response.status(500).send("Server Error");
+
+Documentation: 1 / 1
+  [    1 / 1   ] Comments in the main file  -- 60% comment lines
+      checked: 52 of 86 non-empty lines in app.js contain comments (60%). Full marks need 10% or more.
+
+HTML Content: 1 / 1
+  [ 0.25 / 0.25] Cover <img src="/images/..."> on each book page  -- 3/3
+      checked: I looked for <img src="/images/..."> in the HTML of each book page: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Price on each book page  -- 3/3
+      checked: I compared the page text with the price in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Title on each book page  -- 3/3
+      checked: I compared the page text with the title in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Student name on each book page  -- 3/3
+      checked: I looked for your name in the text of each book page: 3 of 3 book pages have it.
+
+Requests made to the running app:
+  GET / -> 200
+  GET /select/9780765382030 -> 200
+  GET /select/9780765386694 -> 200
+  GET /select/9780765386632 -> 200
+  GET /select/0000000000000 -> 404: File Not Found
+  GET /no-such-route/xyz -> 404: File Not Found
+  GET /select/%E0%A4%A -> 500: Server Error
+  GET /select/..%2Fapp -> 500: Server Error
+
+Project structure: no problems found.
+
+==============================================================================
+Samuel Bassham  --  GRADE 14 / 17   (14 points)
+==============================================================================
+Folder      : submissions/Samuel_Bassham_project
+Entry file  : app.js    App started: yes    node_modules: included
+Proposal    : Samuel_Bassham.json
+
+Proper Routing of Books: 8 / 8
+  [    3 / 3   ] One route handles all 3 books (request.params)
+      checked: I scanned app.js for app.get routes: 1 with a path variable (/select/:x), 0 separate per-book routes; request.params used: yes.
+      code   : app.js line 18:  app.get("/select/:book", function(request, response, next) {
+  [  0.5 / 0.5 ] sendFile with {root: ...}
+      checked: I looked for response.sendFile(file, {root: ...}) in the code.
+      code   : app.js line 20:  response.sendFile(bookfile, {root: bookPath}, function(err) {
+  [  0.5 / 0.5 ] path.resolve builds the path
+      checked: I looked for path.resolve(...) in the code.
+      code   : app.js line 9:  var bookPath = path.resolve(__dirname, 'Pages');
+  [    1 / 1   ] '/' serves the index; links use /select/ISBN  -- 3 /select/ links (index served at /)
+      checked: GET / returned 200. Index page (served at /) has 3 links of the form /select/ISBN and 0 direct links to .html files.
+  [    3 / 3   ] The 3 book pages are served at /select/ISBN  -- 3/3 book pages returned
+      checked: GET /select/9780060913076 returned 200; GET /select/9780143039945 returned 200; GET /select/9780312423209 returned 200.
+
+Error Handling: 4 / 7
+  [    0 / 3   ] A book that does not exist returns 'File Not Found'  -- no 'not found' message (200: <html><body><h2>Error: Bad ISBN! Try again!</h2></body></html>)
+      checked: GET /select/0000000000000 returned 200: <html><body><h2>Error: Bad ISBN! Try again!</h2></body></html>
+      code   : app.js line 22:  next(new Error("book isbn not found"));
+  [    2 / 2   ] An unknown page returns a 'not found' response (separate handler)
+      checked: GET /no-such-route/xyz returned 404: <html><body><h2>Sorry -- file not found!</h2></body></html>
+      code   : app.js line 45:  app.use(function(request, response) {
+  [    2 / 2   ] Any other error returns 'Server Error'
+      checked: I forced two errors. GET /select/%E0%A4%A returned 500: <html><body><h2>Server error!</h2></body></html>; GET /select/..%2Fapp returned 200: <html><body><h2>Error: Bad ISBN! Try again!</h2></body></html>
+      code   : app.js line 54:  response.end('<html><body><h2>Server error!</h2></body></html>');
+
+Documentation: 1 / 1
+  [    1 / 1   ] Comments in the main file  -- 24% comment lines
+      checked: 12 of 49 non-empty lines in app.js contain comments (24%). Full marks need 10% or more.
+
+HTML Content: 1 / 1
+  [ 0.25 / 0.25] Cover <img src="/images/..."> on each book page  -- 3/3
+      checked: I looked for <img src="/images/..."> in the HTML of each book page: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Price on each book page  -- 3/3
+      checked: I compared the page text with the price in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Title on each book page  -- 3/3
+      checked: I compared the page text with the title in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Student name on each book page  -- 3/3
+      checked: I looked for your name in the text of each book page: 3 of 3 book pages have it.
+
+Requests made to the running app:
+  GET / -> 200
+  GET /select/9780060913076 -> 200
+  GET /select/9780143039945 -> 200
+  GET /select/9780312423209 -> 200
+  GET /select/0000000000000 -> 200: <html><body><h2>Error: Bad ISBN! Try again!</h2></body></html>
+  GET /no-such-route/xyz -> 404: <html><body><h2>Sorry -- file not found!</h2></body></html>
+  GET /select/%E0%A4%A -> 500: <html><body><h2>Server error!</h2></body></html>
+  GET /select/..%2Fapp -> 200: <html><body><h2>Error: Bad ISBN! Try again!</h2></body></html>
+
+Project structure: no problems found.
+
+==============================================================================
+Shreeyan Simkhada  --  GRADE 17 / 17   (17 points)
+==============================================================================
+Folder      : submissions/Shreeyan_Simkhada_project
+Entry file  : app.js    App started: yes    node_modules: included
+Proposal    : Shreeyan_Simkhada.json
+
+Proper Routing of Books: 8 / 8
+  [    3 / 3   ] One route handles all 3 books (request.params)
+      checked: I scanned app.js for app.get routes: 1 with a path variable (/select/:x), 0 separate per-book routes; request.params used: yes.
+      code   : app.js line 37:  app.get("/select/:book", function(request, response) {
+  [  0.5 / 0.5 ] sendFile with {root: ...}
+      checked: I looked for response.sendFile(file, {root: ...}) in the code.
+      code   : app.js line 21:  response.sendFile("index.html", {root: pagesPath}, function(error) {
+  [  0.5 / 0.5 ] path.resolve builds the path
+      checked: I looked for path.resolve(...) in the code.
+      code   : app.js line 11:  var pagesPath = path.resolve(__dirname, "Pages");
+  [    1 / 1   ] '/' serves the index; links use /select/ISBN  -- 3 /select/ links (index served at /)
+      checked: GET / returned 200. Index page (served at /) has 3 links of the form /select/ISBN and 0 direct links to .html files.
+  [    3 / 3   ] The 3 book pages are served at /select/ISBN  -- 3/3 book pages returned
+      checked: GET /select/978-1504074025 returned 200; GET /select/978-1466819481 returned 200; GET /select/978-1504074032 returned 200.
+
+Error Handling: 7 / 7
+  [    3 / 3   ] A book that does not exist returns 'File Not Found'
+      checked: GET /select/0000000000000 returned 404: File Not Found
+      code   : app.js line 25:  response.status(404).send("File Not Found");
+  [    2 / 2   ] An unknown page returns a 'not found' response (separate handler)
+      checked: GET /no-such-route/xyz returned 404: File Not Found
+      code   : app.js line 62:  app.use(function(request, response) {
+  [    2 / 2   ] Any other error returns 'Server Error'
+      checked: I forced two errors. GET /select/%E0%A4%A returned 400: <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</tit; GET /select/..%2Fapp returned 500: Server Error
+      code   : app.js line 28:  response.status(500).send("Server Error");
+
+Documentation: 1 / 1
+  [    1 / 1   ] Comments in the main file  -- 27% comment lines
+      checked: 13 of 48 non-empty lines in app.js contain comments (27%). Full marks need 10% or more.
+
+HTML Content: 1 / 1
+  [ 0.25 / 0.25] Cover <img src="/images/..."> on each book page  -- 3/3
+      checked: I looked for <img src="/images/..."> in the HTML of each book page: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Price on each book page  -- 3/3
+      checked: I compared the page text with the price in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Title on each book page  -- 3/3
+      checked: I compared the page text with the title in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Student name on each book page  -- 3/3
+      checked: I looked for your name in the text of each book page: 3 of 3 book pages have it.
+
+Requests made to the running app:
+  GET / -> 200
+  GET /select/978-1504074025 -> 200
+  GET /select/978-1466819481 -> 200
+  GET /select/978-1504074032 -> 200
+  GET /select/0000000000000 -> 404: File Not Found
+  GET /no-such-route/xyz -> 404: File Not Found
+  GET /select/%E0%A4%A -> 400: <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</tit
+  GET /select/..%2Fapp -> 500: Server Error
+
+Project structure: no problems found.
+
+==============================================================================
+Tirsan Sapkota  --  GRADE 16 / 17   (15.75 points)
+==============================================================================
+Folder      : submissions/Tirsan_Sapkota_project
+Entry file  : app.js    App started: yes    node_modules: included
+Proposal    : Tirsan_Sapkota.json
+
+Proper Routing of Books: 7.75 / 8
+  [    3 / 3   ] One route handles all 3 books (request.params)
+      checked: I scanned app.js for app.get routes: 1 with a path variable (/select/:x), 0 separate per-book routes; request.params used: yes.
+      code   : app.js line 30:  app.get("/select/:isbn", function (request, response) {
+  [ 0.25 / 0.5 ] sendFile with {root: ...}  -- sendFile used without root
+      checked: I looked for response.sendFile(file, {root: ...}) in the code.
+      code   : app.js line 20:  response.sendFile(filePath, function (error) {
+  [  0.5 / 0.5 ] path.resolve builds the path
+      checked: I looked for path.resolve(...) in the code.
+      code   : app.js line 13:  var imagesPath = path.resolve(__dirname, "Pages", "images");
+  [    1 / 1   ] '/' serves the index; links use /select/ISBN  -- 3 /select/ links (index served at /)
+      checked: GET / returned 200. Index page (served at /) has 3 links of the form /select/ISBN and 0 direct links to .html files.
+  [    3 / 3   ] The 3 book pages are served at /select/ISBN  -- 3/3 book pages returned
+      checked: GET /select/9780593820254 returned 200; GET /select/9780593820278 returned 200; GET /select/9780593820285 returned 200.
+
+Error Handling: 6 / 7
+  [    3 / 3   ] A book that does not exist returns 'File Not Found'
+      checked: GET /select/0000000000000 returned 404: File Not Found
+      code   : app.js line 39:  response.end("File Not Found");
+  [    2 / 2   ] An unknown page returns a 'not found' response (separate handler)
+      checked: GET /no-such-route/xyz returned 404: File Not Found
+      code   : app.js line 56:  app.use(function (request, response) {
+  [    1 / 2   ] Any other error returns 'Server Error'  -- 'Server Error' is in the code but was not returned when an error was forced
+      checked: I forced two errors. GET /select/%E0%A4%A returned 400: <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</tit; GET /select/..%2Fapp returned 404: File Not Found
+      code   : app.js line 23:  response.end("Server Error");
+
+Documentation: 1 / 1
+  [    1 / 1   ] Comments in the main file  -- 21% comment lines
+      checked: 11 of 53 non-empty lines in app.js contain comments (21%). Full marks need 10% or more.
+
+HTML Content: 1 / 1
+  [ 0.25 / 0.25] Cover <img src="/images/..."> on each book page  -- 3/3
+      checked: I looked for <img src="/images/..."> in the HTML of each book page: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Price on each book page  -- 3/3
+      checked: I compared the page text with the price in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Title on each book page  -- 3/3
+      checked: I compared the page text with the title in your proposal: 3 of 3 book pages have it.
+  [ 0.25 / 0.25] Student name on each book page  -- 3/3
+      checked: I looked for your name in the text of each book page: 3 of 3 book pages have it.
+
+Requests made to the running app:
+  GET / -> 200
+  GET /select/9780593820254 -> 200
+  GET /select/9780593820278 -> 200
+  GET /select/9780593820285 -> 200
+  GET /select/0000000000000 -> 404: File Not Found
+  GET /no-such-route/xyz -> 404: File Not Found
+  GET /select/%E0%A4%A -> 400: <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</tit
+  GET /select/..%2Fapp -> 404: File Not Found
+
+Project structure: no problems found.
+

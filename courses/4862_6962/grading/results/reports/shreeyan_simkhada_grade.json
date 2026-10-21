@@ -1,162 +1,213 @@
 {
   "student": "shreeyan_simkhada",
-  "total": 75,
-  "outOf100": 100,
-  "grade20": 15,
-  "manualPoints": 0,
+  "total": 17,
+  "outOf": 17,
   "categories": {
-    "Routing & File Handling": {
-      "score": 25,
-      "max": 25
+    "Proper Routing of Books": {
+      "score": 8,
+      "max": 8
     },
     "Error Handling": {
-      "score": 25,
-      "max": 25
+      "score": 7,
+      "max": 7
     },
-    "Pages Served": {
-      "score": 5,
-      "max": 20
+    "Documentation": {
+      "score": 1,
+      "max": 1
     },
     "HTML Content": {
-      "score": 10,
-      "max": 20
-    },
-    "Startup & Documentation": {
-      "score": 10,
-      "max": 10
+      "score": 1,
+      "max": 1
     }
   },
+  "grade": 17,
+  "studentName": "Shreeyan Simkhada",
+  "entry": "app.js",
+  "structure": [
+    {
+      "level": "ok",
+      "title": "Server files are at the top of the project",
+      "text": "app.js and package.json are in the project folder, as expected."
+    },
+    {
+      "level": "ok",
+      "title": "Pages and Pages/images folders exist",
+      "text": "Found Pages/ and its images folder."
+    }
+  ],
+  "tips": [],
+  "serverTail": "",
   "started": true,
   "startNote": "",
   "flags": [],
   "items": [
     {
-      "section": "Routing & File Handling",
-      "item": "Single /select/:variable route with request.params",
-      "max": 10,
-      "score": 10,
-      "note": "",
-      "manual": false
-    },
-    {
-      "section": "Routing & File Handling",
-      "item": "sendFile with {root: ...}",
-      "max": 8,
-      "score": 8,
-      "note": "",
-      "manual": false
-    },
-    {
-      "section": "Routing & File Handling",
-      "item": "path.resolve for the path",
-      "max": 7,
-      "score": 7,
-      "note": "",
-      "manual": false
-    },
-    {
-      "section": "Pages Served",
-      "item": "/ returns the index page",
-      "max": 5,
-      "score": 5,
-      "note": "",
-      "manual": false
-    },
-    {
-      "section": "Pages Served",
-      "item": "/select/ISBN returns each book page",
-      "max": 10,
-      "score": 0,
-      "note": "0/3 book pages returned",
-      "manual": false
-    },
-    {
-      "section": "Pages Served",
-      "item": "Cover images served at /images/...",
-      "max": 5,
-      "score": 0,
-      "note": "0/3 cover images loaded",
-      "manual": false
-    },
-    {
-      "section": "Error Handling",
-      "item": "Nonexistent ISBN returns a not-found message",
-      "max": 10,
-      "score": 10,
-      "note": "",
-      "manual": false
-    },
-    {
-      "section": "Error Handling",
-      "item": "Unknown route returns a not-found message",
-      "max": 8,
-      "score": 8,
-      "note": "",
-      "manual": false
-    },
-    {
-      "section": "Error Handling",
-      "item": "Other errors return Server Error",
-      "max": 7,
-      "score": 7,
-      "note": "",
-      "manual": false
-    },
-    {
-      "section": "HTML Content",
-      "item": "Index links use /select/ISBN",
-      "max": 10,
-      "score": 10,
-      "note": "3 /select/ links (index served at /)",
-      "manual": false
-    },
-    {
-      "section": "HTML Content",
-      "item": "Title on each book page",
+      "section": "Proper Routing of Books",
+      "item": "One route handles all 3 books (request.params)",
       "max": 3,
-      "score": 0,
-      "note": "0/3",
-      "manual": false
+      "score": 3,
+      "note": "",
+      "fb": {
+        "code": "app.js line 37:  app.get(\"/select/:book\", function(request, response) {",
+        "example": "app.get(\"/select/:variable\", (request, response) => {\n    const file = request.params.variable + \".html\";\n    response.sendFile(file, { root: path.resolve(__dirname, \"Pages\") });\n});",
+        "ok": "One route with a path variable handles every book and reads it from request.params. This is exactly the pattern the assignment is after.",
+        "test": "I scanned app.js for app.get routes: 1 with a path variable (/select/:x), 0 separate per-book routes; request.params used: yes.",
+        "why": "One route for every book is the core idea of the assignment: adding a book then means adding a file, not writing more code."
+      }
+    },
+    {
+      "section": "Proper Routing of Books",
+      "item": "sendFile with {root: ...}",
+      "max": 0.5,
+      "score": 0.5,
+      "note": "",
+      "fb": {
+        "code": "app.js line 21:  response.sendFile(\"index.html\", {root: pagesPath}, function(error) {",
+        "example": "response.sendFile(file, { root: path.resolve(__dirname, \"Pages\") });",
+        "ok": "response.sendFile with a {root: ...} option, which also stops a request from reaching files outside your Pages folder.",
+        "test": "I looked for response.sendFile(file, {root: ...}) in the code.",
+        "why": "root keeps requests inside your Pages folder (so a URL like ../app cannot read other files) and avoids building the path by hand."
+      }
+    },
+    {
+      "section": "Proper Routing of Books",
+      "item": "path.resolve builds the path",
+      "max": 0.5,
+      "score": 0.5,
+      "note": "",
+      "fb": {
+        "code": "app.js line 11:  var pagesPath = path.resolve(__dirname, \"Pages\");",
+        "example": "path.resolve(__dirname, \"Pages\")",
+        "ok": "path.resolve builds the folder path, so it works on any operating system.",
+        "test": "I looked for path.resolve(...) in the code.",
+        "why": "path.resolve gives one absolute path that works on Windows, Mac and Linux alike."
+      }
+    },
+    {
+      "section": "Proper Routing of Books",
+      "item": "'/' serves the index; links use /select/ISBN",
+      "max": 1,
+      "score": 1,
+      "note": "3 /select/ links (index served at /)",
+      "fb": {
+        "ok": "GET / returns your index page, and its three links go through your app (/select/ISBN) instead of pointing at the .html files.",
+        "test": "GET / returned 200. Index page (served at /) has 3 links of the form /select/ISBN and 0 direct links to .html files.",
+        "why": "Links that go through /select/ prove a click reaches your route; a direct .html link skips the app entirely."
+      }
+    },
+    {
+      "section": "Proper Routing of Books",
+      "item": "The 3 book pages are served at /select/ISBN",
+      "max": 3,
+      "score": 3,
+      "note": "3/3 book pages returned",
+      "fb": {
+        "ok": "All three books load at /select/<ISBN>.",
+        "test": "GET /select/978-1504074025 returned 200; GET /select/978-1466819481 returned 200; GET /select/978-1504074032 returned 200.",
+        "why": "Each of your three proposal books must be reachable through the route."
+      }
+    },
+    {
+      "section": "Error Handling",
+      "item": "A book that does not exist returns 'File Not Found'",
+      "max": 3,
+      "score": 3,
+      "note": "",
+      "fb": {
+        "code": "app.js line 25:  response.status(404).send(\"File Not Found\");",
+        "example": "response.sendFile(file, { root: path.resolve(__dirname, \"Pages\") }, err => {\n    if (!err) return;\n    if (err.code === \"ENOENT\") response.status(404).send(\"File Not Found\");   // no such book\n    else response.status(500).send(\"Server Error\");                           // some other problem\n});",
+        "ok": "A request for a book that does not exist answers \"File Not Found\".",
+        "test": "GET /select/0000000000000 returned 404: File Not Found",
+        "why": "A missing book is an expected case, not a crash, so it needs its own clear answer."
+      }
+    },
+    {
+      "section": "Error Handling",
+      "item": "An unknown page returns a 'not found' response (separate handler)",
+      "max": 2,
+      "score": 2,
+      "note": "",
+      "fb": {
+        "code": "app.js line 62:  app.use(function(request, response) {",
+        "example": "// put this AFTER all your routes: it catches every address that matched nothing\napp.use((request, response) => response.status(404).send(\"Page Not Found\"));",
+        "ok": "An unknown address gets its own \"not found\" answer, separate from the missing-book case.",
+        "test": "GET /no-such-route/xyz returned 404: File Not Found",
+        "why": "An address that matches no route should get your own message, handled separately from a missing book."
+      }
+    },
+    {
+      "section": "Error Handling",
+      "item": "Any other error returns 'Server Error'",
+      "max": 2,
+      "score": 2,
+      "note": "",
+      "fb": {
+        "code": "app.js line 28:  response.status(500).send(\"Server Error\");",
+        "example": "// put this last, after the \"Page Not Found\" handler. The four parameters are what make it an error handler\napp.use((err, request, response, next) => response.status(500).send(\"Server Error\"));",
+        "ok": "Other errors return \"Server Error\".",
+        "test": "I forced two errors. GET /select/%E0%A4%A returned 400: <!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <title>Error</tit; GET /select/..%2Fapp returned 500: Server Error",
+        "why": "Anything unexpected must still end in a clean \"Server Error\" instead of a stack trace or a hanging request."
+      }
+    },
+    {
+      "section": "Documentation",
+      "item": "Comments in the main file",
+      "max": 1,
+      "score": 1,
+      "note": "27% comment lines",
+      "fb": {
+        "ok": "About 27% of the lines in app.js are comments, which makes the file easy to follow.",
+        "test": "13 of 48 non-empty lines in app.js contain comments (27%). Full marks need 10% or more.",
+        "why": "Comments explain why the code is written the way it is, which helps you and anyone who reads it later."
+      }
     },
     {
       "section": "HTML Content",
       "item": "Cover <img src=\"/images/...\"> on each book page",
-      "max": 4,
-      "score": 0,
-      "note": "0/3",
-      "manual": false
+      "max": 0.25,
+      "score": 0.25,
+      "note": "3/3",
+      "fb": {
+        "test": "I looked for <img src=\"/images/...\"> in the HTML of each book page: 3 of 3 book pages have it.",
+        "why": "The cover is part of the book page the assignment asks for, and the /images/ path is how the app serves it.",
+        "ok": "Every page has an <img src=\"/images/...\"> cover tag."
+      }
     },
     {
       "section": "HTML Content",
       "item": "Price on each book page",
-      "max": 3,
-      "score": 0,
-      "note": "0/3",
-      "manual": false
+      "max": 0.25,
+      "score": 0.25,
+      "note": "3/3",
+      "fb": {
+        "test": "I compared the page text with the price in your proposal: 3 of 3 book pages have it.",
+        "why": "The price is one of the three things each book page must show.",
+        "ok": "Every book page shows the price from your proposal."
+      }
     },
     {
-      "section": "Startup & Documentation",
-      "item": "App starts from the package.json entry file",
-      "max": 3,
-      "score": 3,
-      "note": "app.js (package.json \"main\")",
-      "manual": false
+      "section": "HTML Content",
+      "item": "Title on each book page",
+      "max": 0.25,
+      "score": 0.25,
+      "note": "3/3",
+      "fb": {
+        "test": "I compared the page text with the title in your proposal: 3 of 3 book pages have it.",
+        "why": "The title is how a reader knows which book the page is about.",
+        "ok": "Every book page shows the title from your proposal."
+      }
     },
     {
-      "section": "Startup & Documentation",
-      "item": "express listed in package.json",
-      "max": 2,
-      "score": 2,
-      "note": "",
-      "manual": false
-    },
-    {
-      "section": "Startup & Documentation",
-      "item": "Well documented",
-      "max": 5,
-      "score": 5,
-      "note": "27% comment lines (check by eye)",
-      "manual": false
+      "section": "HTML Content",
+      "item": "Student name on each book page",
+      "max": 0.25,
+      "score": 0.25,
+      "note": "3/3",
+      "fb": {
+        "test": "I looked for your name in the text of each book page: 3 of 3 book pages have it.",
+        "why": "The assignment asks for your name on the bottom of every page.",
+        "ok": "Your name appears on every book page."
+      }
     }
   ]
 }

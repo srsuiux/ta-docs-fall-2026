@@ -1,32 +1,26 @@
 Grade report: darius_price
 ============================================================
 
-Routing & File Handling: 10 / 25
-  [    10 / 10] Single /select/:variable route with request.params
-  [     0 / 8 ] sendFile with {root: ...}  -- sendFile used without root (check by eye)
-  [     0 / 7 ] path.resolve for the path  -- uses path.join instead of path.resolve
+Proper Routing of Books: 7.5 / 8
+  [    3 / 3   ] One route handles all 3 books (request.params)
+  [ 0.25 / 0.5 ] sendFile with {root: ...}  -- sendFile used without root
+  [ 0.25 / 0.5 ] path.resolve builds the path  -- uses path.join instead of path.resolve
+  [    1 / 1   ] '/' serves the index; links use /select/ISBN  -- 3 /select/ links (index served at /)
+  [    3 / 3   ] The 3 book pages are served at /select/ISBN  -- 3/3 book pages returned
 
-Error Handling: 18 / 25
-  [    10 / 10] Nonexistent ISBN returns a not-found message
-  [     8 / 8 ] Unknown route returns a not-found message
-  [     0 / 7 ] Other errors return Server Error  -- no 'Server Error' response found
+Error Handling: 5 / 7
+  [    3 / 3   ] A book that does not exist returns 'File Not Found'
+  [    2 / 2   ] An unknown page returns a 'not found' response (separate handler)
+  [    0 / 2   ] Any other error returns 'Server Error'  -- no 'Server Error' response found
 
-Pages Served: 20 / 20
-  [     5 / 5 ] / returns the index page
-  [    10 / 10] /select/ISBN returns each book page  -- 3/3 book pages returned
-  [     5 / 5 ] Cover images served at /images/...  -- 3/3 cover images loaded
+Documentation: 1 / 1
+  [    1 / 1   ] Comments in the main file  -- 11% comment lines
 
-HTML Content: 19 / 20
-  [    10 / 10] Index links use /select/ISBN  -- 3 /select/ links (index served at /)
-  [     2 / 3 ] Title on each book page  -- 2/3
-  [     4 / 4 ] Cover <img src="/images/..."> on each book page  -- 3/3
-  [     3 / 3 ] Price on each book page  -- 3/3
-
-Startup & Documentation: 8 / 10
-  [     3 / 3 ] App starts from the package.json entry file  -- app.js (default file name)
-  [     2 / 2 ] express listed in package.json
-  [     3 / 5 ] Well documented  -- 11% comment lines (check by eye)
+HTML Content: 1 / 1
+  [ 0.25 / 0.25] Cover <img src="/images/..."> on each book page  -- 3/3
+  [ 0.25 / 0.25] Price on each book page  -- 3/3
+  [ 0.25 / 0.25] Title on each book page  -- 3/3
+  [ 0.25 / 0.25] Student name on each book page  -- 3/3
 
 ============================================================
-TOTAL: 75 / 100
-GRADE OUT OF 20: 15 / 20
+POINTS: 14.5 / 17   GRADE (rounded up): 15 / 17

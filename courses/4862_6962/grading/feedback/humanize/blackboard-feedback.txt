@@ -1,0 +1,59 @@
+ASSIGNMENT 1 (EXPRESS ROUTING) - FEEDBACK
+
+
+Charles Lowerre
+Thanks for the good work. One route handles all three books, you use sendFile with the root option and path.resolve, and your messages for a missing book, a wrong page and other errors all work as expected. Your book pages show the cover, title, price and your name, and the comments in your code are clear and helpful. Keep it up.
+
+
+Darius Price
+Thanks for your submission. Your single /select route works, all three books load, and your not found messages for a missing book and a wrong page are in place. Your book pages are complete and the code is commented.
+
+A few things to work on in the code:
+- Use sendFile with the {root: ...} option, and use path.resolve instead of path.join to build the folder path.
+- Add an error handler at the end of app.js that sends "Server Error", for example app.use((err, req, res, next) => ...). I could not get a "Server Error" message when I forced an error.
+- You don't need the list of valid ISBNs. If sendFile can't find the file, its callback tells you, and you can send "File Not Found" from there.
+
+The bigger thing is the project setup. app.js, package.json and node_modules are all inside the Pages folder, but Pages should only hold the html files and the images folder. There are also two package.json files and two node_modules folders, and the package.json in the main folder has no start script, so running node app.js or npm start from the main folder doesn't work. Please move app.js and package.json up next to Pages, keep just one package.json and one node_modules, add a start script, and rename Index.html to index.html (all lowercase). That will make your project much easier to run and to share.
+
+
+Mia Semple
+Thanks for your submission. Your single route for all books works, you use path.resolve, and all three book pages load with the cover, title, price and your name. The code is nicely commented.
+
+A few things to work on:
+- Use sendFile with the {root: ...} option.
+- A wrong URL still shows Express's own "Cannot GET" message. Add an app.use(...) after all your routes that sends "Page Not Found", separate from your missing-book message.
+- You have "Server Error" in your code, but it did not show up when I forced an error. An Express error handler needs four parameters, app.use((err, req, res, next) => ...), and it has to come after your routes.
+
+
+Pradeep Poudel
+Good work. Your single route, sendFile with root, path.resolve and all your error messages work well, and your pages are complete and well commented.
+
+Two small things to keep in mind. The assignment asks for the main file to be called app.js, and yours is script.js. Also, your index links go to ISBNs that are not in your proposal, so please make sure the pages are for the three books you proposed.
+
+
+Pratiksha Bam
+Thanks for the good work. Your routing and your error messages all work, and your book pages show the cover, title and price. The code is clearly commented.
+
+One small note: your pages show the name "Pratikshya Bam" at the bottom. Please check that it is spelled the way you want it.
+
+
+Ritu Tripathi
+Thanks for the good work. Your single route, sendFile with root, path.resolve and your error messages all work well. Your pages show the cover, title, price and your name, and your code is very well commented. Nothing major to fix. Keep it up.
+
+
+Samuel Bassham
+Thanks for your submission. Your routing is good: one route handles all three books, and you use sendFile with root and path.resolve. Your pages are complete and the code is well commented.
+
+The one thing to fix is the missing-book message. When I asked for a fake ISBN, your app answered "Error: Bad ISBN! Try again!" with a normal 200 status. The assignment asks for "File Not Found". In the sendFile callback, when the file isn't there, please send "File Not Found" with a 404 status.
+
+
+Shreeyan Simkhada
+Good work. Everything works well, including your file names with hyphens. One route handles all the books, sendFile uses root with path.resolve, your error messages for a missing book, a wrong page and other errors all work, and your pages and comments are clear. Nothing to fix. Keep it up.
+
+
+Tirsan Sapkota
+Thanks for your submission. Your single route, path.resolve and your messages for a missing book and a wrong page work well, and your pages are complete and well commented.
+
+Two things to work on:
+- Use sendFile with the {root: ...} option.
+- You have "Server Error" in your code, but it did not show up when I forced an error. Please check that your error handler has four parameters, (err, req, res, next), and that it comes after your routes.
