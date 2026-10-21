@@ -1,0 +1,12 @@
+﻿student,grade_out_of_20,total_out_of_100,Routing & File Handling (pts),Error Handling (pts),Pages Served (pts),HTML Content (pts),Startup & Documentation (pts),manual_points_pending,zero_items,flags,proposal,folder
+charles_lowerre,20,100,25/25,25/25,20/20,20/20,10/10,,,,Charles_Lowerre.json,Charles_Lowerre_project
+darius_price,15,75,10/25,18/25,20/20,19/20,8/10,,sendFile with {root: ...}; path.resolve for the path; Other errors return Server Error,,Darius_Price.json,Darius_Price_project
+joshua_smith,,,,,,,,,,proposal found but no submission,Joshua_Smith.json,
+mia_semple,15.8,79,17/25,13/25,20/20,19/20,10/10,,sendFile with {root: ...}; Unknown route returns a not-found message,,Mia_Semple.json,Mia_Semple_project
+pradeep_poudel,15,75,25/25,25/25,5/20,10/20,10/10,,"/select/ISBN returns each book page; Cover images served at /images/...; Title on each book page; Cover <img src=""/images/...""> on each book page; Price on each book page",,Pradeep_Poudel.json,Pradeep_Poudel_project
+pratiksha_bam,20,100,25/25,25/25,20/20,20/20,10/10,,,,Pratiksha_Bam.json,Pratiksha_Bam_project
+ritu_tripathi,19.8,99,25/25,25/25,20/20,19/20,10/10,,,,Ritu_Tripathi.json,Ritu_Tripathi_project
+samuel_bassham,18,90,25/25,15/25,20/20,20/20,10/10,,Nonexistent ISBN returns a not-found message,,Samuel_Bassham.json,Samuel_Bassham_project
+shreeyan_simkhada,15,75,25/25,25/25,5/20,10/20,10/10,,"/select/ISBN returns each book page; Cover images served at /images/...; Title on each book page; Cover <img src=""/images/...""> on each book page; Price on each book page",,Shreeyan_Simkhada.json,Shreeyan_Simkhada_project
+tirsan_sapkota,17.6,88,17/25,21/25,20/20,20/20,10/10,,sendFile with {root: ...},,Tirsan_Sapkota.json,Tirsan_Sapkota_project
+topendra_singh,,,,,,,,,,proposal found but no submission,Topendra_Singh.json,

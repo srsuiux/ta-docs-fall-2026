@@ -1,0 +1,162 @@
+{
+  "student": "charles_lowerre",
+  "total": 100,
+  "outOf100": 100,
+  "grade20": 20,
+  "manualPoints": 0,
+  "categories": {
+    "Routing & File Handling": {
+      "score": 25,
+      "max": 25
+    },
+    "Error Handling": {
+      "score": 25,
+      "max": 25
+    },
+    "Pages Served": {
+      "score": 20,
+      "max": 20
+    },
+    "HTML Content": {
+      "score": 20,
+      "max": 20
+    },
+    "Startup & Documentation": {
+      "score": 10,
+      "max": 10
+    }
+  },
+  "started": true,
+  "startNote": "",
+  "flags": [],
+  "items": [
+    {
+      "section": "Routing & File Handling",
+      "item": "Single /select/:variable route with request.params",
+      "max": 10,
+      "score": 10,
+      "note": "",
+      "manual": false
+    },
+    {
+      "section": "Routing & File Handling",
+      "item": "sendFile with {root: ...}",
+      "max": 8,
+      "score": 8,
+      "note": "",
+      "manual": false
+    },
+    {
+      "section": "Routing & File Handling",
+      "item": "path.resolve for the path",
+      "max": 7,
+      "score": 7,
+      "note": "",
+      "manual": false
+    },
+    {
+      "section": "Pages Served",
+      "item": "/ returns the index page",
+      "max": 5,
+      "score": 5,
+      "note": "",
+      "manual": false
+    },
+    {
+      "section": "Pages Served",
+      "item": "/select/ISBN returns each book page",
+      "max": 10,
+      "score": 10,
+      "note": "3/3 book pages returned",
+      "manual": false
+    },
+    {
+      "section": "Pages Served",
+      "item": "Cover images served at /images/...",
+      "max": 5,
+      "score": 5,
+      "note": "3/3 cover images loaded",
+      "manual": false
+    },
+    {
+      "section": "Error Handling",
+      "item": "Nonexistent ISBN returns a not-found message",
+      "max": 10,
+      "score": 10,
+      "note": "",
+      "manual": false
+    },
+    {
+      "section": "Error Handling",
+      "item": "Unknown route returns a not-found message",
+      "max": 8,
+      "score": 8,
+      "note": "",
+      "manual": false
+    },
+    {
+      "section": "Error Handling",
+      "item": "Other errors return Server Error",
+      "max": 7,
+      "score": 7,
+      "note": "",
+      "manual": false
+    },
+    {
+      "section": "HTML Content",
+      "item": "Index links use /select/ISBN",
+      "max": 10,
+      "score": 10,
+      "note": "3 /select/ links (index served at /)",
+      "manual": false
+    },
+    {
+      "section": "HTML Content",
+      "item": "Title on each book page",
+      "max": 3,
+      "score": 3,
+      "note": "3/3",
+      "manual": false
+    },
+    {
+      "section": "HTML Content",
+      "item": "Cover <img src=\"/images/...\"> on each book page",
+      "max": 4,
+      "score": 4,
+      "note": "3/3",
+      "manual": false
+    },
+    {
+      "section": "HTML Content",
+      "item": "Price on each book page",
+      "max": 3,
+      "score": 3,
+      "note": "3/3",
+      "manual": false
+    },
+    {
+      "section": "Startup & Documentation",
+      "item": "App starts from the package.json entry file",
+      "max": 3,
+      "score": 3,
+      "note": "app.js (package.json \"main\")",
+      "manual": false
+    },
+    {
+      "section": "Startup & Documentation",
+      "item": "express listed in package.json",
+      "max": 2,
+      "score": 2,
+      "note": "",
+      "manual": false
+    },
+    {
+      "section": "Startup & Documentation",
+      "item": "Well documented",
+      "max": 5,
+      "score": 5,
+      "note": "23% comment lines (check by eye)",
+      "manual": false
+    }
+  ]
+}

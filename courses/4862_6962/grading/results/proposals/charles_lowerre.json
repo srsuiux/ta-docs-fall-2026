@@ -1,0 +1,20 @@
+{
+  "student": "Charles Lowerre",
+  "books": [
+    {
+      "isbn": "9780441172719",
+      "title": "Dune",
+      "price": "11"
+    },
+    {
+      "isbn": "9780441172696",
+      "title": "Dune Messiah",
+      "price": "8.50"
+    },
+    {
+      "isbn": "9780441104055",
+      "title": "Children of Dune",
+      "price": "10"
+    }
+  ]
+}

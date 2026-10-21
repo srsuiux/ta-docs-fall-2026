@@ -1,0 +1,32 @@
+Grade report: samuel_bassham
+============================================================
+
+Routing & File Handling: 25 / 25
+  [    10 / 10] Single /select/:variable route with request.params
+  [     8 / 8 ] sendFile with {root: ...}
+  [     7 / 7 ] path.resolve for the path
+
+Error Handling: 15 / 25
+  [     0 / 10] Nonexistent ISBN returns a not-found message  -- no 'not found' message (status 200)
+  [     8 / 8 ] Unknown route returns a not-found message
+  [     7 / 7 ] Other errors return Server Error
+
+Pages Served: 20 / 20
+  [     5 / 5 ] / returns the index page
+  [    10 / 10] /select/ISBN returns each book page  -- 3/3 book pages returned
+  [     5 / 5 ] Cover images served at /images/...  -- 3/3 cover images loaded
+
+HTML Content: 20 / 20
+  [    10 / 10] Index links use /select/ISBN  -- 3 /select/ links (index served at /)
+  [     3 / 3 ] Title on each book page  -- 3/3
+  [     4 / 4 ] Cover <img src="/images/..."> on each book page  -- 3/3
+  [     3 / 3 ] Price on each book page  -- 3/3
+
+Startup & Documentation: 10 / 10
+  [     3 / 3 ] App starts from the package.json entry file  -- app.js (default file name)
+  [     2 / 2 ] express listed in package.json
+  [     5 / 5 ] Well documented  -- 24% comment lines (check by eye)
+
+============================================================
+TOTAL: 90 / 100
+GRADE OUT OF 20: 18 / 20

@@ -1,0 +1,20 @@
+{
+  "student": "Samuel Bassham",
+  "books": [
+    {
+      "isbn": "9780143039945",
+      "title": "Gravity's Rainbow",
+      "price": "25.00"
+    },
+    {
+      "isbn": "9780312423209",
+      "title": "Mason and Dixon",
+      "price": "30.99"
+    },
+    {
+      "isbn": "9780060913076",
+      "title": "The Crying of Lot 49",
+      "price": "16.99"
+    }
+  ]
+}
