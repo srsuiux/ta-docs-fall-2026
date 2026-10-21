@@ -1,0 +1,202 @@
+apex.dialog.registerHandlers([
+{
+"action":"init",
+"ids":["APEX_5.0_DIALOG_GRID_LAYOUT"]
+,"code":function(pPageUrl,pTitle,pHeight,pWidth,pMaxWidth,pIsModal,pDialogCssClasses,dialogAttributes,pDialog,pPageCssClasses,pTriggeringElement){apex.navigation.dialog(pPageUrl,{title:pTitle,height:pHeight,width:pWidth,maxWidth:pMaxWidth,modal:pIsModal,dialog:pDialog,dialogAttributes},pDialogCssClasses,pTriggeringElement);}
+},
+{
+"action":"init",
+"ids":["APEX_5.0_DIALOG"]
+,"code":function(pPageUrl,pTitle,pHeight,pWidth,pMaxWidth,pIsModal,pDialogCssClasses,dialogAttributes,pDialog,pPageCssClasses,pTriggeringElement){apex.navigation.dialog(pPageUrl,{title:pTitle,height:pHeight,width:pWidth,maxWidth:pMaxWidth,modal:pIsModal,dialog:pDialog,baseDialogClass:'a-Dialog--uiDialog',dialogClass:pDialogCssClasses,jsDialogClass:true,dialogAttributes},pPageCssClasses,pTriggeringElement);}
+},
+{
+"action":"init",
+"ids":["APEX_5.0_WIZARD_DIALOG"]
+,"code":function(pPageUrl,pTitle,pHeight,pWidth,pMaxWidth,pIsModal,pDialogCssClasses,dialogAttributes,pDialog,pPageCssClasses,pTriggeringElement){apex.navigation.dialog(pPageUrl,{title:pTitle,height:pHeight,width:pWidth,maxWidth:pMaxWidth,modal:pIsModal,dialog:pDialog,baseDialogClass:'a-Dialog--wizard',dialogClass:pDialogCssClasses,jsDialogClass:true,dialogAttributes},pPageCssClasses,pTriggeringElement);}
+},
+{
+"action":"close",
+"ids":["APEX_5.0_DIALOG","APEX_5.0_DIALOG_GRID_LAYOUT","APEX_5.0_WIZARD_DIALOG"]
+,"code":function(pIsModal,pTarget){apex.navigation.dialog.close(pIsModal,pTarget);}
+}]);
+apex.dialog.registerAttributes([
+{
+"appId":4500,"pageId":18,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":29,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":30,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":31,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":39,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":41,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":43,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":44,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":45,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":56,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":64,"attributes": function() { return {resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":403,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":804,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":841,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":842,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":843,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":1017,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":1105,"attributes": function() { return {resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":1107,"attributes": function() { return {resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":1108,"attributes": function() { return {resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":1600,"attributes": function() { return {resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2010,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2015,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2016,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2020,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2022,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2025,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2026,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2027,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2030,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2035,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2040,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2055,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2060,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2061,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2065,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":2070,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":3100,"attributes": function() { return {resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":3150,"attributes": function() { return {resisable:true}; }
+}
+,
+{
+"appId":4500,"pageId":4005,"attributes": function() { return {resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":4010,"attributes": function() { return {resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":4012,"attributes": function() { return {resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":4020,"attributes": function() { return {resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":5005,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+,
+{
+"appId":4500,"pageId":5015,"attributes": function() { return {minWidth:500,minHeight:400,resizable:true}; }
+}
+]);

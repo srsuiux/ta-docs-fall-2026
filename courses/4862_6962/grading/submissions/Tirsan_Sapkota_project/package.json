@@ -1,0 +1,17 @@
+{
+  "name": "express-routing",
+  "version": "1.0.0",
+  "description": "Apply what I learned until express routing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tirsan Sapkota",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "morgan": "^1.12.1",
+    "path": "^0.12.7",
+    "process": "^0.11.10"
+  }
+}

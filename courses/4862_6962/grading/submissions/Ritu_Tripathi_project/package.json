@@ -1,0 +1,12 @@
+{
+  "name": "liu-cixin-book-routing-assignment",
+  "version": "1.0.0",
+  "description": "CSCI 4862/6962 Assignment 1 - Express Routing",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

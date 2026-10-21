@@ -1,0 +1,16 @@
+{
+  "name": "book-website",
+  "version": "1.0.0",
+  "description": "Website for selling books",
+  "license": "ISC",
+  "author": "Samuel Bassham",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mustache": "^4.2.0"
+  }
+}
