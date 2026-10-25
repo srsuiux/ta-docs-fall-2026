@@ -63,6 +63,7 @@ When students ask AI on their own, they mostly ask for debugging help, almost ne
 Teachers worried that showing pseudo-code gives away the algorithm [4]. 
 
  
+
 Control between the student and AI.  
 
 Students say they want more control, teachers want more restrictions or guardrails, and both like "teacher sets the limit, student picks inside it" [6, 7]. But these were surveys, no learning was measured. Studies that did test control with learning outcomes were in physics and math, not programming [8, 9]. 
@@ -91,7 +92,7 @@ CS1 students → Students taking their first programming course. They are usuall
 
 Data Structures students → Students taking a more advanced programming course focused on data structures such as arrays, linked lists, stacks, queues, trees, graphs, and algorithms. 
 
-
+ 
 
 Research questions and hypotheses 
 
@@ -121,6 +122,10 @@ My hypothesis
 
  
 
+ 
+
+ 
+
 RQ1 
 
 Do students score higher on a no-AI coding test after practicing in condition A, compared to B and C? 
@@ -145,9 +150,25 @@ Yes. Making their own decisions should give them a higher sense of what they can
 
 Higher – replaced – honest.  
 
- 
+In the last meeting the robort flagged me about the hypothesis,  
 
  
+
+A. Student plans: the student makes the planning decisions (approach, logic, data, edge cases). The AI only helps turn that plan into code. 
+
+B. AI plans: the AI makes the planning decisions and shows them. The student writes the code. 
+
+C. Plain AI: the AI gives the full solution an explanation, like the baseline in [1]. 
+
+ 
+
+As the A, B and C,  
+
+The C is basically the baseline of the pervious paper, as it shold not be a part, as it has to be something significnt ith respect to our paper, and new study it has to show. We can;t simly call thehypothsis taken from the paper which is showing the study is already done for this. So the c is invalid here.  
+
+So hre the main thing is what level of decisions we need to assign to the students, and to the AI so it maximize the larning and retain the learning over time. As the time here we have taken is a week frame, as in week in retainten test the learning has to be better with split decision framework. - so the RQ’s has to be rewritten that;s what we have discussed in the last meeting.  
+
+I was not  
 
 Confidence score: How confident is the student about their own answer.  
 
