@@ -1,24 +1,3 @@
-# Dr A, comments revision -
-
-- Status: Open
-- Created: Oct 26, 2026, 2:19 PM
-- Started: Oct 26, 2026, 2:25 PM
-- Last worked: Oct 26, 2026, 4:55 PM
-- Time worked: 1h 10m 00s (2 sessions)
-- Break time: 0s (0 breaks)
-- Start to finish: 2h 30m 28s
-
-## Work sessions
-
-1. Oct 26, 2026, 2:25 PM → 2:50 PM · 25m 00s
-2. Oct 26, 2026, 4:10 PM → 4:55 PM · 45m 00s
-
-## Breaks
-
-None.
-
-## Log
-
 Oct 26, 2026, 2:19 PM · https://github.com/srsuiux/ta-docs-fall-2026/blob/main/thesis-work/thesis_proposal_draft_original_text_claude.md
 Oct 26, 2026, 2:19 PM · Here are all of Angello's comments from the document, in the order they appear:
     
