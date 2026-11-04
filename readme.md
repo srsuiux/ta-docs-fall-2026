@@ -25,9 +25,13 @@ Students are welcome to browse the repository at any time. It is updated regular
 - remove sync-ppt-to-blackboard task file
 - daily log: skip deleted files
 - thesis: add TODO note to brainstorm log
+- 6920 ch-9 'Knowledge Management and E-Learning': slides open for revision, with speaker notes and clean graphics
 
 **Files updated**
 - [`CLAUDE.md`](./CLAUDE.md)
+- [`courses/6920/lecture/ch-9/Chapter9_Speaker_Notes.txt`](./courses/6920/lecture/ch-9/Chapter9_Speaker_Notes.txt)
+- [`courses/6920/lecture/ch-9/Knowledge Management and E-Learning.pdf`](./courses/6920/lecture/ch-9/Knowledge%20Management%20and%20E-Learning.pdf)
+- [`courses/6920/lecture/ch-9/Knowledge Management and E-Learning.pptx`](./courses/6920/lecture/ch-9/Knowledge%20Management%20and%20E-Learning.pptx)
 - [`courses/6950_4850/grading/grading-instruction.txt`](./courses/6950_4850/grading/grading-instruction.txt)
 - [`courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx`](./courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx)
 - [`courses/6950_4850/quiz2.md`](./courses/6950_4850/quiz2.md)
