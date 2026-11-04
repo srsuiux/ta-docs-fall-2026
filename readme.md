@@ -12,13 +12,14 @@ Students are welcome to browse the repository at any time. It is updated regular
 <!-- RECENT-UPDATES:START -->
 ## Recent Updates
 
-_Auto-generated from git history by `scripts/update-readme.sh`. Student submissions and feedback are not listed._
-
 ### 2026-11-04
+- **Commit:** ta-work:quiz added
+- **Commit:** Add auto-generated Recent Updates to readme and clean intro
 - **Commit:** fix:irelevent file push from the git:
 - **Commit:** nov-4 updaete and discussion with angello
   - [`courses/6950_4850/grading/grading-instruction.txt`](./courses/6950_4850/grading/grading-instruction.txt)
   - [`courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx`](./courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx)
+  - [`courses/6950_4850/quiz2.md`](./courses/6950_4850/quiz2.md)
   - [`thesis-work/code/movieTicket.cpp`](./thesis-work/code/movieTicket.cpp)
 
 ### 2026-11-03
@@ -74,4 +75,39 @@ _Auto-generated from git history by `scripts/update-readme.sh`. Student submissi
   - [`thesis-work/todo-thesis.md`](./thesis-work/todo-thesis.md)
   - [`thesis-work/toread/docs.txt`](./thesis-work/toread/docs.txt)
   - [`thesis-work/updates-oct24.md`](./thesis-work/updates-oct24.md)
+
+### 2026-10-25
+- **Commit:** comments to proposal1.md in thesis_proposal_draft_original_text_claude.md
+- **Commit:** udpated the docs to inital one which is shared to the dr. R and Dr. A
+- **Commit:** thesis work commit
+  - [`thesis-work/experiment/baseline/gpt.md`](./thesis-work/experiment/baseline/gpt.md)
+  - [`thesis-work/experiment/baseline/prompt.md`](./thesis-work/experiment/baseline/prompt.md)
+  - [`thesis-work/experiment/experiment-summary.md`](./thesis-work/experiment/experiment-summary.md)
+  - [`thesis-work/experiment/explain-before-usage/explain-before-usase.md`](./thesis-work/experiment/explain-before-usage/explain-before-usase.md)
+  - [`thesis-work/experiment/explain-before-usage/prompt.md`](./thesis-work/experiment/explain-before-usage/prompt.md)
+  - [`thesis-work/experiment/lead-reveal/findings.md`](./thesis-work/experiment/lead-reveal/findings.md)
+  - [`thesis-work/experiment/lead-reveal/prompt-iter-1.md`](./thesis-work/experiment/lead-reveal/prompt-iter-1.md)
+  - [`thesis-work/experiment/lead-reveal/prompt-iter-2.md`](./thesis-work/experiment/lead-reveal/prompt-iter-2.md)
+  - [`thesis-work/experiment/lead-reveal/t7-lead-reveal-iter1.md`](./thesis-work/experiment/lead-reveal/t7-lead-reveal-iter1.md)
+  - [`thesis-work/experiment/lead-reveal/t7-lead-reveal-iter2.md`](./thesis-work/experiment/lead-reveal/t7-lead-reveal-iter2.md)
+  - [`thesis-work/experiment/p1.md`](./thesis-work/experiment/p1.md)
+  - [`thesis-work/experiment/programming-problem.txt`](./thesis-work/experiment/programming-problem.txt)
+  - [`thesis-work/experiment/README.md`](./thesis-work/experiment/README.md)
+  - [`thesis-work/experiment/rev.md`](./thesis-work/experiment/rev.md)
+  - [`thesis-work/experiment/utils/markdown-format.md`](./thesis-work/experiment/utils/markdown-format.md)
+  - [`thesis-work/proposal1.md`](./thesis-work/proposal1.md)
+  - [`thesis-work/thesis_proposal_draft_original_text_claude.md`](./thesis-work/thesis_proposal_draft_original_text_claude.md)
+
+### 2026-10-21
+- **Commit:** grade posted
+- **Commit:** results added for updated rubric
+- **Commit:** rubric update final
+- **Commit:** grading script update
+  - [`courses/4862_6962/grading/assignment-instructions.md`](./courses/4862_6962/grading/assignment-instructions.md)
+  - [`courses/4862_6962/grading/grade-all-student.sh`](./courses/4862_6962/grading/grade-all-student.sh)
+  - [`courses/4862_6962/grading/grading-log.txt`](./courses/4862_6962/grading/grading-log.txt)
+  - [`courses/4862_6962/grading/README.md`](./courses/4862_6962/grading/README.md)
+  - [`courses/4862_6962/grading/rubric-assignment-1.md`](./courses/4862_6962/grading/rubric-assignment-1.md)
+  - [`courses/4862_6962/grading/rubric.md`](./courses/4862_6962/grading/rubric.md)
+  - [`courses/4862_6962/readme.md`](./courses/4862_6962/readme.md)
 <!-- RECENT-UPDATES:END -->

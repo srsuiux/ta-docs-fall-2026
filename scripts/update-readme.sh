@@ -9,8 +9,6 @@ EXCLUDE='(^\.gitignore$|^scripts/|^readme\.md$|/submissoins/|/submissions/|/resu
 
 section() {
   echo "## Recent Updates"
-  echo
-  echo "_Auto-generated from git history by \`scripts/update-readme.sh\`. Student submissions and feedback are not listed._"
   for d in $(git log --format='%ad' --date=short | uniq | head -n "$DAYS"); do
     echo
     echo "### $d"
