@@ -4,6 +4,8 @@
 Thumbs.db
 Desktop.ini
 
+trash/
+
 # IDE / Editor
 .vscode/
 .idea/

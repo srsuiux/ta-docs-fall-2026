@@ -1,0 +1,9 @@
+SO, the the ownsership laddr is clean and simple and it explains the cnnditions
+
+l1 is includsive l2 so on l3. 
+and when running l1 and l2, it isolates the modeling of the inputs. and l3 vs l2 isolates the testing. 
+
+so taking the common. 
+
+( l1 & l2) * ( l3 & l2 )
+
