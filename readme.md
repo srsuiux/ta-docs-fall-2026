@@ -1,11 +1,77 @@
-Teaching Assistant Documentation — Fall 2026
+# Teaching Assistant Documentation — Fall 2026
 
-This repository serves as the central workspace and documentation repository for my Teaching Assistant responsibilities during Fall 2026.
+The central workspace for my Teaching Assistant work in Fall 2026: course materials, grading documents, code, schedules, and notes, kept organized and open to students.
 
-It contains the information, documentation, files, resources, code, schedules, and other materials related to my work as a Teaching Assistant throughout the semester.
+## What's here
 
-The repository also serves as a record of my work and activities, documenting the tasks, resources, and materials developed or maintained during the semester.
+- **Resources:** files, documentation, schedules, and code for the courses I assist with.
+- **Work record:** the tasks and materials I create or maintain during the semester.
 
-Students can access this repository at any time to find relevant files, resources, documentation, schedules, and codebases. The repository will be updated regularly as new materials and information become available.
+Students are welcome to browse the repository at any time. It is updated regularly as new material becomes available.
 
-This repository is intended to keep TA-related work organized, accessible, and transparent throughout the Fall 2026 semester.
+<!-- RECENT-UPDATES:START -->
+## Recent Updates
+
+_Auto-generated from git history by `scripts/update-readme.sh`. Student submissions and feedback are not listed._
+
+### 2026-11-04
+- **Commit:** fix:irelevent file push from the git:
+- **Commit:** nov-4 updaete and discussion with angello
+  - [`courses/6950_4850/grading/grading-instruction.txt`](./courses/6950_4850/grading/grading-instruction.txt)
+  - [`courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx`](./courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx)
+  - [`thesis-work/code/movieTicket.cpp`](./thesis-work/code/movieTicket.cpp)
+
+### 2026-11-03
+- **Commit:** rewrite all docs push to nov-03 file
+  - [`thesis-work/comments/proposal-astroga.md`](./thesis-work/comments/proposal-astroga.md)
+  - [`thesis-work/documents/questions.txt`](./thesis-work/documents/questions.txt)
+  - [`thesis-work/documents/study-document-nov-3.md`](./thesis-work/documents/study-document-nov-3.md)
+  - [`thesis-work/documents/study-log.md`](./thesis-work/documents/study-log.md)
+  - [`thesis-work/experiment/current-study/experiment.md`](./thesis-work/experiment/current-study/experiment.md)
+  - [`thesis-work/experiment/p1.md`](./thesis-work/experiment/p1.md)
+  - [`thesis-work/experiment/P2-even-odd/even-odd.md`](./thesis-work/experiment/P2-even-odd/even-odd.md)
+  - [`thesis-work/proposal-updated-oct26.md`](./thesis-work/proposal-updated-oct26.md)
+  - [`thesis-work/proposal1.md`](./thesis-work/proposal1.md)
+  - [`thesis-work/th-work/mydo-dr-a-comments-revision-2026-10-26.md`](./thesis-work/th-work/mydo-dr-a-comments-revision-2026-10-26.md)
+  - [`thesis-work/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md`](./thesis-work/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md)
+  - [`thesis-work/th-work/prompt.md`](./thesis-work/th-work/prompt.md)
+  - [`thesis-work/th-work/thesis_proposal_draft_original_text_claude.md`](./thesis-work/th-work/thesis_proposal_draft_original_text_claude.md)
+  - [`thesis-work/th-work/thesis-propodal-draft-udpate-oct-26.md`](./thesis-work/th-work/thesis-propodal-draft-udpate-oct-26.md)
+  - [`thesis-work/th-work/thesis-proposal-draft.md`](./thesis-work/th-work/thesis-proposal-draft.md)
+  - [`thesis-work/thesis_proposal_draft_original_text_claude.md`](./thesis-work/thesis_proposal_draft_original_text_claude.md)
+  - [`thesis-work/todo-thesis.md`](./thesis-work/todo-thesis.md)
+
+### 2026-10-26
+- **Commit:** rewrite the todays update
+- **Commit:** todays work update
+- **Commit:** paper metadata push
+- **Commit:** thoughts when i was outside so i decided to keep it
+  - [`log/log.oct-26.md`](./log/log.oct-26.md)
+  - [`ta-log-mydo/tasks/sync-ppt-to-blackboard.md`](./ta-log-mydo/tasks/sync-ppt-to-blackboard.md)
+  - [`ta-log-mydo/th-work/mydo-dr-a-comments-revision-2026-10-26.md`](./ta-log-mydo/th-work/mydo-dr-a-comments-revision-2026-10-26.md)
+  - [`ta-log-mydo/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md`](./ta-log-mydo/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md)
+  - [`ta-log-mydo/th-work/thoughts-decison.md`](./ta-log-mydo/th-work/thoughts-decison.md)
+  - [`thesis-work/comments/proposal-astroga.md`](./thesis-work/comments/proposal-astroga.md)
+  - [`thesis-work/experiment/CET_main/baseline/gpt.md`](./thesis-work/experiment/CET_main/baseline/gpt.md)
+  - [`thesis-work/experiment/CET_main/baseline/prompt.md`](./thesis-work/experiment/CET_main/baseline/prompt.md)
+  - [`thesis-work/experiment/CET_main/explain-before-usage/explain-before-usase.md`](./thesis-work/experiment/CET_main/explain-before-usage/explain-before-usase.md)
+  - [`thesis-work/experiment/CET_main/explain-before-usage/prompt.md`](./thesis-work/experiment/CET_main/explain-before-usage/prompt.md)
+  - [`thesis-work/experiment/CET_main/lead-reveal/findings.md`](./thesis-work/experiment/CET_main/lead-reveal/findings.md)
+  - [`thesis-work/experiment/CET_main/lead-reveal/links.md`](./thesis-work/experiment/CET_main/lead-reveal/links.md)
+  - [`thesis-work/experiment/CET_main/lead-reveal/prompt-iter-1.md`](./thesis-work/experiment/CET_main/lead-reveal/prompt-iter-1.md)
+  - [`thesis-work/experiment/CET_main/lead-reveal/prompt-iter-2.md`](./thesis-work/experiment/CET_main/lead-reveal/prompt-iter-2.md)
+  - [`thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter1.md`](./thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter1.md)
+  - [`thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter2.md`](./thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter2.md)
+  - [`thesis-work/experiment/lead-reveal/links.md`](./thesis-work/experiment/lead-reveal/links.md)
+  - [`thesis-work/papers/links.md`](./thesis-work/papers/links.md)
+  - [`thesis-work/proposal-updated-oct26.md`](./thesis-work/proposal-updated-oct26.md)
+  - [`thesis-work/th-work/mydo-dr-a-comments-revision-2026-10-26.md`](./thesis-work/th-work/mydo-dr-a-comments-revision-2026-10-26.md)
+  - [`thesis-work/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md`](./thesis-work/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md)
+  - [`thesis-work/th-work/prompt.md`](./thesis-work/th-work/prompt.md)
+  - [`thesis-work/th-work/thesis_proposal_draft_original_text_claude.md`](./thesis-work/th-work/thesis_proposal_draft_original_text_claude.md)
+  - [`thesis-work/th-work/thesis-propodal-draft-udpate-oct-26.md`](./thesis-work/th-work/thesis-propodal-draft-udpate-oct-26.md)
+  - [`thesis-work/th-work/thesis-proposal-draft.md`](./thesis-work/th-work/thesis-proposal-draft.md)
+  - [`thesis-work/todo-thesis.md`](./thesis-work/todo-thesis.md)
+  - [`thesis-work/toread/docs.txt`](./thesis-work/toread/docs.txt)
+  - [`thesis-work/updates-oct24.md`](./thesis-work/updates-oct24.md)
+<!-- RECENT-UPDATES:END -->
