@@ -1,24 +1,37 @@
 #!/usr/bin/env bash
-# Regenerates the "Recent Updates" section of readme.md from git history.
-# Usage: scripts/update-readme.sh [number_of_days_with_commits=5]
+# Rebuilds the "Recent Updates" daily log inside readme.md from git history.
+# Same-day commits are grouped under one date heading.
+# Usage: scripts/update-daily-log.sh [--commit] [days=3]
+#   --commit  also commit readme.md as "docs: daily log update" if it changed
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
-DAYS="${1:-5}"
-# Paths never listed publicly (student work/feedback, ignored/meta files)
+COMMIT=0; DAYS=3
+for a in "$@"; do case "$a" in --commit) COMMIT=1;; *) DAYS="$a";; esac; done
+
+# Never listed publicly: student work/feedback, repo meta files
 EXCLUDE='(^\.gitignore$|^scripts/|^readme\.md$|/submissoins/|/submissions/|/results/|/feedback/|\.json$)'
+SKIP_MSG='^docs: daily log'
 
 section() {
   echo "## Recent Updates"
   for d in $(git log --format='%ad' --date=short | uniq | head -n "$DAYS"); do
+    range=(--since="$d 00:00" --until="$d 23:59:59" --invert-grep --grep="$SKIP_MSG")
     echo
     echo "### $d"
-    git log --since="$d 00:00" --until="$d 23:59:59" --format='%s' | sed 's/^/- **Commit:** /' | head -n 5
-    git log --since="$d 00:00" --until="$d 23:59:59" --name-only --format= \
-      | sort -u | grep -v '^$' | grep -Ev "$EXCLUDE" \
-      | while read -r f; do echo "  - [\`$f\`](./${f// /%20})"; done
+    echo
+    echo "**Work done**"
+    git log "${range[@]}" --format='- %s' --reverse
+    echo
+    echo "**Files updated**"
+    git log "${range[@]}" --name-only --format= | sort -u | grep -v '^$' | grep -Ev "$EXCLUDE" \
+      | while read -r f; do echo "- [\`$f\`](./${f// /%20})"; done
   done
 }
 
 START='<!-- RECENT-UPDATES:START -->'; END='<!-- RECENT-UPDATES:END -->'
 base=$(awk -v s="$START" -v e="$END" '$0==s{skip=1} !skip{print} $0==e{skip=0}' readme.md)
 printf '%s\n\n%s\n%s\n%s\n' "$base" "$START" "$(section)" "$END" > readme.md
+
+if [ "$COMMIT" = 1 ] && ! git diff --quiet readme.md; then
+  git add readme.md && git commit -q -m "docs: daily log update" && echo "committed readme"
+fi
