@@ -1,0 +1,21 @@
+Grading Guidelines
+
+Marks
+The assignment is graded out of 30 marks.
+
+How to grade
+
+Read the assignment carefully and check that each student’s work is accurate against what was asked.
+Don’t take marks off for minor syntax issues, commas, small typos, or basic slips. Leave them as they are.
+Focus on whether the work is correct and complete.
+
+How to write the feedback
+Keep it clean and detailed, but generic. Don’t make it too specific to one student.
+Say what the student did well (for example, “Good work on the routing setup”).
+Say what is missing, if anything.
+Say what can be improved, if anything.
+If there is nothing missing or nothing to improve, don’t mention those parts.
+
+Tone
+Make it sound natural and simple.
+Use plain words. Avoid heavy or fancy language.
