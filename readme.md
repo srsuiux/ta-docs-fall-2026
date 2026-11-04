@@ -23,6 +23,7 @@ Students are welcome to browse the repository at any time. It is updated regular
 - Add daily log script and CLAUDE.md
 - thesis: clean brainstorm log on reveal timing with Angello
 - remove sync-ppt-to-blackboard task file
+- daily log: skip deleted files
 
 **Files updated**
 - [`CLAUDE.md`](./CLAUDE.md)
