@@ -19,3 +19,10 @@ I'm not sure. You make the choice.
 In lead and reveal, the student leads and the AI reveals the answer, either as text or as code. In their case, the AI exposes the complete code for that decision.
 
 For our interaction to be specific, we need the concept of a decision, and their paper has none. Their experiment is technique-based: the AI holds all the information and a set of predefined answers, and depending on the interaction it reveals one of the mapped responses.
+
+---
+
+NOTE / TODO
+- Work out what Astroga's comment really means (see thesis-work/comments/proposal-astroga.md).
+- Test a couple of experiments on top of this idea (reveal syntax only after the student makes a decision) and respond to Angello with the results.
+- Figure out and write down how this fits: decision-based reveal vs. T7 lead-and-reveal from the CMU paper, and where it sits in the proposal.
