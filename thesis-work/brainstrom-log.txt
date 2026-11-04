@@ -1,0 +1,21 @@
+Brainstorm log: AI reveal timing (discussion with Angello)
+
+@angello
+Idea: the AI shows the syntax only after the student has made a decision on an implementation detail. Once the student decides, the AI proceeds, e.g.:
+
+  AI: This is how an if condition is written:
+
+  if (<expr>) {
+
+  }
+
+@author
+Yes, but that falls under "lead and reveal" from the CMU paper (T7).
+
+@angello
+I'm not sure. You make the choice.
+
+@author
+In lead and reveal, the student leads and the AI reveals the answer, either as text or as code. In their case, the AI exposes the complete code for that decision.
+
+For our interaction to be specific, we need the concept of a decision, and their paper has none. Their experiment is technique-based: the AI holds all the information and a set of predefined answers, and depending on the interaction it reveals one of the mapped responses.
