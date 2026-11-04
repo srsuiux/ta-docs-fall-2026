@@ -21,12 +21,14 @@ Students are welcome to browse the repository at any time. It is updated regular
 - ta-work:quiz added
 - readme: remove auto-generated note, refresh recent updates
 - Add daily log script and CLAUDE.md
+- thesis: clean brainstorm log on reveal timing with Angello
 
 **Files updated**
 - [`CLAUDE.md`](./CLAUDE.md)
 - [`courses/6950_4850/grading/grading-instruction.txt`](./courses/6950_4850/grading/grading-instruction.txt)
 - [`courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx`](./courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx)
 - [`courses/6950_4850/quiz2.md`](./courses/6950_4850/quiz2.md)
+- [`thesis-work/brainstrom-log.txt`](./thesis-work/brainstrom-log.txt)
 - [`thesis-work/code/movieTicket.cpp`](./thesis-work/code/movieTicket.cpp)
 
 ### 2026-11-03
