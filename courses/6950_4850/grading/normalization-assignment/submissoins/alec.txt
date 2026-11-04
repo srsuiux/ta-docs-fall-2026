@@ -1,0 +1,128 @@
+-----------------------
+PART 1: CONVERT TO 1NF
+-----------------------
+
+RESULT (1NF): Student_Order
+PRIMARY KEY: (StudentName, Item) <--- composite key
+
++-------------+---------------+
+| StudentName |     Item      |
++-------------+---------------+
+| Todd Jones  | Bluebook      |
+| Todd Jones  | Pencils       |
+| Todd Jones  | Notebook      |
+| John Smith  | Pens          |
+| John Smith  | Notebook      |
+| John Smith  | Printer Paper |
+| Mark Jones  | Bluebook      |
+| Mark Jones  | Pencils       |
+| Mark Jones  | Notebook      |
++-------------+---------------+
+
+
+Primary key:
+- Student_Order: (StudentName,Item) 
+
+Why this result satisfies 1NF:
+- Every cell now holds exactly one value. 
+- No repeating groups remain.
+- Every row is unique. A student name alone is no longer unique, so the key had to be expanded to StudentName + Item. That combination identifies each row exactly once.
+- All of the 9 original items are still there: 3 for Todd, 3 for John, and 3 for Mark.
+
+Justification for table design:
+- No new columns or tables were added. The only change is expanding the primary key. I kept it as one table because 1NF   only requires single values and unique rows.
+
+
+
+
+
+----------------------
+PART 2: CONVERT TO 2NF
+----------------------
+
+
+Table 1: Course
+PRIMARY KEY: CourseCode
+FOREIGN KEY: none
+
++------------+------+
+| CourseCode | Fees |
++------------+------+
+| CSIS 3722  |  100 |
+| CSIS 4822  |  200 |
+| ENGL 1550  |  300 |
+| MATH 5600  |  400 |
++------------+------+
+
+
+Table 2: Enrollment
+PRIMARY KEY: (Y-number, CourseCode)
+FOREIGN KEY: CourseCode ---> Course(CourseCode)
+
++----------+------------+
+| Y-number | CourseCode |
++----------+------------+
+| Y001     | CSIS 3722  |
+| Y002     | CSIS 4822  |
+| Y001     | ENGL 1550  |
+| Y003     | MATH 5600  |
++----------+------------+
+
+How this removes partial dependency:
+- Fees column was moved into the Course table, where CourseCode is the whole primary key. Fees now depends on the entire key, not just part of it.
+- Enrollment has no non-key columns left, so no partial dependency can exist there.
+- Each course fee is now stored once. Before, a fee had to be repeated for every student in the course, which caused redundancy and update anomalies.
+
+
+
+
+
+-----------------------------
+PART 3: CONVERT TO 3NF / BCNF
+-----------------------------
+
+Functional dependencies from the original table:
+FD1: (Event, Year) --> Winner, DOB
+FD2: Winner -> DOB   (assumes each winner name identifies one person)
+
+Winner is not a candidate key, so DOB depends on the key only through Winner: 
+Event, Year) -> Winner -> DOB. This is a transitive dependency.
+
+
+Table 1: Event_Winner 
+PRIMARY KEY: (Event, Year)
+FOREIGN KEY: Winner --> Wrestler(Winner)
+
++-----------------+------+---------------+
+| Event           | Year | Winner        |
++-----------------+------+---------------+
+| WrestleMania    | 1988 | Undertaker    |
+| SummerSlam      | 2022 | Roman Reigns  |
+| Royal Rumble    | 1999 | Vince McMahon |
+| Survivor Series | 2000 | Jeff Hardy    |
++-----------------+------+---------------+
+
+
+Table 2: Wrestler 
+PRIMARY KEY: Winner
+FOREIGN KEY: none
+
++---------------+------------+
+| Winner        | DOB        |
++---------------+------------+
+| Undertaker    | 03/24/1965 |
+| Roman Reigns  | 05/25/1985 |
+| Vince McMahon | 08/24/1945 |
+| Jeff Hardy    | 08/31/1977 |
++---------------+------------+
+
+Why this is in BCNF:
+- Event_Winner: the only determinant is (Event, Year), and it is the primary key (a candidate key).
+- Wrestler: the only determinant is Winner, and it is the primary key (a candidate key).
+- Every determinant in both tables is a candidate key, so the transitive dependency is gone.
+- Joining the two tables on Winner gives back the original table with all 4 rows.
+- Each wrestler's DOB is now stored only once, so fixing a wrong DOB means changing only
+  one row.
+
+
+

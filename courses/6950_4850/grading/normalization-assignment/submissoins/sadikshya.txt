@@ -1,0 +1,94 @@
+Question 1: solution
+
+
++------------------+---------------+
+| Student Name(PK) |     Order(PK) |
++------------------+---------------+
+| Todd Jones       | Bluebook      |
+| Todd Jones       | Pencils       |
+| Todd Jones       | Notebook      |
+| John Smith       | Pens          |
+| John Smith       | Notebook      |
+| John Smith       | Printer Paper |
+| Mark Jones       | Bluebook      |
+| Mark Jones       | Pencils       |
+| Mark Jones       | Notebook      |
++------------------+---------------+
+
+The primary key is combination of Student name and Order, student can place many order so alone student name doesn't uniquely identify each row. Having order added makes the combination unique for data provided.
+The table satisfies 1NF because each cell contains only one value and there is no repeating/duplication of groups. Each order has its own row. The primary key consist of Student Name and Item as it uniquely identifies each row. No new columns were added just data were reorganized into separate rows to ensure that each order contains only one item.
+
+Question 2: solution
+Table1: StudentEnrollment
++--------------+-------------------+
+| Y-Number(PK) | CourseCode(PK,FK) |
++--------------+-------------------+
+| Y001         |    CSIS 3722      |
+| Y002         |    CSIS 4822      |
+| Y001         |    ENGL 1550      |
+| Y003         |    MATH 5600      |
++--------------+-------------------+
+
+Composite primary key is Y-Number and CourseCode
+Foreign key is CourseCode as it refrences CourseCode in CourseFee table.
+
+Table2: CourseFee
+
++----------------+-------+
+| CourseCode(PK) |  Fees |
++----------------+-------+
+| CSIS 3722      |   100 |
+| CSIS 4822      |   200 |
+| ENGL 1550      |   300 |
+| MATH 5600      |   400 |
++----------------+-------+
+Primary key is CourseCode.
+Foreign key is none.
+The original table was not in 2NF as Fees is only dependent on CourseCode. I have decompose this data into two tables that is StudentEnrollment and CourseFee. This eliminates the partial dependence as the fee for each course is saved  in isolation. Both tables are in 2NF and original data is not lost.
+
+Question 3: solution
+Step1: remove extraneous columns.
+the functional dependencies are 
+(event, year)-> winner
+winner -> DOB
+(Event,year)->DOB
+= none of these determinant has an extraneous column
+Step2: removing derived functional dependencies
+(event, year)-> winner
+winner -> DOB
+Step3: Arrange FDs into groups with the same determinant
+Group1: (event, year)-> winner
+Group2: winner -> DOB
+Step4: Creating a table for each FD group, using determinant as primary key and adding refrential integrity constraints.
+
+Table1: EventWinners
++-----------------+----------+---------------+
+|    Event(Pk)    | Year(PK) |  Winner(FK)   |
++-----------------+----------+---------------+
+| WrestleMania    |     1988 | Undertaker    |
+| SummerSlam      |     2022 | Roman Reigns  |
+| Royal Rumble    |     1999 | Vince McMahon |
+| Survivor Series |     2000 | Jeff Hardy    |
++-----------------+----------+---------------+
+Primary key is composite primary key that is Event and Year
+Foreign key is Winner referencing Winner in the Winners Table.
+
+Table2: Winners
++---------------+------------+
+|  Winner(PK)   |    DOB     |
++---------------+------------+
+| Undertaker    | 03/24/1965 |
+| Roman Reigns  | 05/25/1985 |
+| Vince McMahon | 08/24/1945 |
+| Jeff Hardy    | 08/31/1977 |
++---------------+------------+
+Primary key is Winner.
+Foreign key is none.
+
+Step5: Merge tables in which one table contains all columns of the other table.
+The two tables cannot be combined as neither table contains all columns of the other.
+
+The original table is transitive dependent because DOB is dependent on Winner and Winner is dependent on event and year. I used simple synthesis procedure to create the EventWinners and Winners table. This removes the transitive dependency and both table satisfy BCNF since each determinant is a candidate key.
+
+
+

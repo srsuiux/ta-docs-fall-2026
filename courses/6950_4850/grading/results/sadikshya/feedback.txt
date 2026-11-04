@@ -1,0 +1,22 @@
+Score: 30/30
+
+Feedback:
+Good work overall. The submission is complete and accurate for all three parts.
+
+Part 1 (1NF) - 10/10
+Good job splitting the order list so every item sits in its own row. The composite primary key is correct and the explanation of why a student name alone is no longer unique is clear. All the original data is kept.
+
+Part 2 (2NF) - 10/10
+Good work spotting that Fees depends only on CourseCode and moving it into its own table. Both tables have clear names, the primary and foreign keys are correct, and the explanation of how the partial dependency is removed makes sense.
+
+Part 3 (3NF/BCNF) - 10/10
+Good work finding the transitive dependency (Event, Year -> Winner -> DOB) and splitting it into two tables. The keys are correct, the foreign key links the tables properly, and the explanation of why every determinant is a candidate key is solid.
+
+Keep it up.
+
+Minor points to fix (no marks taken off):
+- Part 1: the column is called "Order" in the table but "Item" in the explanation. Pick one name and use it everywhere.
+- Part 2: "the fee is saved in isolation" is a little unclear. It is better to say the fee is now stored once per course, which removes repeated data and update problems.
+- Part 3: in Step 1 you listed (Event, Year) -> DOB, then dropped it in Step 2 without saying why. Add one line explaining that it is derived from the other two dependencies.
+- Part 3: say your assumption that each winner name points to one person.
+- Some small spelling slips ("refrences", "decompose"). Worth a quick proofread.

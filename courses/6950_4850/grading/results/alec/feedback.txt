@@ -1,0 +1,19 @@
+Score: 30/30
+
+Feedback:
+Good work overall. The submission is complete and accurate for all three parts.
+
+Part 1 (1NF) - 10/10
+Good job splitting the order list so every item sits in its own row. The composite primary key is correct and the explanation of why a student name alone is no longer unique is clear. All the original data is kept.
+
+Part 2 (2NF) - 10/10
+Good work spotting that Fees depends only on CourseCode and moving it into its own table. Both tables have clear names, the primary and foreign keys are correct, and the explanation of how the partial dependency is removed makes sense.
+
+Part 3 (3NF/BCNF) - 10/10
+Good work finding the transitive dependency (Event, Year -> Winner -> DOB) and splitting it into two tables. The keys are correct, the foreign key links the tables properly, and the explanation of why every determinant is a candidate key is solid.
+
+Keep it up.
+
+Minor points to fix (no marks taken off):
+- Part 3: there is a missing opening bracket in "Event, Year) -> Winner -> DOB". Small typo, but check it next time.
+- Part 3: calling the key column "Winner" in the Wrestler table works, but a name like "WrestlerName" would describe the table better.

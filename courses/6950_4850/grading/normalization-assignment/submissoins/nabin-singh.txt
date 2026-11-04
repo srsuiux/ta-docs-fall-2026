@@ -1,0 +1,87 @@
+Part 1: Convert to 1NF
+
+1. Resulting Table:
+
+Student_Orders
+---------------------------------------
+Student_Name (PK) | Order_Item (PK)
+---------------------------------------
+Todd Jones        | Bluebook
+Todd Jones        | Pencils
+Todd Jones        | Notebook
+John Smith        | Pens
+John Smith        | Notebook
+John Smith        | Printer Paper
+Mark Jones        | Bluebook
+Mark Jones        | Pencils
+Mark Jones        | Notebook
+
+2. Primary Key:
+- Composite Primary Key: (Student_Name, Order_Item)
+
+3. Design Choices & Justification:
+- In the original unnormalized table, the "Order" column had multiple items lumped together in a single cell as a comma-separated list. To satisfy 1NF, every cell must be atomic, meaning it can only hold a single value. I broke down each item into its own individual row so that every purchased item is recorded separately.
+- Because a single student now appears across multiple rows for their different items, "Student_Name" by itself can no longer uniquely identify a row. Therefore, I expanded the primary key into a composite primary key consisting of both (Student_Name, Order_Item) to keep every row unique.
+
+
+Part 2: Convert to 2NF
+
+1. Decomposed Tables:
+
+Table 1: Course_Fees
+----------------------------
+CourseCode (PK) | Fees
+----------------------------
+CSIS 3722       | 100
+CSIS 4822       | 200
+ENGL 1550       | 300
+MATH 5600       | 400
+
+- Primary Key: CourseCode
+- Foreign Key: None
+
+Table 2: Student_Enrollments
+------------------------------------
+Y_Number (PK) | CourseCode (PK, FK)
+------------------------------------
+Y001          | CSIS 3722
+Y002          | CSIS 4822
+Y001          | ENGL 1550
+Y003          | MATH 5600
+- Composite Primary Key: (Y_Number, CourseCode)
+- Foreign Key: CourseCode (references CourseCode in Course_Fees)
+
+2. Explanation & Justification:
+- In the original table, the primary key was a composite key made up of (Y_Number, CourseCode). However, the "Fees" column depended only on "CourseCode", which is just a part of the primary key. This is a partial dependency and violates 2NF.
+- To fix this, I split the table into two. "Course_Fees" handles the course and its fixed fee (where CourseCode is the primary key), and "Student_Enrollments" tracks which students are in which classes. This removes the partial dependency because all non-key attributes now fully depend on the entire primary key of their respective tables.
+
+
+Part 3: Convert to 3NF / BCNF
+
+1. Decomposed Tables:
+
+Table 1: Event_Results
+---------------------------------------------
+Event (PK)      | Year (PK) | Winner (FK)
+---------------------------------------------
+WrestleMania    | 1988      | Undertaker
+SummerSlam      | 2022      | Roman Reigns
+Royal Rumble    | 1999      | Vince McMahon
+Survivor Series | 2000      | Jeff Hardy
+- Composite Primary Key: (Event, Year)
+- Foreign Key: Winner (references Winner in Winner_Details)
+
+Table 2: Winner_Details
+----------------------------------
+Winner (PK)     | DOB
+----------------------------------
+Undertaker      | 03/24/1965
+Roman Reigns    | 05/25/1985
+Vince McMahon   | 08/24/1945
+Jeff Hardy      | 08/31/1977
+- Primary Key: Winner
+- Foreign Key: None
+
+2. Explanation & Justification:
+- In the original table, the composite primary key was (Event, Year), which determined the Winner, but the Winner also determined the DOB (Winner -> DOB). Since DOB depended on Winner (a non-key column), this created a transitive dependency.
+- To bring this into BCNF, we must ensure that every determinant is a candidate key. I separated the winner's birthdate into its own table called "Winner_Details" where "Winner" is the primary key. The "Event_Results" table keeps track of the event, year, and winner. Now, all determinants are candidate keys, completely eliminating the transitive dependency.
