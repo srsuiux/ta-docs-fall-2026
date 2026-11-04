@@ -29,7 +29,6 @@ Students are welcome to browse the repository at any time. It is updated regular
 - [`courses/6950_4850/grading/grading-instruction.txt`](./courses/6950_4850/grading/grading-instruction.txt)
 - [`courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx`](./courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx)
 - [`courses/6950_4850/quiz2.md`](./courses/6950_4850/quiz2.md)
-- [`ta-log-mydo/tasks/sync-ppt-to-blackboard.md`](./ta-log-mydo/tasks/sync-ppt-to-blackboard.md)
 - [`thesis-work/brainstrom-log.txt`](./thesis-work/brainstrom-log.txt)
 - [`thesis-work/code/movieTicket.cpp`](./thesis-work/code/movieTicket.cpp)
 
@@ -44,18 +43,7 @@ Students are welcome to browse the repository at any time. It is updated regular
 - [`thesis-work/documents/study-document-nov-3.md`](./thesis-work/documents/study-document-nov-3.md)
 - [`thesis-work/documents/study-log.md`](./thesis-work/documents/study-log.md)
 - [`thesis-work/experiment/current-study/experiment.md`](./thesis-work/experiment/current-study/experiment.md)
-- [`thesis-work/experiment/p1.md`](./thesis-work/experiment/p1.md)
 - [`thesis-work/experiment/P2-even-odd/even-odd.md`](./thesis-work/experiment/P2-even-odd/even-odd.md)
-- [`thesis-work/proposal-updated-oct26.md`](./thesis-work/proposal-updated-oct26.md)
-- [`thesis-work/proposal1.md`](./thesis-work/proposal1.md)
-- [`thesis-work/th-work/mydo-dr-a-comments-revision-2026-10-26.md`](./thesis-work/th-work/mydo-dr-a-comments-revision-2026-10-26.md)
-- [`thesis-work/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md`](./thesis-work/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md)
-- [`thesis-work/th-work/prompt.md`](./thesis-work/th-work/prompt.md)
-- [`thesis-work/th-work/thesis_proposal_draft_original_text_claude.md`](./thesis-work/th-work/thesis_proposal_draft_original_text_claude.md)
-- [`thesis-work/th-work/thesis-propodal-draft-udpate-oct-26.md`](./thesis-work/th-work/thesis-propodal-draft-udpate-oct-26.md)
-- [`thesis-work/th-work/thesis-proposal-draft.md`](./thesis-work/th-work/thesis-proposal-draft.md)
-- [`thesis-work/thesis_proposal_draft_original_text_claude.md`](./thesis-work/thesis_proposal_draft_original_text_claude.md)
-- [`thesis-work/todo-thesis.md`](./thesis-work/todo-thesis.md)
 
 ### 2026-10-26
 
@@ -67,10 +55,6 @@ Students are welcome to browse the repository at any time. It is updated regular
 
 **Files updated**
 - [`log/log.oct-26.md`](./log/log.oct-26.md)
-- [`ta-log-mydo/tasks/sync-ppt-to-blackboard.md`](./ta-log-mydo/tasks/sync-ppt-to-blackboard.md)
-- [`ta-log-mydo/th-work/mydo-dr-a-comments-revision-2026-10-26.md`](./ta-log-mydo/th-work/mydo-dr-a-comments-revision-2026-10-26.md)
-- [`ta-log-mydo/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md`](./ta-log-mydo/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md)
-- [`ta-log-mydo/th-work/thoughts-decison.md`](./ta-log-mydo/th-work/thoughts-decison.md)
 - [`thesis-work/comments/proposal-astroga.md`](./thesis-work/comments/proposal-astroga.md)
 - [`thesis-work/experiment/CET_main/baseline/gpt.md`](./thesis-work/experiment/CET_main/baseline/gpt.md)
 - [`thesis-work/experiment/CET_main/baseline/prompt.md`](./thesis-work/experiment/CET_main/baseline/prompt.md)
@@ -82,16 +66,6 @@ Students are welcome to browse the repository at any time. It is updated regular
 - [`thesis-work/experiment/CET_main/lead-reveal/prompt-iter-2.md`](./thesis-work/experiment/CET_main/lead-reveal/prompt-iter-2.md)
 - [`thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter1.md`](./thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter1.md)
 - [`thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter2.md`](./thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter2.md)
-- [`thesis-work/experiment/lead-reveal/links.md`](./thesis-work/experiment/lead-reveal/links.md)
 - [`thesis-work/papers/links.md`](./thesis-work/papers/links.md)
-- [`thesis-work/proposal-updated-oct26.md`](./thesis-work/proposal-updated-oct26.md)
-- [`thesis-work/th-work/mydo-dr-a-comments-revision-2026-10-26.md`](./thesis-work/th-work/mydo-dr-a-comments-revision-2026-10-26.md)
-- [`thesis-work/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md`](./thesis-work/th-work/mydo-thoughts-validations-research-updates-oc-2026-10-26.md)
-- [`thesis-work/th-work/prompt.md`](./thesis-work/th-work/prompt.md)
-- [`thesis-work/th-work/thesis_proposal_draft_original_text_claude.md`](./thesis-work/th-work/thesis_proposal_draft_original_text_claude.md)
-- [`thesis-work/th-work/thesis-propodal-draft-udpate-oct-26.md`](./thesis-work/th-work/thesis-propodal-draft-udpate-oct-26.md)
-- [`thesis-work/th-work/thesis-proposal-draft.md`](./thesis-work/th-work/thesis-proposal-draft.md)
-- [`thesis-work/todo-thesis.md`](./thesis-work/todo-thesis.md)
 - [`thesis-work/toread/docs.txt`](./thesis-work/toread/docs.txt)
-- [`thesis-work/updates-oct24.md`](./thesis-work/updates-oct24.md)
 <!-- RECENT-UPDATES:END -->

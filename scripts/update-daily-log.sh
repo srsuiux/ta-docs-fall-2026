@@ -23,7 +23,7 @@ section() {
     git log "${range[@]}" --format='- %s' --reverse
     echo
     echo "**Files updated**"
-    git log "${range[@]}" --name-only --format= | sort -u | grep -v '^$' | grep -Ev "$EXCLUDE" \
+    git log "${range[@]}" --name-only --format= | sort -u | grep -v '^$' | grep -Ev "$EXCLUDE" | while read -r f; do [ -e "$f" ] && echo "$f"; done \
       | while read -r f; do echo "- [\`$f\`](./${f// /%20})"; done
   done
 }
