@@ -1,0 +1,173 @@
+Chapter 9: Knowledge Management and E-Learning - Speaker Notes
+
+Slide 1: Knowledge Management and E-Learning
+
+Hi everyone. Today we're covering Chapter 9, Knowledge Management and E-Learning.
+
+We'll start with how a company keeps track of what it knows, and why that's hard when so much of it lives in people's heads. Then we'll look at how people learn online.
+
+Slide 2: What we will cover
+
+Here's the plan. We have five objectives.
+
+First, what intellectual capital is. Second, how a company starts a knowledge management program. Third, why people don't always want to share what they know.
+
+Then we switch to e-learning: the different approaches, and how a course actually gets built.
+
+Slide 3: Intellectual capital
+
+Let's start with intellectual capital. Think of it as everything valuable a company has that you won't find on its financial reports.
+
+It comes in three kinds. Human capital is what the employees know and can do. Social capital is the company's relationships, with customers, suppliers, and partners. Structural capital is what's written down and owned: processes, policies, contracts, and patents.
+
+Two companies can have the same money and equipment. This is often what makes one of them win.
+
+Slide 4: Two types of knowledge
+
+Inside all of that, knowledge comes in two types.
+
+Explicit knowledge is anything you can write down, like a manual, a policy, or a spreadsheet. It's easy to store and share.
+
+Tacit knowledge is what people know from experience. Think of a veteran employee who just knows how to handle an angry customer, but couldn't easily explain how. That's the hard one to capture, and it's why knowledge management is a real challenge.
+
+Slide 5: Knowledge management in four steps
+
+So how does a company manage all this? Knowledge management, or KM, is the set of strategies and practices for managing intellectual capital.
+
+It runs in four steps. Set a goal. Find where the knowledge is. Capture it. Then organize and share it.
+
+Notice the goal comes first. A narrow, specific goal makes the project much more likely to succeed, and it guides every choice after that. Let's go through the steps.
+
+Slide 6: Step 2: Locate the sources
+
+Step two is finding the knowledge.
+
+Explicit knowledge is usually already digital, but scattered. Search software can crawl through databases, websites, email, and documents to find it.
+
+Tacit knowledge is in people, so we need to find the people. An expert directory lists each person's projects and skills.
+
+There's also social network analysis. It maps who is connected to whom. Each dot here is a person, and each line is a relationship. You can spot the leader in the middle, the people who connect groups, and the people on the edge. The real network often looks different from the org chart.
+
+Slide 7: Steps 3 and 4: Capture, organize, share
+
+Now steps three and four.
+
+Capturing explicit knowledge is straightforward: you gather it in a knowledge base. Tacit knowledge needs a looser approach, where people share in their own words. Communities of practice are a good example. These are groups that learn from each other through forums, wikis, and blogs.
+
+Then we organize and share. Enterprise content management keeps documents, videos, web pages, and images under control. Document management uses OCR, which reads paper forms and makes them searchable. And the intranet, the company's own website, is where employees go to find it all.
+
+Slide 8: Step 4: Value the knowledge
+
+The last part of step four is deciding what's actually worth keeping. Not everything we capture is useful, and the more valuable something is, the more effort it deserves.
+
+Strategic information: invest in it and experiment with it. Operational information: organize it and share it widely. Compliance information, the kind required by rules: automate collecting and archiving it. And low-value or duplicate material: just delete it.
+
+One practical idea is to let users rate entries, so the good ones rise to the top.
+
+Slide 9: Example: Mayo Clinic
+
+Here's a real example: Mayo Clinic.
+
+Medical knowledge changes fast, and a doctor with a patient needs an answer that is current and trusted.
+
+At Mayo, experts contribute what they know. Editors turn it into short, practical pieces called knowledge bytes. Panels of experts review them for quality. Then they're tagged and stored in one system.
+
+Doctors use it through two tools. AskMayoExpert gives quick answers to clinical questions. The Decision Advisor goes further. It combines the patient's own data with this knowledge to help guide care.
+
+Slide 10: The human element
+
+Now the human side, which is where many KM projects struggle.
+
+Managers see sharing as an obvious win. But for an employee, what they know is part of what makes them valuable. It affects pay, title, and promotions. So sharing can feel like giving something away.
+
+That shows up in four ways. Hoarding: holding back knowledge to stay important. Free riding: using the knowledge base but never adding to it. When others notice, they stop contributing too. No time: sharing takes time from regular work. And fear of criticism: nobody likes being corrected in front of others.
+
+Slide 11: Encouraging people to share
+
+So how can managers get people to share? With incentives, meaning rewards that influence behavior.
+
+What works: make it clear that sharing is valued, use moderate rewards, count sharing in performance reviews, and reward team results, not just individuals. When one person shares, others tend to share back.
+
+But be careful. Big cash bonuses can backfire, because people may stop sharing unless they're paid. Some will game the system with tiny or split contributions. And if people feel the judging is unfair, they'll push back.
+
+Slide 12: Tips for launching a KM project
+
+Let's pull this together with some practical tips for launching a KM project.
+
+Start small with a clear goal. Get management behind it. Fill the knowledge base with accurate, current content from the right experts. Choose simple technology that works with your existing systems. Run a pilot with a small group of willing employees. Plan incentives that fit your organization. And encourage people to take part and suggest improvements.
+
+If you remember one thing: start small, then grow.
+
+Slide 13: Three approaches to e-learning
+
+Now let's move to e-learning. It means learning that uses the internet to connect learners with materials, teachers, and each other.
+
+There are three main approaches. Self-paced: you learn on your own, anytime, with little or no teacher. Companies use this a lot for policy and system training. Instructor-led: a teacher guides the course, using virtual classrooms, web conferencing, email, and forums. Hybrid: a mix of online activities and in-class sessions.
+
+Two terms to know. Synchronous means everyone is online at the same time. Asynchronous means people work whenever they choose.
+
+Slide 14: E-learning in universities and companies
+
+Universities and companies both use e-learning, but they went in different directions.
+
+A MOOC is a massive open online course. It's open to anyone, free or low cost, often offered through a platform like edX. Millions sign up, but most never finish.
+
+Companies took a different route: self-paced modules where employees build skills and earn certifications. A good example is Google's Data Analytics courses, which lead to a professional certificate.
+
+So, universities tried to copy the classroom, and companies built self-paced modules.
+
+Slide 15: Who creates an e-learning course?
+
+So how does an e-learning course actually get made? It takes a team of four.
+
+The subject matter expert knows the content. The instructional designer plans how to teach it and how to test it. The project sponsor sets the goals and pays for it. And the project manager coordinates the work and tracks progress.
+
+Each person covers something the others can't.
+
+Slide 16: Building the course content
+
+Once the team is in place, they build the content.
+
+Courses are made of learning objects, which are small, reusable pieces of content. These can be narrated slides, simulations, serious games, or augmented and virtual reality. A simulation is a good example. You make choices and see the consequences, with no real risk.
+
+But one rule matters most: content is king. If the substance isn't good, fancy technology won't save it.
+
+Slide 17: Preventing cheating online
+
+A fair question for online courses: how do you stop cheating when no one is in the room?
+
+Schools use three kinds of safeguards. Identity: making sure it's really you, with passwords or biometrics like fingerprints. Honesty: honor codes, proctored tests, and webcam room scans.
+
+And then there's the newer challenge, AI. AI-detection tools help, and more ideas are in development, such as eye tracking, browser monitoring, and typing patterns.
+
+Slide 18: Learning management systems
+
+Where does all of this live? In a learning management system, or LMS.
+
+It delivers the courses, tracks progress, and keeps records. Many also support learning analytics, which means using the LMS data to see how students are doing. And they support social learning, through wikis, blogs, forums, and virtual classrooms.
+
+One more term: SCORM. It's a standard that lets learning objects work in any LMS that supports it.
+
+Slide 19: Online vs. classroom learning
+
+So how does online learning compare with the classroom? Think of two questions: same place or not, and same time or not.
+
+Different place, same time is live online: video, virtual classrooms, chat. Different place, different time is forums, email, wikis, and recorded video. Same place, same time is the traditional classroom. Same place, different time is things like open computer labs and language labs.
+
+Research finds few differences in results between them. They complement each other, so the best approach is often a blend.
+
+Slide 20: Case study: Lynda.com
+
+Let's end with a case study: Lynda.com, an online video-training company.
+
+It began by selling single videos. Then it switched to a subscription for a full video library, and it grew. By 2013 it had 22 million dollars in sales and 450 employees. In 2015, LinkedIn bought it for 1.5 billion dollars.
+
+Later, Microsoft bought LinkedIn for 25.2 billion. The next step is combining the videos with LinkedIn's network and Microsoft's analytics and AI.
+
+Slide 21: Key takeaways
+
+To wrap up, here's one line for each objective.
+
+Intellectual capital has three types, and knowledge is either explicit or tacit. Launching KM takes four steps: set a goal, locate, capture, and organize. People hold back from sharing, so fair, moderate incentives help. E-learning can be self-paced, instructor-led, or hybrid. And a team builds the course, while an LMS delivers and tracks it.
+
+Thank you. Any questions?
