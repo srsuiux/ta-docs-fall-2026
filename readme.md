@@ -12,6 +12,20 @@ Students are welcome to browse the repository at any time. It is updated regular
 <!-- RECENT-UPDATES:START -->
 ## Recent Updates
 
+### 2026-11-05
+
+**Work done**
+- ta-work: 6920 ch-9 'Knowledge Management and E-Learning': class preparation
+- ta-work: 6920 ch-9 slides: edited and prepared for the lecture
+- ta-work: 6920 ch-9 lecture: speaking preparation and speaker notes
+- ta-work: 6920 ch-9 lecture delivered to students, 5:10 - 6:30 PM
+- ta-work: graded assignments
+- thesis plan: make the implementation decisions
+- thesis plan: make the algorithmic decisions
+- thesis plan: run the experiment and study further
+
+**Files updated**
+
 ### 2026-11-04
 
 **Work done**
@@ -50,28 +64,4 @@ Students are welcome to browse the repository at any time. It is updated regular
 - [`thesis-work/documents/study-log.md`](./thesis-work/documents/study-log.md)
 - [`thesis-work/experiment/current-study/experiment.md`](./thesis-work/experiment/current-study/experiment.md)
 - [`thesis-work/experiment/P2-even-odd/even-odd.md`](./thesis-work/experiment/P2-even-odd/even-odd.md)
-
-### 2026-10-26
-
-**Work done**
-- thoughts when i was outside so i decided to keep it
-- paper metadata push
-- todays work update
-- rewrite the todays update
-
-**Files updated**
-- [`log/log.oct-26.md`](./log/log.oct-26.md)
-- [`thesis-work/comments/proposal-astroga.md`](./thesis-work/comments/proposal-astroga.md)
-- [`thesis-work/experiment/CET_main/baseline/gpt.md`](./thesis-work/experiment/CET_main/baseline/gpt.md)
-- [`thesis-work/experiment/CET_main/baseline/prompt.md`](./thesis-work/experiment/CET_main/baseline/prompt.md)
-- [`thesis-work/experiment/CET_main/explain-before-usage/explain-before-usase.md`](./thesis-work/experiment/CET_main/explain-before-usage/explain-before-usase.md)
-- [`thesis-work/experiment/CET_main/explain-before-usage/prompt.md`](./thesis-work/experiment/CET_main/explain-before-usage/prompt.md)
-- [`thesis-work/experiment/CET_main/lead-reveal/findings.md`](./thesis-work/experiment/CET_main/lead-reveal/findings.md)
-- [`thesis-work/experiment/CET_main/lead-reveal/links.md`](./thesis-work/experiment/CET_main/lead-reveal/links.md)
-- [`thesis-work/experiment/CET_main/lead-reveal/prompt-iter-1.md`](./thesis-work/experiment/CET_main/lead-reveal/prompt-iter-1.md)
-- [`thesis-work/experiment/CET_main/lead-reveal/prompt-iter-2.md`](./thesis-work/experiment/CET_main/lead-reveal/prompt-iter-2.md)
-- [`thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter1.md`](./thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter1.md)
-- [`thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter2.md`](./thesis-work/experiment/CET_main/lead-reveal/t7-lead-reveal-iter2.md)
-- [`thesis-work/papers/links.md`](./thesis-work/papers/links.md)
-- [`thesis-work/toread/docs.txt`](./thesis-work/toread/docs.txt)
 <!-- RECENT-UPDATES:END -->
