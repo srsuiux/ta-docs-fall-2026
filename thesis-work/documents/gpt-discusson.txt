@@ -1,0 +1,638 @@
+Chat log with gpt: 
+Introductory Computer Science (CS1) students often know basic programming syntax, including variables, data types, input/output, conditional statements, loops, and basic program structure. However, knowing programming syntax does not necessarily mean that students can independently solve programming problems.
+
+When presented with a well-defined programming problem, students must make several decisions before and during implementation. They need to understand the requirements, identify necessary information, develop an algorithmic approach, determine the required logic, organize the execution flow, and verify their solutions.
+
+AI programming tutors can assist students throughout this process. However, providing too much assistance may cause students to rely on AI-generated solutions rather than develop their own problem-solving abilities.
+
+This creates an important research question:
+
+Which programming decisions should AI support or expose, and which decisions should remain the student's responsibility to preserve active reasoning and independent problem-solving ability?
+
+The objective is not to prevent students from receiving AI assistance. Instead, it is to investigate how AI can support students without taking ownership of the problem-solving process away from them.
+
+2. Programming Decisions in CS1
+When solving a well-defined programming problem, students make several interconnected decisions.
+
+The following is a proposed classification of these decisions for the study.
+
+Programming decision What the student needs to determine
+Problem understanding What is the problem asking me to accomplish?
+Input identification What information does the program need?
+Output identification What should the program produce?
+Data modeling How should the information be represented?
+Problem decomposition What smaller tasks make up the problem?
+Algorithmic approach What steps are necessary to solve the problem?
+Computational logic What calculations and operations are required?
+Conditional reasoning What situations or conditions must be considered?
+Control-flow selection Should the solution use sequence, selection, or iteration?
+Execution order What needs to happen first, next, and last?
+Testing strategy What scenarios and boundary cases should be tested?
+These categories are a proposed operational framework, not an established standardized taxonomy.
+
+The distinction between syntax and problem-solving
+A student might know how to write an if-else statement but still struggle to determine:
+
+Whether a condition is necessary.
+Which condition should be evaluated.
+Which comparison operator is appropriate.
+What should happen when the condition is true or false.
+Whether multiple conditions are necessary.
+How the different operations should be organized.
+The challenge is not necessarily knowing how to write the syntax. It is deciding when and why to use it.
+
+3. Levels of Problem Representation
+An important distinction is between understanding what a problem requires and knowing exactly how to implement its solution.
+
+Four levels can help explain this distinction.
+
+Level 1: Problem statement
+Describes the requirements, constraints, and expected outcomes.
+
+Example:
+
+Develop a payroll program that calculates an employee's weekly gross pay, accounting for regular working hours and overtime.
+
+Level 2: High-level problem representation
+Describes the major responsibilities of the solution without exposing detailed implementation logic.
+
+Example:
+
+Collect employee working information.
+Determine the appropriate pay calculation.
+Calculate the employee's earnings.
+Produce the final payroll result.
+This communicates what the program needs to accomplish without revealing the specific conditions, formulas, or execution steps.
+
+Level 3: Detailed algorithm or pseudocode
+Describes how the solution should work.
+
+Example:
+
+INPUT hourly_rate
+INPUT hours_worked
+
+IF hours_worked <= 40
+    regular_pay = hours_worked * hourly_rate
+    overtime_pay = 0
+ELSE
+    regular_pay = 40 * hourly_rate
+    overtime_hours = hours_worked - 40
+    overtime_pay = overtime_hours * hourly_rate * 1.5
+END IF
+
+gross_pay = regular_pay + overtime_pay
+DISPLAY gross_pay
+This exposes the algorithmic logic, conditions, calculations, variables, and execution order.
+
+Level 4: Source code
+Translates the algorithm into an actual programming language, such as C++.
+
+Important terminology
+"High-level abstraction" is a descriptive expression, not necessarily the name of a standardized pseudocode technique.
+
+Relevant established concepts include:
+
+Computational abstraction.
+Problem-level representation.
+Design-level representation.
+Top-down problem solving.
+Algorithmic decomposition.
+Black-boxing.
+Proposed terminology for this study: High-level problem representation or design-level representation.
+
+The purpose is to provide students with an understanding of the major responsibilities of a solution without immediately revealing its detailed algorithm.
+
+4. Example: Payroll Calculation Program
+Problem statement
+Write a program that calculates an employee's weekly gross pay.
+
+The program should:
+
+Ask the user for the employee's hourly rate.
+Ask for the number of hours worked.
+Pay the regular hourly rate for up to 40 hours.
+Pay 1.5 times the regular hourly rate for hours exceeding 40.
+Display the total gross pay.
+4.1 Identify the inputs
+Input Data type Purpose
+Hourly rate double Employee's hourly wage
+Hours worked double Total working hours
+4.2 Identify the outputs
+Regular pay.
+Overtime pay.
+Total gross pay.
+4.3 High-level problem representation
+Obtain employee working information.
+Determine the appropriate pay calculation.
+Calculate employee earnings.
+Present the payroll result.
+4.4 Student programming decisions
+The student needs to reason about:
+
+Why regular and overtime hours are treated differently.
+What determines when overtime begins.
+How regular working hours should be calculated.
+How overtime hours should be determined.
+How the overtime rate should be applied.
+How regular and overtime pay should be combined.
+What happens when an employee works exactly 40 hours.
+What happens when an employee works 41 hours.
+4.5 Example calculation
+Hourly rate: $20
+
+Hours worked: 45
+
+Regular pay:
+
+\[
+40 \times 20 = 800
+\]
+
+Overtime pay:
+
+\[
+(45-40)\times20\times1.5=150
+\]
+
+Gross pay:
+
+\[
+800+150=\$950
+\]
+
+The important distinction is that the student should develop the reasoning behind these calculations rather than simply receive the formulas from the tutor.
+
+5. Which Decisions Should AI Expose, and Which Should Students Develop?
+A possible instructional division is to organize programming decisions into three groups.
+
+Group A: Decisions AI can make explicit
+These decisions help students understand and organize the problem without directly revealing its solution.
+
+Decision AI's role
+Problem understanding Clarify what the problem asks.
+Input identification Help identify the required information.
+Output identification Clarify expected results.
+Constraint identification Highlight important requirements and restrictions.
+Problem decomposition Identify major responsibilities and subgoals.
+For example, AI can tell a student:
+
+"Your payroll program needs to collect employee information, determine earnings, account for overtime, and display gross pay."
+
+This provides direction without revealing the overtime formula or the condition that determines when overtime applies.
+
+Group B: Decisions students should actively develop
+These represent the central reasoning activities that the study aims to preserve.
+
+Decision Student's responsibility
+Data modeling Decide how information should be represented.
+Algorithmic approach Develop an approach to solving the problem.
+Computational logic Determine the necessary calculations and operations.
+Conditional reasoning Identify situations requiring different outcomes.
+Control-flow selection Determine how the program should organize those situations.
+Execution order Organize the solution into a logical sequence.
+These decisions should not necessarily be completed without assistance.
+
+Instead, the AI should guide students toward developing and explaining their own decisions.
+
+Group C: Decisions that can be shared
+Decision Student's responsibility AI's responsibility
+Data type selection Propose appropriate data types. Explain choices and trade-offs.
+Control structure selection Suggest an approach. Explain alternatives.
+Edge-case identification Propose scenarios. Suggest missing cases.
+Debugging Diagnose the problem. Provide diagnostic hints.
+Testing Select test cases. Help evaluate test coverage.
+The objective is to develop students' ability to make and justify programming decisions, rather than requiring them to work without any assistance.
+
+6. The Problem with Withholding the Algorithmic Approach
+One important concern is that beginners may not know how to develop an algorithmic approach independently.
+
+Suppose an AI tutor always asks:
+
+"How would you calculate overtime?"
+
+A beginner might not know where to start.
+
+If the tutor instead provides:
+
+"Use an if-else statement and calculate overtime using (hours - 40) × rate × 1.5."
+
+The tutor has already exposed much of the algorithm.
+
+Neither extreme is necessarily ideal.
+
+The instructional challenge is to provide enough support to help students progress while preserving their involvement in developing the solution.
+
+This leads to the idea of progressive scaffolding.
+
+7. Progressive Scaffolding in AI Tutoring
+Rather than always revealing or always withholding the algorithm, the tutor can progressively increase the level of assistance depending on the student's understanding.
+
+Example tutoring interaction
+Problem: Calculate employee gross pay, including overtime.
+
+Tutor — Initial support:
+
+The problem mentions regular hours and overtime. Do you think every hour worked should be compensated at the same rate?
+
+Student:
+
+No, overtime hours have a different rate.
+
+Tutor — Guiding question:
+
+What information from the problem determines when regular working hours end and overtime begins?
+
+Student:
+
+The 40-hour threshold.
+
+Tutor — Deeper reasoning:
+
+Suppose an employee works 45 hours. Should the overtime rate apply to all 45 hours or only some of them? Why?
+
+Student:
+
+Only the five hours beyond 40.
+
+Tutor — Transition:
+
+Now organize the regular and overtime calculations into a sequence that produces the final gross pay.
+
+In this interaction:
+
+The tutor clarifies the requirements.
+The student identifies the relevant distinction.
+The tutor guides the student toward the threshold.
+The student reasons through the calculation.
+The student develops the solution structure.
+The tutor supports the reasoning process without immediately presenting the complete algorithm.
+
+Progressive assistance levels
+A possible tutoring strategy:
+
+Clarification: Explain the problem requirements.
+Guidance: Ask questions that direct attention toward relevant information.
+Hints: Provide increasingly specific clues.
+Partial explanation: Explain a difficult concept or decision.
+Worked guidance: Demonstrate part of the reasoning when necessary.
+Implementation support: Help translate the student's developed approach into code.
+The goal is not to make students struggle unnecessarily. It is to help them move toward independent problem-solving.
+
+8. Relevant Research and Theoretical Foundations
+The following literature provides possible foundations for this research direction.
+
+8.1 Abstraction and problem-solving
+Waite et al. (2018)
+
+Abstraction in Action: K-5 Teachers' Uses of Levels of Abstraction, Particularly the Design Level, in Teaching Programming.
+
+Relevant contribution:
+
+Distinguishes problem, design, code, and execution levels.
+Discusses design as a bridge between understanding a problem and implementing a solution.
+Its educational context is K-5, so it should be used as supporting literature rather than direct evidence about university CS1 students.
+
+8.2 Computational thinking
+Shute et al. (2017)
+
+Demystifying Computational Thinking.
+
+Relevant concepts:
+
+Decomposition.
+Abstraction.
+Algorithm design.
+Debugging.
+Iteration.
+Generalization.
+This provides a foundation for understanding the cognitive processes involved in solving computational problems.
+
+8.3 Black-boxing and abstraction
+Muller and Haberman (2008)
+
+Supporting Abstraction Processes in Problem Solving through Pattern-Oriented Instruction.
+
+Relevant concepts:
+
+Pattern recognition.
+Black-boxing.
+Structure identification.
+Black-boxing is especially relevant because students can understand the purpose of a component without immediately knowing its internal implementation.
+
+8.4 Levels of algorithmic thinking
+Perrenet et al. (2010)
+
+Levels of Thinking in Computer Science: Development in Bachelor Students' Conceptualization of Algorithm.
+
+Relevant contribution:
+
+Execution-level thinking.
+Program-level thinking.
+Object-level thinking.
+Problem-level thinking.
+This helps explain the difference between understanding an algorithm as a problem-solving concept and focusing on its implementation.
+
+8.5 Top-down problem-solving framework in CS1
+Brieven and Donnet (2024)
+
+Practicing Abstraction through a Top-Down Problem-Solving Framework in a CS1 Course.
+
+Relevant contribution:
+
+Problem level.
+Algorithmic level.
+Development level.
+Execution level.
+This is particularly relevant because it addresses abstraction and top-down problem solving in a CS1 context.
+
+8.6 Worked examples and metacognitive scaffolding
+Shin et al. (2023)
+
+The Effects of Worked-Out Example and Metacognitive Scaffolding on Problem-Solving Programming.
+
+Relevant contribution:
+
+Examines worked examples and metacognitive scaffolding.
+Investigates how instructional support affects programming problem-solving and self-regulation.
+Supports considering progressive rather than all-or-nothing assistance.
+8.7 Subgoal-labeled worked examples
+Margulieux et al. (2020)
+
+Reducing Withdrawal and Failure Rates in Introductory Programming with Subgoal Labeled Worked Examples.
+
+Relevant contribution:
+
+Helps students understand the purpose of different parts of programming solutions.
+Supports learning through decomposition into meaningful subgoals.
+8.8 AI assistance and cognitive offloading
+Liu et al. (2026)
+
+Tool, Tutor, or Crutch? A Grounded Theory of Cognitive Scaffolding and Offloading in AI-Assisted Programming Education.
+
+Relevant research direction:
+
+Examines AI assistance and cognitive scaffolding.
+Addresses the tension between immediate task performance and independent learning.
+Relates to concerns about AI dependency and cognitive offloading.
+Bibliographic details and the specific findings of these papers should be checked against the original publications before final thesis citation.
+
+9. Proposed Research Framework
+The following is a proposed framework for investigating AI-supported programming problem-solving.
+
+AI-supported programming problem-solving
+Stage 1: Well-defined programming problem
+
+The student receives a problem with clear requirements, constraints, and expected outcomes.
+
+Stage 2: High-level problem representation
+
+AI exposes the major responsibilities and subgoals without immediately revealing detailed implementation logic.
+
+Stage 3: Student programming decisions
+
+The student actively develops:
+
+Input and output modeling.
+Data modeling.
+Problem decomposition.
+Algorithmic approach.
+Conditional and computational logic.
+Control flow and execution order.
+Testing strategy.
+AI provides guidance, hints, and explanations when needed.
+
+Stage 4: Implementation
+
+The student translates the developed solution into C++.
+
+Stage 5: Testing and evaluation
+
+The student verifies the implementation and evaluates whether the solution satisfies the requirements.
+
+Stage 6: Independent assessment
+
+The student's ability to solve a new programming problem without AI assistance is evaluated.
+
+10. Proposed Research Questions
+The central research question can be expressed as:
+
+How can AI tutoring techniques support CS1 students in developing programming solutions while preserving their active involvement in problem-solving decisions?
+
+Possible supporting research questions:
+
+RQ1: How do different AI tutoring approaches influence CS1 students' engagement in programming problem-solving activities?
+
+RQ2: How do different AI tutoring approaches influence students' ability to independently develop programming solutions?
+
+RQ3: How do students interact with AI guidance when making programming decisions?
+
+The final wording should depend on the actual experimental conditions, assessment methods, and research objectives.
+
+11. Potential Learning Outcomes and Evaluation
+The study should not measure success only by whether students complete programming assignments with AI assistance.
+
+A student might successfully complete an assignment because the AI effectively provided the solution.
+
+Another student might take longer, receive hints, make mistakes, and eventually develop the solution independently.
+
+The second process may demonstrate more meaningful learning.
+
+Possible evaluation dimensions:
+
+Evaluation dimension What it measures
+Programming decision quality Whether students make appropriate decisions.
+Decision justification Whether students can explain why they made those decisions.
+Independent problem-solving Whether students can solve problems without AI.
+Transfer ability Whether students can apply their reasoning to a new problem.
+Engagement How actively students participate in the tutoring process.
+AI dependency How much students rely on AI to make decisions for them.
+An independent or transfer assessment is especially important if the study aims to make claims about retained problem-solving ability.
+
+12. Important Research Design Distinction
+Two separate dimensions should be maintained.
+
+Programming decisions
+These describe what the student needs to reason about.
+
+Examples:
+
+Problem decomposition.
+Algorithmic approach.
+Data modeling.
+Conditional reasoning.
+Testing strategy.
+Engagement technique
+This describes how the AI tutor interacts with the student.
+
+Examples:
+
+Lead-and-Reveal.
+Explain-Before-Usage.
+Guided questioning.
+Progressive hints.
+Conversational explanations.
+This distinction is important when comparing different AI tutoring approaches.
+
+The same programming decisions can be examined under different engagement techniques.
+
+13. Central Research Contribution
+The research should not simply investigate whether AI should reveal or hide pseudocode, algorithms, or source code.
+
+A more meaningful direction is to investigate:
+
+How AI can scaffold students through programming decisions without taking ownership of those decisions away from them.
+
+The objective is to find an appropriate balance between AI assistance and student reasoning.
+
+The tutor should not leave beginners without enough guidance to make progress. At the same time, it should not make every important problem-solving decision on their behalf.
+
+The desired outcome is not merely successful AI-assisted code generation. It is the development of students who can independently understand problems, make programming decisions, develop algorithms, implement solutions, and transfer their problem-solving abilities to new problems.
+
+
+----- 
+
+
+let me say what we have discussed in the meetings in the campus with the dr astroga.
+student: i am going to solve the and we have the descripton.
+and student is i want to make a following decision.
+so,
+the algorithm is essence condition classifying
+
+we have that day discovered the term, when student is implementing it what sort of decisiins to make. as we take the problem that day and we studied.
+
+#include <iostream>
+using namespace std;
+
+int ticketPriceSundar(int age, bool isStudent) {
+if (age < 0 || age > 120) {
+return -1;
+} else if (age < 12) {
+return 5;
+} else if (age >= 65) {
+return 6;
+} else if (isStudent) {
+return 8;
+} else {
+return 12;
+}
+}
+
+here we took this problem aand angelo raised a flag and started solving by own fixing the order and at the end we realised that hte aelire solutin is good and correct. and as the to keep the order of those, it;s necessary and if we keep the decision or thinking, in order, it goes for the optimiized way of solving this, and so very less checks and all, but the student can solve this in some different ways,
+
+and as when we are doing the study, the dr g, raised a flag that the modeling of the inputs and all could go under the algo approach, and both diecisons could get merge or overlaps over time, and so what decisions we sholld consider for the solid framework.
+
+or we need to study more under the algorithimic approach, and we need to do the sub decisins inside/
+
+
+
+and if the study of currentt l1 l2 and l3, in which l1 is inclusive in l2, same way l2 in l3, and so there is little problem in the study. let's say if it's a study, then why the ai is not taking the algo decison, and wny student taking it, or what happens if the student is struggling to sove the problems and every time student fails an dthere is no study to log or so.
+
+and the writting hte code is always with an AI, so there is a study contradiction, between this, in which the, what actually is problem solving with c++.
+
+and as the assumption is that the cs1 pre req the basic knowledge of the computer science fundamentals and the programming and the syntax with respect to the language of the study.
+
+so it is making sense. as the coding is always the important thing, right we coiuld know the approach to solve and we can discuss with ai, but if we never write a code we will not retain that learning, problem solving in c++ in the sense. here is ability to interpret the problem clearly and write a solution for it and which pass the certain defined test casess.
+
+if we have defend this and run the styudy the current condition and the rq''s are not making any sense.
+
+/* angello:*/
+// terminology: implementation decisions
+int ticketPrice(int age, bool isStudent){
+
+if (age < 0 || age > 120) {
+return -1;
+}
+if (age < 12){
+return 5;
+}
+if (age >= 65){
+return 6
+}
+// if previous two if cases are false logically it must true that
+// age is between 12 and 64 includsive
+if (age >=12 && age <= 64){
+if (isStudent){
+return 8;
+}
+else{
+return 12;
+}
+}
+
+}
+
+int main() {
+int age;
+bool isStudent;
+cout << "Enter age: ";
+cin >> age;
+cout << "Student? (1 = yes, 0 = no): ";
+cin >> isStudent;
+
+int price = ticketPriceSundar(age, isStudent);
+
+if (price == -1) {
+cout << "Invalid age entered" << endl;
+} else {
+cout << "Ticket price: $" << price << endl;
+}
+
+return 0;
+}
+
+raw gpt log- https://chatgpt.com/c/6aeb7e04-138c-83e9-b238-24719eef771f
+we have discusse this problem, and thenn we need to work on thee decisions, factors.
+orders here order matters, and what decisions the student have to own.
+so thinking
+
+take referenbces fromthe whiteboard we discussed, and all think and run some exoperient against the
+problem we discusssed and make a solild experiemnt.
+
+--
+
+and i had some interactions with the gpt regarding the problem, as i was just being curious to know what actual decision the current stdy is able to figure out. as the LLM is part of the study by humans compressed in the form of knowledge so i generally trusted it and thinking it loud.
+
+what i found is, that the very important step when solving a programming problem in c++ or any language is the planning how to solve it, and think from top to bottom, not directly jumping to the solution, but to plan out , and break it down from understanding the problem, statement, defining the data scope and modeling, pseudocode breaking, translating it into an algorithm, thinkign abou thte edge cases, and the thinking about the return statements, and all , and think about overall combination how did it executed and go through, dry running couple of test cases by theu ser itself, and all. that;s the basic process how user learn.
+
+so the current study of mine lacks lot of things, as this keeps getting rejected by professor.
+as i am doing this reaerch as part of the study, and i even do not know what actually is the good framework we can design and which fits for the study. as the timeline being the constraint i needf to pull this all the framework design as soon as possible.
+
+References
+[1] Kazemitabaar, M., Huang, O., Suh, S., Henley, A. Z., & Grossman, T. (2025). Exploring the Design Space of Cognitive Engagement Techniques with AI-Generated Code for Enhanced Learning. IUI 2025. ACM. arXiv:2410.08922. https://arxiv.org/pdf/2410.08922
+
+[2] Loksa, D., Ko, A. J., Jernigan, W., Oleson, A., Mendez, C. J., & Burnett, M. M. (2016). Programming, Problem Solving, and Self-Awareness: Effects of Explicit Guidance. CHI 2016, 1449-1461. https://faculty.washington.edu/ajko/papers/Loksa2016ProgrammingProblemSolving.pdf
+
+[3] Prather, J., et al. (2024). The Widening Gap: The Benefits and Harms of Generative AI for Novice Programmers. ICER 2024.
+
+[4] Kazemitabaar, M., et al. (2024). CodeAid: Evaluating a Classroom Deployment of an LLM-based Programming Assistant that Balances Student and Educator Needs. CHI 2024.
+
+[5] Kazemitabaar, M., et al. (2023). Studying the Effect of AI Code Generators on Supporting Novice Learners in Introductory Programming. CHI 2023.
+
+[6] Wu, Z., Tang, Y., & Ericson, B. (2025). Learner and Instructor Needs in AI-Supported Programming Learning Tools: Design Implications for Features and Adaptive Control. AIED 2025.
+
+[7] Ma, B., Xie, Y., Li, H., Li, G., Chen, L., Shimada, A., & Konomi, S. (2026). Design Implications for Student and Educator Needs in AI-Supported Programming Learning Tools. arXiv.
+
+[8] Dai, et al. (2025). How Students Use AI Feedback Matters: Experimental Evidence on Physics Achievement and Autonomy. arXiv.
+
+[9] Long, Y. (2015). Supporting Learner-Controlled Problem Selection in Intelligent Tutoring Systems. PhD dissertation, Carnegie Mellon University.
+
+[10] Bastani, H., Bastani, O., Sungu, A., Ge, H., Kabakci, O., & Mariman, R. (2025). Generative AI without guardrails can harm learning: Evidence from high school mathematics. PNAS, 122(26).
+
+[11] Kazemitabaar, M., Hou, X., Henley, A. Z., Ericson, B., Weintrop, D., & Grossman, T. (2023). How Novices Use LLM-Based Code Generators to Solve CS1 Coding Tasks in a Self-Paced Learning Environment. Koli Calling 2023.
+
+[12] Phung, T., Choi, H., Wu, M., Singla, A., & Brooks, C. (2025). Plan More, Debug Less: Applying Metacognitive Theory to AI-Assisted Programming Education. AIED 2025.
+
+[13] Sankaranarayanan, S. (2026). Mitigating "Epistemic Debt" in Generative AI-Scaffolded Novice Programming using Metacognitive Scripts. L@S 2026.
+
+[14] Ma, B., Li, H., Li, G., Chen, L., Shimada, A., & Konomi, S. (2026). AI-Assisted Help-Seeking Trajectories in Programming Education from an SRL-Informed Perspective. arXiv.
+
+[15] Study of 104 developer interviews on coding decisions. https://doi.org/10.1145/2915970.2915990 (authors and title to add)
+
+[16] Jackson, D. (2025). LLMs are not calculators. https://groups.csail.mit.edu/sdg/pubs/2025/jackson-ai-education.pdf
+
+[17] General definition of decision-making. https://www.edpsycinteractive.org/papers/prbsmbti.html (author and year to add)
+
+[18] Kazemitabaar, M., et al. Code engagement techniques (open-source project and Lead-and-Reveal demo app). https://github.com/MajeedKazemi/code-engagement-techniques · https://lead-and-reveal.vercel.app/
+
+

@@ -1,0 +1,37 @@
+Why the Framework Changed
+
+Purpose: record why the first framework was replaced, so the reasoning is not lost. Status: draft
+
+The first framework
+Three decision categories: algorithmic approach, modeling of inputs, testing.
+Three fixed levels of student and AI ownership (L1, L2, L3), applied across those categories.
+Three research questions (RQ1–RQ3), one per level comparison.
+Framed around "levels of AI autonomy" and how much the AI helps.
+
+It came from a paper on techniques that make students engage with AI-generated code (Kazemitabaar et al., 2024). In every technique there, the AI made the decisions and the student answered along a path the AI had chosen. The future-work section of that paper pointed to hierarchical decision-making and user agency, which led to the idea of controlling who owns each decision.
+
+What went wrong with it
+"Decision" was never defined. The categories were named before anyone said what counts as a decision.
+The categories overlapped. Input modeling and algorithm approach could not be told apart cleanly, so the same piece of work could be placed in two categories.
+The levels could not show which decision matters. In every level the student stayed in charge of the core decisions, so any difference in results could not be traced to one decision.
+The question was about the amount of help. "How much does the AI do" does not say who owns which choice, which is what the study is about.
+Wording. "Autonomy" came from the first draft and did not fit a design built on decisions.
+What changed
+Old	New	Reason
+Three categories	Four decisions, each answering one question	A decision is defined by the question it answers, which also gives a rule for placing any piece of work
+No step for reading the problem	Decision 1: understand the problem	Problem statements are often descriptive. Understanding what is asked is separate from finding the logic and shapes everything after it
+Input modeling as its own category	Split across decisions 1 and 3	What the input and output are, and the rules about them, belong to decision 1. How the data is held, read and moved belongs to decision 3
+Testing as a decision	Testing as a setting	Tests run the same way for every student. A failing test sends the student back to an earlier decision. Edge cases are fixed inside decision 3 unless they change what the problem asks
+Rewinding to similar problems	Treated as an activity	It supports other decisions and is not a choice in itself
+Fixed levels L1–L3	Ownership per decision	Each decision is owned by the student or the AI, so effects can be traced to a single decision
+"Autonomy"	Decision-based wording	Matches the design
+RQ1–RQ3	Retired. New open questions after the framework is settled	The old questions depended on the levels
+What was kept
+The AI always writes the code, so syntax is not what is tested.
+The population (CS1, C++) and the outcome measures: no-AI test, one-week retention test, confidence against score.
+The six-stage problem-solving model (Loksa et al., 2016) as the base. The four decisions map onto it.
+The old fixed-level idea survives as one possible study design (packages of decisions), next to the other design options.
+Still open
+Final wording of the four decisions.
+Which study design (one decision at a time, leave one out, packages, or student choice).
+Rules for what happens when a plan has an error, and for generic examples from a different problem.
