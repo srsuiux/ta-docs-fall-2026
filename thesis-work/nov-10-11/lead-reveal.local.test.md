@@ -396,9 +396,6 @@ def calculate_ticket_price(age:int, is_student:bool)->str:
 
 Great job! You have completed the task!
 
-## Analysis: who made which decisions
-
-This section is analysis added after the log. Everything below comes from the log above, plus two facts from the app's own code, marked as such.
 
 ### Decisions the AI made
 
@@ -442,5 +439,3 @@ This section is analysis added after the log. Everything below comes from the lo
 | Design the algorithm | Chose the order, the chain, and the step split. Context text named the next category. | Chose "invalid first" and the logic of each condition in words or code |
 | Implement | Wrote the full code, the function form and the return values | Wrote 3 conditions and 1 return message (Rounds 1, 2, 3, 5) in their own words |
 | Test and edge cases | Never tested. The boundaries were set in the AI's code. | Got one boundary wrong (Round 3) and was never asked to check it |
-
-**Takeaway:** the student produced conditions (Rounds 1, 3, 5) and ideas (Rounds 2, 7). The AI made the structure, the order, the boundaries and the testing decisions. The one student mistake (Round 3) was shown the correct line without a retry, according to the log.
