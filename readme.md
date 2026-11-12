@@ -16,6 +16,7 @@ Students are welcome to browse the repository at any time. It is updated regular
 
 **Work done**
 - thesis: move work to nov-10-11, rewrite work-done section 1, update T1 and T7 notes, ignore cloned authors repo
+- thesis: work-done, write 'section' instead of the section sign
 
 **Files updated**
 - [`thesis-work/CLAUDE.md`](./thesis-work/CLAUDE.md)
