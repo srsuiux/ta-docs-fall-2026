@@ -452,7 +452,7 @@ Testing and edge cases: the AI chose the boundaries and the one test case. stude
 
 ---
 
-## Experiment Summary (T7 Lead-and-Reveal)
+## Experiment Summary (T7 Lead-and-Reveal - Made by Claude)
 
 **Task:** Movie Ticket Discount Calculator (C++).
 **Technique:** T7 Lead-and-Reveal. The AI keeps the code hidden and asks one question at a time. The student answers, and the matching lines of code are revealed only after a good answer (score 4 or 5, or after 3 tries).

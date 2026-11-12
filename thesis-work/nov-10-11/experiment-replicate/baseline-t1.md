@@ -116,7 +116,8 @@ The order of these conditions is important because the program must first elimin
 Finally, the program displays the calculated ticket price and uses `return 0` to indicate that execution has completed successfully.
 
 
-Note: @raj
+# Observations from the interactions. 
+
 - Direct output as expected.
 - the code comes with the explanations for each steps this is good to understand what is happening in the code.
 - The experiment output is differnt from the experiment 1 we ran in the last time. as it was the third person prompt wrapper, which was due the prompt structure being used as the last experimt there was no explanations provided, after the code, and no comments were given. 

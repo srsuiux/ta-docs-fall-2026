@@ -1,3 +1,7 @@
+
+
+#ignore this if you are working on nov-10/ workspaces
+
 # CLAUDE.md: Thesis Project
 
 ## Who I am and what this is
