@@ -4,17 +4,36 @@ what is been done.
 
 All three runs were done in ChatGPT. Each has a share link that anyone can open for revision. The link is also at the top of its own file, after the title and description.
 
-**Files in `nov-10/`:**
+## Problem used in all three runs
 
-- `work-done.md`: this log
-- `problem.txt`: the Movie Ticket Discount Calculator problem
-- `prompt-structure-extract-codebase.md`: prompt structure extracted from the authors' codebase
-- `experiment-replicate/`
-  - `baseline-t1.md`: T1 trace
-  - `explain-before-usage-t6.md`: T6 trace
-  - `lead-reveal-t7.md`: T7 trace
-  - `cet-df.md`
-- `code-engagement-techniques/`: clone of the authors' repo (source for the prompts)
+(from `problem.txt`)
+
+The Movie Ticket Discount Calculator
+- Inputs: `age:int` and `is_student:bool`
+- Children (under 12): ticket price is $5.
+- Seniors (65 and older): ticket price is $6.
+- Students (ages 12 to 64 who are students): ticket price is $8.
+- Regular adults (ages 12 to 64, not students): ticket price is $12.
+- Invalid age (less than 0 or greater than 120): print an error message like "Invalid age entered".
+
+## Experiment study files
+
+### Code (where the prompts come from)
+
+| File / folder | What it is |
+| ------------- | ---------- |
+| `code-engagement-techniques/` | Clone of the authors' repo, https://github.com/MajeedKazemi/code-engagement-techniques. The prompts are taken from its `packages/server/routes/`. |
+| `prompt-structure-extract-codebase.md` | The repo's system prompts and user-message templates for T1, T6 and T7, filled with `problem.txt`. The only edit to the repo text is Python to C++. |
+
+### Traces (the runs)
+
+Technique definitions are from the paper (`experiment-replicate/cet-df.md`, Kazemitabaar et al., Univ. of Toronto and CMU).
+
+| Trace | File | Definition |
+| ----- | ---- | ---------- |
+| T1 Baseline | `experiment-replicate/baseline-t1.md` | Users can directly use the generated code and accompanying explanation without any required engagement. |
+| T6 Explain-before-Usage | `experiment-replicate/explain-before-usage-t6.md` | Users must answer AI-generated questions about various parts of the code. |
+| T7 Lead-and-Reveal | `experiment-replicate/lead-reveal-t7.md` | The AI guides users through solving the problem step by step, prompting them to explain the necessary actions and decisions for each step before revealing the corresponding line of code. |
 
 **Saved transcripts:**
 

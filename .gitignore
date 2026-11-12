@@ -97,3 +97,5 @@ confidential/
 .cache/
 .tmp/
 temp/
+# cloned authors repo (has its own .git)
+thesis-work/*/code-engagement-techniques/
