@@ -103,20 +103,20 @@ and T7 set to short-answer instead of  multiple choice.
 
 Not directly. The paper has no passage listing scenarios where T7 does worse. The evidence that comes closest:
 
-Scores: In Study 2, T7 had the lowest mean of the three (55.0, against 57.6 for Baseline and 64.3 for Trace-and-Predict). The differences were not significant (§6.3). In Study 1, T7 had the highest mean, but not significantly (§4.3).
-Time: T7 took 1.82 times longer than Baseline (857 s against 471 s, §6.4 and §6.7).
-Accuracy on its questions: Learners got 58% right on T7’s questions, against 76% on Trace-and-Predict’s (§6.4). The authors read this as T7’s questions being more challenging (§7.2.1).
-Participant complaints: Study 1 participants cited missing context and no hints after wrong answers, and some were confused when their own solution differed from the AI’s (§4.5.7). Study 2 participants cited lack of flexibility, time cost and hard-to-read feedback (§6.6.1).
-Limits the authors state: If the AI’s code is wrong, engaging before the reveal is wasted, because the code is hidden (§7.1). The line-by-line reveal also doesn’t match how code is really built (§7.2.1).
+Scores: In Study 2, T7 had the lowest mean of the three (55.0, against 57.6 for Baseline and 64.3 for Trace-and-Predict). The differences were not significant (section 6.3). In Study 1, T7 had the highest mean, but not significantly (section 4.3).
+Time: T7 took 1.82 times longer than Baseline (857 s against 471 s, section 6.4 and section 6.7).
+Accuracy on its questions: Learners got 58% right on T7’s questions, against 76% on Trace-and-Predict’s (section 6.4). The authors read this as T7’s questions being more challenging (section 7.2.1).
+Participant complaints: Study 1 participants cited missing context and no hints after wrong answers, and some were confused when their own solution differed from the AI’s (section 4.5.7). Study 2 participants cited lack of flexibility, time cost and hard-to-read feedback (section 6.6.1).
+Limits the authors state: If the AI’s code is wrong, engaging before the reveal is wasted, because the code is hidden (section 7.1). The line-by-line reveal also doesn’t match how code is really built (section 7.2.1).
 
 ### What kinds of problems does T7 do well on?
 
 The paper does not name a problem type where T7 excels. What it says:
 
-All tasks were algorithm-heavy. They needed decomposition, pattern recognition, data representation, abstraction and algorithm design (§7.1).
-T7 works at the “Create” level because the code is hidden and users must predict the logic (§3.7).
-It gave the best match between what learners thought they could do and what they could do (r=.26), with no higher task load than Baseline (§6.5, §6.4).
-Participants valued the step-by-step guidance and the logical thinking it required (§6.6.1).
+All tasks were algorithm-heavy. They needed decomposition, pattern recognition, data representation, abstraction and algorithm design (section 7.1).
+T7 works at the “Create” level because the code is hidden and users must predict the logic (section 3.7).
+It gave the best match between what learners thought they could do and what they could do (r=.26), with no higher task load than Baseline (section 6.5, section 6.4).
+Participants valued the step-by-step guidance and the logical thinking it required (section 6.6.1).
 
 # Problems used and learning objectives
 
@@ -183,7 +183,7 @@ Log: Q7 asked which price applies, $6 or $8, and why order matters. The student 
 | Shows the whole finished solution first | The student never builds or chooses anything | Order, boundaries and branches are all decided for him | Understand, Algorithm, Implement |
 | Asks about lines 4–9, 10–12, 13–18 and 19–24. Skips 1–3 and 25–26 | It sets what the student thinks about | Nothing asked about boundaries or why senior is checked before student | Algorithm, Edge cases |
 | Only "why" questions about finished code | The student justifies afterward instead of constructing | Order and boundaries are defended, not worked out | Algorithm |
-| Hints point at the answer, and feedback gives the answer in the first reply | It breaks the 3-attempt rule from the paper (§3.6) | Removes the struggle that conditionals need | Algorithm |
+| Hints point at the answer, and feedback gives the answer in the first reply | It breaks the 3-attempt rule from the paper (section 3.6) | Removes the struggle that conditionals need | Algorithm |
 | Generous scoring, a final 16/20 table and an overall feedback paragraph | The overall feedback credits things the student never said | None directly | Understand |
 | Never tests boundary values | Nobody tests anything | Boundaries are never tried | Testing |
 
