@@ -12,6 +12,34 @@ Students are welcome to browse the repository at any time. It is updated regular
 <!-- RECENT-UPDATES:START -->
 ## Recent Updates
 
+### 2026-11-11
+
+**Work done**
+- thesis: lock T1, T6, T7 traces and add experiment summaries and observations
+
+**Files updated**
+- [`thesis-work/nov-10/experiment-replicate/baseline-t1.md`](./thesis-work/nov-10/experiment-replicate/baseline-t1.md)
+- [`thesis-work/nov-10/experiment-replicate/cet-df.md`](./thesis-work/nov-10/experiment-replicate/cet-df.md)
+- [`thesis-work/nov-10/experiment-replicate/explain-before-usage-t6.md`](./thesis-work/nov-10/experiment-replicate/explain-before-usage-t6.md)
+- [`thesis-work/nov-10/experiment-replicate/lead-reveal-t7.md`](./thesis-work/nov-10/experiment-replicate/lead-reveal-t7.md)
+- [`thesis-work/nov-10/problem.txt`](./thesis-work/nov-10/problem.txt)
+- [`thesis-work/nov-10/prompt-structure-extract-codebase.md`](./thesis-work/nov-10/prompt-structure-extract-codebase.md)
+- [`thesis-work/nov-10/work-done.md`](./thesis-work/nov-10/work-done.md)
+
+### 2026-11-10
+
+**Work done**
+- nov 9 push
+
+**Files updated**
+- [`thesis-work/CLAUDE.md`](./thesis-work/CLAUDE.md)
+- [`thesis-work/documents/framework-update.txt`](./thesis-work/documents/framework-update.txt)
+- [`thesis-work/documents/gpt-discusson.txt`](./thesis-work/documents/gpt-discusson.txt)
+- [`thesis-work/experiment/current-study/movieticket-framework-current-study.md`](./thesis-work/experiment/current-study/movieticket-framework-current-study.md)
+- [`thesis-work/nov-9-updates/proposed-framework.md`](./thesis-work/nov-9-updates/proposed-framework.md)
+- [`thesis-work/nov-9-updates/rq-proposed.md`](./thesis-work/nov-9-updates/rq-proposed.md)
+- [`thesis-work/nov-9-updates/rq.tx`](./thesis-work/nov-9-updates/rq.tx)
+
 ### 2026-11-05
 
 **Work done**
@@ -25,43 +53,4 @@ Students are welcome to browse the repository at any time. It is updated regular
 - thesis plan: run the experiment and study further
 
 **Files updated**
-
-### 2026-11-04
-
-**Work done**
-- nov-4 updaete and discussion with angello
-- fix:irelevent file push from the git:
-- Add auto-generated Recent Updates to readme and clean intro
-- ta-work:quiz added
-- readme: remove auto-generated note, refresh recent updates
-- Add daily log script and CLAUDE.md
-- thesis: clean brainstorm log on reveal timing with Angello
-- remove sync-ppt-to-blackboard task file
-- daily log: skip deleted files
-- thesis: add TODO note to brainstorm log
-- 6920 ch-9 'Knowledge Management and E-Learning': slides open for revision, with speaker notes and clean graphics
-
-**Files updated**
-- [`CLAUDE.md`](./CLAUDE.md)
-- [`courses/6920/lecture/ch-9/Chapter9_Speaker_Notes.txt`](./courses/6920/lecture/ch-9/Chapter9_Speaker_Notes.txt)
-- [`courses/6920/lecture/ch-9/Knowledge Management and E-Learning.pdf`](./courses/6920/lecture/ch-9/Knowledge%20Management%20and%20E-Learning.pdf)
-- [`courses/6920/lecture/ch-9/Knowledge Management and E-Learning.pptx`](./courses/6920/lecture/ch-9/Knowledge%20Management%20and%20E-Learning.pptx)
-- [`courses/6950_4850/grading/grading-instruction.txt`](./courses/6950_4850/grading/grading-instruction.txt)
-- [`courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx`](./courses/6950_4850/grading/normalization-assignment/assignment/Normalization_Formatted.docx)
-- [`courses/6950_4850/quiz2.md`](./courses/6950_4850/quiz2.md)
-- [`thesis-work/brainstrom-log.txt`](./thesis-work/brainstrom-log.txt)
-- [`thesis-work/code/movieTicket.cpp`](./thesis-work/code/movieTicket.cpp)
-
-### 2026-11-03
-
-**Work done**
-- rewrite all docs push to nov-03 file
-
-**Files updated**
-- [`thesis-work/comments/proposal-astroga.md`](./thesis-work/comments/proposal-astroga.md)
-- [`thesis-work/documents/questions.txt`](./thesis-work/documents/questions.txt)
-- [`thesis-work/documents/study-document-nov-3.md`](./thesis-work/documents/study-document-nov-3.md)
-- [`thesis-work/documents/study-log.md`](./thesis-work/documents/study-log.md)
-- [`thesis-work/experiment/current-study/experiment.md`](./thesis-work/experiment/current-study/experiment.md)
-- [`thesis-work/experiment/P2-even-odd/even-odd.md`](./thesis-work/experiment/P2-even-odd/even-odd.md)
 <!-- RECENT-UPDATES:END -->
