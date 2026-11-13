@@ -1,0 +1,237 @@
+:root {
+  --bg: #f9f9fb;
+  --surface: #ffffff;
+  --column: #f0f0f4;
+  --text: #15141a;
+  --muted: #5b5b66;
+  --border: #cfcfd8;
+  --accent: #0069c2;
+  --accent-text: #ffffff;
+  --danger: #d70022;
+  --focus: #0069c2;
+  --radius: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1b1f;
+    --surface: #2b2a33;
+    --column: #23222b;
+    --text: #fbfbfe;
+    --muted: #b0b0bb;
+    --border: #4a4a55;
+    --accent: #8cb4ff;
+    --accent-text: #15141a;
+    --danger: #ff6a75;
+    --focus: #8cb4ff;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Top bar */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  flex: none;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: auto;
+}
+
+/* Controls */
+input, button {
+  font: inherit;
+  color: inherit;
+}
+
+input[type="text"], input[type="search"] {
+  padding: 7px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-width: 0;
+}
+
+button {
+  padding: 7px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+button:hover { border-color: var(--accent); }
+
+.add-form button {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Board */
+.board {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 16px 20px 20px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--column);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+.column.drag-over { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+
+.column-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.column-head h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.count {
+  font-size: 12px;
+  padding: 0 7px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+/* Cards */
+.list {
+  flex: 1;
+  min-height: 0;
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: grab;
+}
+
+.card.dragging { opacity: 0.4; }
+
+.card input[type="checkbox"] {
+  margin: 3px 0 0;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  flex: none;
+}
+
+.card .title {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.card.done .title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.card .edit {
+  flex: 1;
+  min-width: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 2px;
+  flex: none;
+}
+
+.actions button {
+  padding: 0 6px;
+  line-height: 22px;
+  border-color: transparent;
+  background: transparent;
+  color: var(--muted);
+}
+
+.actions button:hover { color: var(--text); border-color: var(--border); }
+.actions .delete:hover { color: var(--danger); border-color: var(--danger); }
+
+.empty {
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+  padding: 12px 0;
+}
+
+/* Add form */
+.add-form {
+  display: flex;
+  gap: 8px;
+  flex: none;
+}
+
+.add-form input { flex: 1; }
+
+/* Narrow screens: keep 100vh, scroll columns sideways */
+@media (max-width: 720px) {
+  .board {
+    grid-template-columns: repeat(3, 85vw);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  .column { scroll-snap-align: start; }
+  .topbar input[type="search"] { width: 120px; }
+}

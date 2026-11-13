@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Whiteboard</title>
+<style>
+  :root {
+    --board-1: #25302b;
+    --board-2: #19211d;
+    --bar: rgba(16, 22, 26, 0.92);
+    --line: #2f3d46;
+    --text: #e8eef2;
+    --muted: #8fa1ad;
+    --accent: #ffd166;
+    --danger: #ef476f;
+  }
+  * { box-sizing: border-box; }
+
+  /* Locked 100vh: the page itself can never scroll or bounce. */
+  html, body {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: var(--board-2);
+    color: var(--text);
+    font: 14px/1.3 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  }
+
+  #board {
+    position: fixed;
+    inset: 0;
+    display: block;
+    touch-action: none;
+    background: radial-gradient(ellipse at 50% 35%, var(--board-1) 0%, var(--board-2) 75%);
+  }
+
+  /* Floating UI */
+  #ui {
+    position: fixed;
+    top: 12px; left: 12px; right: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .group {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px;
+    background: var(--bar);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.35);
+    backdrop-filter: blur(6px);
+  }
+  .sep { width: 1px; height: 22px; background: var(--line); margin: 0 4px; }
+
+  button, select, input {
+    font: inherit;
+    color: var(--text);
+  }
+  .btn {
+    width: 34px; height: 34px;
+    display: grid; place-items: center;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0;
+  }
+  .btn:hover { background: rgba(255,255,255,.08); }
+  .btn:disabled { opacity: .35; cursor: default; background: transparent; }
+  .btn.active { background: rgba(255,209,102,.16); border-color: var(--accent); color: var(--accent); }
+  .btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .btn.wide { width: auto; padding: 0 10px; gap: 6px; display: inline-flex; align-items: center; grid-auto-flow: column; }
+
+  .swatch {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    outline: 1px solid rgba(255,255,255,.25);
+    cursor: pointer;
+    padding: 0;
+    margin: 0 2px;
+  }
+  .swatch.active { border-color: var(--board-2); outline: 2px solid var(--accent); }
+
+  select, #sessionName {
+    background: #0c1114;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    height: 32px;
+    padding: 0 8px;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  #sessionName { width: 150px; }
+  #sessionName:focus, select:focus { outline: 1px solid var(--accent); }
+
+  #status { color: var(--muted); font-size: 12px; padding: 0 6px; white-space: nowrap; }
+  #status::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #06d6a0; margin-right: 6px; }
+  #status.bad::before { background: var(--danger); }
+
+  /* Sessions panel */
+  #panel {
+    position: fixed;
+    top: 66px; left: 12px;
+    width: 280px;
+    max-height: calc(100dvh - 90px);
+    overflow: auto;
+    background: var(--bar);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.45);
+    padding: 8px;
+    display: none;
+    z-index: 6;
+  }
+  #panel.open { display: block; }
+  #panel h3 { margin: 4px 6px 8px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .sess {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px; border-radius: 8px; cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .sess:hover { background: rgba(255,255,255,.06); }
+  .sess.current { border-color: var(--accent); background: rgba(255,209,102,.08); }
+  .sess .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sess .when { color: var(--muted); font-size: 12px; }
+  .sess .del { width: 26px; height: 26px; }
+  .sess .del.sure { color: var(--danger); border-color: var(--danger); width: auto; padding: 0 8px; font-size: 12px; }
+
+  /* Text editor overlay */
+  #ta {
+    position: fixed;
+    display: none;
+    margin: 0; padding: 0;
+    background: transparent;
+    border: 1px dashed rgba(255,255,255,.35);
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    white-space: pre;
+    line-height: 1.25;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    -webkit-user-select: text;
+    user-select: text;
+    z-index: 4;
+  }
+
+  @media (max-width: 820px) {
+    #ui { gap: 6px; }
+    .group { flex-wrap: wrap; }
+    #sessionName { width: 110px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="board"></canvas>
+<textarea id="ta" spellcheck="false" aria-label="Text"></textarea>
+
+<div id="ui">
+  <div class="group" id="gSession">
+    <button class="btn wide" id="btnSessions" title="Sessions">
+      <svg viewBox="0 0 20 20"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+    </button>
+    <input id="sessionName" type="text" maxlength="40" aria-label="Session name">
+    <button class="btn wide" id="btnNew" title="New session (starts a blank board; the current one is saved)">
+      <svg viewBox="0 0 20 20"><path d="M10 4v12M4 10h12"/></svg><span>New</span>
+    </button>
+  </div>
+
+  <div class="group" id="gTools"></div>
+
+  <div class="group" id="gStyle">
+    <div id="swatches"></div>
+    <div class="sep"></div>
+    <select id="size" title="Line width / text size" aria-label="Size">
+      <option value="2">Thin</option>
+      <option value="4" selected>Medium</option>
+      <option value="8">Thick</option>
+    </select>
+    <div class="sep"></div>
+    <button class="btn" id="btnUndo" title="Undo (Ctrl/Cmd+Z)"></button>
+    <button class="btn" id="btnRedo" title="Redo (Ctrl/Cmd+Shift+Z)"></button>
+    <button class="btn" id="btnDelete" title="Delete selected (Del)"></button>
+    <button class="btn" id="btnLock" title="Lock / unlock the selected item (K)"></button>
+    <button class="btn wide" id="btnUnlockAll" title="Unlock every locked item" style="display:none"><span>Unlock all</span></button>
+    <button class="btn" id="btnClear" title="Clear board (can be undone)"></button>
+    <button class="btn" id="btnExport" title="Download as PNG"></button>
+    <span id="status">Saved</span>
+  </div>
+</div>
+
+<div id="panel" aria-label="Sessions">
+  <h3>Sessions</h3>
+  <div id="list"></div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  // ---------- constants ----------
+  const STORE = "whiteboard.sessions.v1";
+  const BOARD_BG = "#1b2420";
+  const COLORS = ["#f4f1ea", "#ffd166", "#ef476f", "#06d6a0", "#4cc9f0", "#ff9f1c"];
+  const TEXT_SIZE = { 2: 20, 4: 28, 8: 40 };
+  const FONT = 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif';
+  const ICONS = {
+    select:   '<path d="M5 3l11 7-5 1.5L8.5 17z"/>',
+    pen:      '<path d="M4 16l1-4 9-9 3 3-9 9z"/>',
+    eraser:   '<path d="M3 13l7-8 6 5-5 6H6z"/><path d="M9 17h8"/>',
+    text:     '<path d="M4 5h12M10 5v11M8 16h4"/>',
+    rect:     '<rect x="3.5" y="5" width="13" height="10" rx="1"/>',
+    ellipse:  '<ellipse cx="10" cy="10" rx="7" ry="5.5"/>',
+    triangle: '<path d="M10 4l7 12H3z"/>',
+    line:     '<path d="M4 16L16 4"/>',
+    arrow:    '<path d="M4 16L16 4M9 4h7v7"/>',
+    undo:     '<path d="M7 4L3 8l4 4"/><path d="M3 8h8a5 5 0 010 10H9"/>',
+    redo:     '<path d="M13 4l4 4-4 4"/><path d="M17 8H9a5 5 0 000 10h2"/>',
+    trash:    '<path d="M4 6h12M8 6V4h4v2M6 6l1 11h6l1-11"/>',
+    clear:    '<path d="M4 4l12 12M16 4L4 16"/>',
+    download: '<path d="M10 3v10M6 9l4 4 4-4M4 17h12"/>',
+    close:    '<path d="M5 5l10 10M15 5L5 15"/>',
+    lock:     '<rect x="4.5" y="9" width="11" height="8" rx="1.5"/><path d="M7 9V6.5a3 3 0 016 0V9"/>',
+    unlock:   '<rect x="4.5" y="9" width="11" height="8" rx="1.5"/><path d="M7 9V6.5a3 3 0 015.6-1.5"/>'
+  };
+  const ROT_T = new Set(["rect", "ellipse", "triangle", "text"]); // these keep a rotation angle; strokes/lines are rotated in place
+  const TOOLS = [
+    ["select", "Select / move (V)", "v"], ["pen", "Pen (P)", "p"], ["eraser", "Eraser: removes whole strokes and shapes (E)", "e"],
+    ["text", "Text (T)", "t"], ["rect", "Rectangle (R)", "r"], ["ellipse", "Ellipse (O)", "o"],
+    ["triangle", "Triangle (G)", "g"], ["line", "Line (L)", "l"], ["arrow", "Arrow (A)", "a"]
+  ];
+  const svg = (name) => '<svg viewBox="0 0 20 20" aria-hidden="true">' + ICONS[name] + "</svg>";
+  const $ = (s) => document.querySelector(s);
+
+  // ---------- elements ----------
+  const canvas = $("#board"), ctx = canvas.getContext("2d");
+  const ta = $("#ta"), nameInput = $("#sessionName"), panel = $("#panel"), listEl = $("#list"), statusEl = $("#status");
+  const mctx = document.createElement("canvas").getContext("2d"); // text measuring
+
+  // ---------- state ----------
+  let W = 0, H = 0, DPR = 1;
+  let tool = "pen", color = COLORS[0], sw = 4;
+  let selId = null, draft = null, drag = null, editing = null, pre = null, textClick = null;
+  let store = loadStore();
+  let session = store.sessions.find((s) => s.id === store.currentId) || store.sessions[0];
+  let objs = session.objs;
+  const hist = {}; // sessionId -> {undo:[], redo:[]}
+
+  // ---------- storage / sessions ----------
+  function uid() { return Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-4); }
+  function makeSession(name) { return { id: uid(), name, updated: Date.now(), objs: [] }; }
+
+  function loadStore() {
+    try {
+      const s = JSON.parse(localStorage.getItem(STORE));
+      if (s && Array.isArray(s.sessions) && s.sessions.length) {
+        s.sessions.forEach((x) => { if (!Array.isArray(x.objs)) x.objs = []; });
+        return s;
+      }
+    } catch (e) { /* storage blocked or corrupt: start fresh */ }
+    const first = makeSession("Session 1");
+    return { currentId: first.id, sessions: [first] };
+  }
+
+  let saveTimer = null;
+  function scheduleSave() {
+    statusEl.textContent = "Saving...";
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveNow, 300);
+  }
+  function saveNow() {
+    clearTimeout(saveTimer);
+    store.currentId = session.id;
+    try {
+      localStorage.setItem(STORE, JSON.stringify(store));
+      statusEl.textContent = "Saved"; statusEl.classList.remove("bad");
+    } catch (e) {
+      statusEl.textContent = "Not saved (storage unavailable)"; statusEl.classList.add("bad");
+    }
+  }
+
+  function setObjs(arr) { objs = arr; session.objs = arr; }
+
+  function switchTo(id) {
+    const s = store.sessions.find((x) => x.id === id);
+    if (!s || s === session) return;
+    commitEditor();
+    session = s; objs = s.objs; selId = null; draft = null; drag = null;
+    saveNow(); refreshUI(); render();
+  }
+  function newSession() {
+    commitEditor();
+    let n = store.sessions.length + 1, name;
+    do { name = "Session " + n++; } while (store.sessions.some((s) => s.name === name));
+    const s = makeSession(name);
+    store.sessions.push(s);
+    session = s; objs = s.objs; selId = null; draft = null; drag = null;
+    saveNow(); refreshUI(); render();
+    nameInput.focus(); nameInput.select();
+  }
+  function deleteSession(id) {
+    store.sessions = store.sessions.filter((s) => s.id !== id);
+    delete hist[id];
+    if (!store.sessions.length) store.sessions.push(makeSession("Session 1"));
+    if (session.id === id) { session = store.sessions[store.sessions.length - 1]; objs = session.objs; selId = null; }
+    saveNow(); refreshUI(); render();
+  }
+
+  // ---------- history ----------
+  const H_ = () => (hist[session.id] = hist[session.id] || { undo: [], redo: [] });
+  function begin() { pre = JSON.stringify(objs); }
+  function end() {
+    if (pre === null) return;
+    if (JSON.stringify(objs) !== pre) {
+      const h = H_(); h.undo.push(pre); if (h.undo.length > 100) h.undo.shift(); h.redo = [];
+      touch();
+    }
+    pre = null;
+  }
+  function undo() {
+    commitEditor();
+    const h = H_(); if (!h.undo.length) return;
+    h.redo.push(JSON.stringify(objs)); setObjs(JSON.parse(h.undo.pop())); fixSel(); touch();
+  }
+  function redo() {
+    commitEditor();
+    const h = H_(); if (!h.redo.length) return;
+    h.undo.push(JSON.stringify(objs)); setObjs(JSON.parse(h.redo.pop())); fixSel(); touch();
+  }
+  const fixSel = () => { if (selId && !objs.some((o) => o.id === selId)) selId = null; };
+  function touch() { session.updated = Date.now(); scheduleSave(); refreshUI(); render(); }
+
+  // ---------- geometry ----------
+  const font = (o) => o.size + "px " + FONT;
+  const textLines = (o) => String(o.text).split("\n");
+  function textBox(o) {
+    mctx.font = font(o);
+    const lines = textLines(o);
+    const w = Math.max(...lines.map((l) => mctx.measureText(l).width), 4);
+    return { x: o.x, y: o.y, w, h: lines.length * o.size * 1.25 };
+  }
+  function center(o) { const b = bbox(o); return [b.x + b.w / 2, b.y + b.h / 2]; }
+  function rotPt(px, py, c, a) {
+    const cs = Math.cos(a), sn = Math.sin(a), dx = px - c[0], dy = py - c[1];
+    return [c[0] + dx * cs - dy * sn, c[1] + dx * sn + dy * cs];
+  }
+  const toWorld = (o, x, y) => (o.rot ? rotPt(x, y, center(o), o.rot) : [x, y]);
+  const toLocal = (o, x, y) => (o.rot ? rotPt(x, y, center(o), -o.rot) : [x, y]);
+  function rotateGeom(o, orig, c, a) {      // strokes and lines: rotate the points themselves
+    if (o.t === "stroke") o.pts = orig.pts.map((p) => rotPt(p[0], p[1], c, a));
+    else {
+      const p1 = rotPt(orig.x1, orig.y1, c, a), p2 = rotPt(orig.x2, orig.y2, c, a);
+      o.x1 = p1[0]; o.y1 = p1[1]; o.x2 = p2[0]; o.y2 = p2[1];
+    }
+  }
+  function bbox(o) {
+    switch (o.t) {
+      case "stroke": {
+        const xs = o.pts.map((p) => p[0]), ys = o.pts.map((p) => p[1]), pad = o.sw / 2;
+        const x = Math.min(...xs) - pad, y = Math.min(...ys) - pad;
+        return { x, y, w: Math.max(...xs) + pad - x, h: Math.max(...ys) + pad - y };
+      }
+      case "line": case "arrow": {
+        const x = Math.min(o.x1, o.x2), y = Math.min(o.y1, o.y2);
+        return { x, y, w: Math.abs(o.x2 - o.x1), h: Math.abs(o.y2 - o.y1) };
+      }
+      case "text": return textBox(o);
+      default: return { x: o.x, y: o.y, w: o.w, h: o.h };
+    }
+  }
+  function translate(o, dx, dy) {
+    if (o.t === "stroke") o.pts.forEach((p) => { p[0] += dx; p[1] += dy; });
+    else if (o.t === "line" || o.t === "arrow") { o.x1 += dx; o.x2 += dx; o.y1 += dy; o.y2 += dy; }
+    else { o.x += dx; o.y += dy; }
+  }
+  function distSeg(px, py, x1, y1, x2, y2) {
+    const dx = x2 - x1, dy = y2 - y1, len2 = dx * dx + dy * dy;
+    let t = len2 ? ((px - x1) * dx + (py - y1) * dy) / len2 : 0;
+    t = Math.max(0, Math.min(1, t));
+    return Math.hypot(px - (x1 + t * dx), py - (y1 + t * dy));
+  }
+  const TOL = 8;
+  function hitEdge(o, x, y) {
+    if (o.rot) [x, y] = toLocal(o, x, y);
+    const t = TOL + (o.sw || 0) / 2;
+    switch (o.t) {
+      case "stroke": {
+        const p = o.pts;
+        if (p.length === 1) return Math.hypot(x - p[0][0], y - p[0][1]) <= t;
+        for (let i = 0; i < p.length - 1; i++) if (distSeg(x, y, p[i][0], p[i][1], p[i + 1][0], p[i + 1][1]) <= t) return true;
+        return false;
+      }
+      case "line": case "arrow": return distSeg(x, y, o.x1, o.y1, o.x2, o.y2) <= t;
+      case "rect": {
+        const outer = x >= o.x - t && x <= o.x + o.w + t && y >= o.y - t && y <= o.y + o.h + t;
+        const inner = x > o.x + t && x < o.x + o.w - t && y > o.y + t && y < o.y + o.h - t;
+        return outer && !inner;
+      }
+      case "ellipse": {
+        const rx = Math.max(o.w / 2, 1), ry = Math.max(o.h / 2, 1);
+        const r = Math.hypot((x - (o.x + rx)) / rx, (y - (o.y + ry)) / ry);
+        return Math.abs(r - 1) * Math.min(rx, ry) <= t;
+      }
+      case "triangle": {
+        const a = [o.x + o.w / 2, o.y], b = [o.x + o.w, o.y + o.h], c = [o.x, o.y + o.h];
+        return distSeg(x, y, a[0], a[1], b[0], b[1]) <= t || distSeg(x, y, b[0], b[1], c[0], c[1]) <= t || distSeg(x, y, c[0], c[1], a[0], a[1]) <= t;
+      }
+      case "text": { const b = textBox(o); return x >= b.x - 4 && x <= b.x + b.w + 4 && y >= b.y - 4 && y <= b.y + b.h + 4; }
+    }
+    return false;
+  }
+  function hitInside(o, x, y) {
+    if (o.rot) [x, y] = toLocal(o, x, y);
+    if (o.t === "rect" || o.t === "ellipse" || o.t === "triangle") return x >= o.x && x <= o.x + o.w && y >= o.y && y <= o.y + o.h;
+    return false;
+  }
+  function pick(x, y) {
+    for (let i = objs.length - 1; i >= 0; i--) if (hitEdge(objs[i], x, y)) return objs[i];
+    for (let i = objs.length - 1; i >= 0; i--) if (hitInside(objs[i], x, y)) return objs[i];
+    return null;
+  }
+
+  // ---------- selection handles ----------
+  const PAD = 6, ROT_DIST = 28;
+  function handles(o) {                      // positions in world coordinates
+    const b = bbox(o), out = [];
+    if (o.t === "line" || o.t === "arrow") out.push(["p1", o.x1, o.y1], ["p2", o.x2, o.y2]);
+    else if (ROT_T.has(o.t)) { const q = toWorld(o, b.x + b.w, b.y + b.h); out.push(["br", q[0], q[1]]); }
+    const r = toWorld(o, b.x + b.w / 2, b.y - PAD - ROT_DIST);
+    out.push(["rot", r[0], r[1]]);
+    return out;
+  }
+  function handleAt(o, x, y) {
+    if (o.locked) return null;
+    for (const [name, hx, hy] of handles(o)) if (Math.hypot(x - hx, y - hy) <= 11) return name;
+    return null;
+  }
+  function applyHandle(o, name, x, y) {
+    if (name === "p1") { o.x1 = x; o.y1 = y; return; }
+    if (name === "p2") { o.x2 = x; o.y2 = y; return; }
+    const anchor = toWorld(o, o.x, o.y);      // keep the top-left corner fixed on screen while resizing
+    const [lx, ly] = toLocal(o, x, y);
+    if (o.t === "text") o.size = Math.max(10, Math.min(200, Math.round((ly - o.y) / (textLines(o).length * 1.25))));
+    else { o.w = Math.max(8, lx - o.x); o.h = Math.max(8, ly - o.y); }
+    if (o.rot) { const after = toWorld(o, o.x, o.y); translate(o, anchor[0] - after[0], anchor[1] - after[1]); }
+  }
+  function applyRotate(o, d, x, y, snap) {
+    let ang = Math.atan2(y - d.c0[1], x - d.c0[0]) - d.a0;
+    const step = Math.PI / 12;                // Shift snaps to 15 degrees
+    if (ROT_T.has(o.t)) { let r = (d.orig.rot || 0) + ang; if (snap) r = Math.round(r / step) * step; o.rot = r; }
+    else { if (snap) ang = Math.round(ang / step) * step; rotateGeom(o, d.orig, d.c0, ang); }
+  }
+
+  // ---------- drawing ----------
+  function drawObj(c, o) {
+    c.save();
+    if (o.rot) { const m = center(o); c.translate(m[0], m[1]); c.rotate(o.rot); c.translate(-m[0], -m[1]); }
+    c.strokeStyle = o.c; c.fillStyle = o.c; c.lineWidth = o.sw || 1; c.lineCap = "round"; c.lineJoin = "round";
+    switch (o.t) {
+      case "stroke": {
+        const p = o.pts;
+        if (p.length === 1) { c.beginPath(); c.arc(p[0][0], p[0][1], o.sw / 2, 0, Math.PI * 2); c.fill(); break; }
+        c.beginPath(); c.moveTo(p[0][0], p[0][1]);
+        for (let i = 1; i < p.length - 1; i++) c.quadraticCurveTo(p[i][0], p[i][1], (p[i][0] + p[i + 1][0]) / 2, (p[i][1] + p[i + 1][1]) / 2);
+        c.lineTo(p[p.length - 1][0], p[p.length - 1][1]); c.stroke();
+        break;
+      }
+      case "rect": c.strokeRect(o.x, o.y, o.w, o.h); break;
+      case "ellipse":
+        c.beginPath(); c.ellipse(o.x + o.w / 2, o.y + o.h / 2, Math.max(o.w / 2, 0.5), Math.max(o.h / 2, 0.5), 0, 0, Math.PI * 2); c.stroke(); break;
+      case "triangle":
+        c.beginPath(); c.moveTo(o.x + o.w / 2, o.y); c.lineTo(o.x + o.w, o.y + o.h); c.lineTo(o.x, o.y + o.h); c.closePath(); c.stroke(); break;
+      case "line": case "arrow": {
+        c.beginPath(); c.moveTo(o.x1, o.y1); c.lineTo(o.x2, o.y2); c.stroke();
+        if (o.t === "arrow") {
+          const a = Math.atan2(o.y2 - o.y1, o.x2 - o.x1), L = 10 + o.sw * 2.5, sp = Math.PI / 7;
+          c.beginPath();
+          c.moveTo(o.x2 - L * Math.cos(a - sp), o.y2 - L * Math.sin(a - sp)); c.lineTo(o.x2, o.y2); c.lineTo(o.x2 - L * Math.cos(a + sp), o.y2 - L * Math.sin(a + sp));
+          c.stroke();
+        }
+        break;
+      }
+      case "text":
+        c.font = font(o); c.textBaseline = "top";
+        textLines(o).forEach((ln, i) => c.fillText(ln, o.x, o.y + i * o.size * 1.25));
+        break;
+    }
+    c.restore();
+  }
+  function drawSelection(o) {
+    const b = bbox(o), m = center(o), col = o.locked ? "#8fa1ad" : "#ffd166";
+    ctx.save();
+    if (o.rot) { ctx.translate(m[0], m[1]); ctx.rotate(o.rot); ctx.translate(-m[0], -m[1]); }
+    ctx.strokeStyle = col; ctx.lineWidth = 1; ctx.setLineDash([5, 4]);
+    ctx.strokeRect(b.x - PAD, b.y - PAD, b.w + PAD * 2, b.h + PAD * 2);
+    if (!o.locked) {                          // line up to the rotate handle
+      ctx.setLineDash([]); ctx.beginPath();
+      ctx.moveTo(b.x + b.w / 2, b.y - PAD); ctx.lineTo(b.x + b.w / 2, b.y - PAD - ROT_DIST); ctx.stroke();
+    }
+    ctx.restore();
+    if (o.locked) {                           // small padlock badge at the top-right corner
+      const p = toWorld(o, b.x + b.w + PAD, b.y - PAD);
+      ctx.save(); ctx.translate(p[0], p[1]);
+      ctx.fillStyle = "#8fa1ad"; ctx.strokeStyle = "#8fa1ad"; ctx.lineWidth = 2; ctx.setLineDash([]);
+      ctx.fillRect(-9, -9, 14, 10);
+      ctx.beginPath(); ctx.arc(-2, -9, 4, Math.PI, 0); ctx.stroke();
+      ctx.restore();
+      return;
+    }
+    handles(o).forEach(([name, hx, hy]) => {
+      ctx.beginPath(); ctx.arc(hx, hy, name === "rot" ? 6 : 5, 0, Math.PI * 2);
+      if (name === "rot") { ctx.fillStyle = "#16201c"; ctx.fill(); ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.stroke(); }
+      else { ctx.fillStyle = col; ctx.fill(); }
+    });
+  }
+  function render() {
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    const hidden = editing && !editing.isNew ? editing.obj.id : null;
+    for (const o of objs) if (o.id !== hidden) drawObj(ctx, o);
+    if (draft) drawObj(ctx, draft);
+    const s = objs.find((o) => o.id === selId);
+    if (s && s.id !== hidden && tool === "select") drawSelection(s);
+  }
+  function resize() {
+    DPR = Math.max(1, window.devicePixelRatio || 1);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
+    canvas.style.width = W + "px"; canvas.style.height = H + "px";
+    render();
+  }
+
+  // ---------- text editing ----------
+  function layoutEditor() {
+    const o = editing.obj;
+    ta.style.left = o.x + "px"; ta.style.top = o.y + "px";
+    ta.style.fontSize = o.size + "px"; ta.style.color = o.c;
+    ta.style.caretColor = o.c;
+    mctx.font = o.size + "px " + FONT;
+    const lines = ta.value.split("\n");
+    const w = Math.max(...lines.map((l) => mctx.measureText(l).width), 40) + 16;
+    ta.style.width = w + "px";
+    ta.style.height = lines.length * o.size * 1.25 + 4 + "px";
+  }
+  function openEditor(x, y, existing) {
+    commitEditor();
+    const o = existing || { id: uid(), t: "text", c: color, x, y, size: TEXT_SIZE[sw] || 28, text: "" };
+    editing = { obj: o, isNew: !existing };
+    ta.value = o.text; ta.style.display = "block";
+    layoutEditor(); render();
+    ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
+  }
+  function commitEditor() {
+    if (!editing) return;
+    const { obj, isNew } = editing;
+    const val = ta.value.replace(/\s+$/, "");
+    editing = null; ta.style.display = "none"; ta.blur();
+    begin();
+    if (isNew) { if (val) { obj.text = val; objs.push(obj); } }
+    else if (val) obj.text = val;
+    else { setObjs(objs.filter((o) => o.id !== obj.id)); selId = null; }
+    end();
+    if (isNew && val && tool === "text") { setTool("select"); selId = obj.id; }   // new text: switch to Select so it can be moved
+    render(); refreshUI();
+  }
+  ta.addEventListener("input", () => editing && layoutEditor());
+  ta.addEventListener("blur", () => commitEditor());
+  ta.addEventListener("keydown", (e) => {
+    e.stopPropagation();
+    if (e.key === "Escape" || (e.key === "Enter" && (e.ctrlKey || e.metaKey))) { e.preventDefault(); commitEditor(); }
+  });
+
+  // ---------- pointer handling ----------
+  const pos = (e) => ({ x: e.clientX, y: e.clientY });
+
+  canvas.addEventListener("pointerdown", (e) => {
+    if (e.button !== undefined && e.button !== 0) return;
+    closePanel();
+    if (editing) commitEditor();
+    canvas.setPointerCapture(e.pointerId);
+    const { x, y } = pos(e);
+
+    if (tool === "select") {
+      const cur = objs.find((o) => o.id === selId);
+      if (cur) {
+        const hd = handleAt(cur, x, y);       // returns null for locked items
+        if (hd === "rot") {
+          const c0 = center(cur);
+          begin(); drag = { mode: "rot", o: cur, orig: JSON.parse(JSON.stringify(cur)), c0, a0: Math.atan2(y - c0[1], x - c0[0]) };
+          return;
+        }
+        if (hd) { begin(); drag = { mode: "handle", hd, o: cur }; return; }
+      }
+      const p = pick(x, y);
+      selId = p ? p.id : null;
+      if (p && !p.locked) { begin(); drag = { mode: "move", o: p, lx: x, ly: y }; }   // locked items can be selected but not moved
+      render(); refreshUI();
+    } else if (tool === "pen") {
+      draft = { id: uid(), t: "stroke", c: color, sw, pts: [[x, y]] };
+      render();
+    } else if (tool === "eraser") {
+      begin(); drag = { mode: "erase" }; eraseAt(x, y);
+    } else if (tool === "text") {
+      textClick = { x, y };               // editor opens on pointerup so focus is not stolen
+    } else if (tool === "line" || tool === "arrow") {
+      draft = { id: uid(), t: tool, c: color, sw, x1: x, y1: y, x2: x, y2: y, x0: x, y0: y };
+    } else {
+      draft = { id: uid(), t: tool, c: color, sw, x, y, w: 0, h: 0, x0: x, y0: y };
+    }
+  });
+
+  canvas.addEventListener("pointermove", (e) => {
+    const { x, y } = pos(e);
+    if (drag) {
+      if (drag.mode === "move") { translate(drag.o, x - drag.lx, y - drag.ly); drag.lx = x; drag.ly = y; }
+      else if (drag.mode === "handle") applyHandle(drag.o, drag.hd, x, y);
+      else if (drag.mode === "rot") applyRotate(drag.o, drag, x, y, e.shiftKey);
+      else if (drag.mode === "erase") eraseAt(x, y);
+      render(); return;
+    }
+    if (draft) {
+      if (draft.t === "stroke") {
+        const l = draft.pts[draft.pts.length - 1];
+        if (Math.hypot(x - l[0], y - l[1]) >= 1.5) draft.pts.push([x, y]);
+      } else if (draft.t === "line" || draft.t === "arrow") {
+        draft.x2 = x; draft.y2 = y;
+      } else {
+        let dx = x - draft.x0, dy = y - draft.y0;
+        if (e.shiftKey) { const m = Math.max(Math.abs(dx), Math.abs(dy)); dx = Math.sign(dx || 1) * m; dy = Math.sign(dy || 1) * m; }
+        draft.x = Math.min(draft.x0, draft.x0 + dx); draft.y = Math.min(draft.y0, draft.y0 + dy);
+        draft.w = Math.abs(dx); draft.h = Math.abs(dy);
+      }
+      render(); return;
+    }
+    // hover cursor
+    if (tool === "select") {
+      const cur = objs.find((o) => o.id === selId);
+      const hd = cur ? handleAt(cur, x, y) : null;
+      if (hd) canvas.style.cursor = hd === "rot" ? "grab" : "nwse-resize";
+      else { const p = pick(x, y); canvas.style.cursor = p ? (p.locked ? "not-allowed" : "move") : "default"; }
+    }
+  });
+
+  function finishPointer() {
+    if (drag) { end(); drag = null; render(); return; }
+    if (draft) {
+      const d = draft; draft = null;
+      let keep = true;
+      if (d.t === "stroke") { /* single dots are allowed */ }
+      else if (d.t === "line" || d.t === "arrow") keep = Math.hypot(d.x2 - d.x1, d.y2 - d.y1) >= 4;
+      else keep = d.w >= 4 || d.h >= 4;
+      if (keep) {
+        delete d.x0; delete d.y0; begin(); objs.push(d); end();
+        if (d.t !== "stroke") { setTool("select"); selId = d.id; }   // shapes/lines: switch to Select so you can move them right away
+      }
+      render(); refreshUI(); return;
+    }
+    if (textClick) {
+      const c = textClick; textClick = null;
+      const hit = objs.slice().reverse().find((o) => o.t === "text" && hitEdge(o, c.x, c.y));
+      if (hit) { if (!hit.locked) { selId = hit.id; openEditor(0, 0, hit); } }   // locked text can't be edited
+      else openEditor(c.x, c.y, null);
+    }
+  }
+  canvas.addEventListener("pointerup", finishPointer);
+  canvas.addEventListener("pointercancel", () => { drag && end(); drag = null; draft = null; textClick = null; render(); });
+
+  canvas.addEventListener("dblclick", (e) => {
+    const { x, y } = pos(e);
+    const hit = objs.slice().reverse().find((o) => o.t === "text" && hitEdge(o, x, y));
+    if (hit && !hit.locked) { selId = hit.id; openEditor(0, 0, hit); }
+  });
+
+  function eraseAt(x, y) {
+    for (let i = objs.length - 1; i >= 0; i--) {
+      if (!objs[i].locked && hitEdge(objs[i], x, y)) { if (objs[i].id === selId) selId = null; objs.splice(i, 1); break; }
+    }
+  }
+
+  // ---------- actions ----------
+  function deleteSelected() {
+    const s = objs.find((o) => o.id === selId);
+    if (!s || s.locked) return;               // unlock first
+    begin(); setObjs(objs.filter((o) => o.id !== selId)); selId = null; end(); render(); refreshUI();
+  }
+  function clearBoard() {
+    commitEditor();
+    if (!objs.some((o) => !o.locked)) return;
+    begin(); setObjs(objs.filter((o) => o.locked)); selId = null; end(); render(); refreshUI();   // locked items stay
+  }
+  function exportPNG() {
+    commitEditor();
+    const off = document.createElement("canvas");
+    off.width = Math.round(W * DPR); off.height = Math.round(H * DPR);
+    const c = off.getContext("2d"); c.scale(DPR, DPR);
+    c.fillStyle = BOARD_BG; c.fillRect(0, 0, W, H);
+    objs.forEach((o) => drawObj(c, o));
+    const a = document.createElement("a");
+    a.download = (session.name || "whiteboard").replace(/[^\w-]+/g, "_") + ".png";
+    a.href = off.toDataURL("image/png"); a.click();
+  }
+  function toggleLock() {
+    const o = objs.find((x) => x.id === selId);
+    if (!o) return;
+    begin(); o.locked = !o.locked; end(); render(); refreshUI();
+  }
+  function unlockAll() {
+    if (!objs.some((o) => o.locked)) return;
+    begin(); objs.forEach((o) => { delete o.locked; }); end(); render(); refreshUI();
+  }
+  function applyStyleToSelection() {
+    const o = objs.find((x) => x.id === selId);
+    if (!o || o.locked) return;
+    begin(); o.c = color;
+    if (o.t === "text") o.size = TEXT_SIZE[sw] || o.size; else o.sw = sw;
+    end(); render();
+  }
+
+  // ---------- UI ----------
+  function buildUI() {
+    const gt = $("#gTools");
+    TOOLS.forEach(([name, title]) => {
+      const b = document.createElement("button");
+      b.className = "btn"; b.dataset.tool = name; b.title = title; b.innerHTML = svg(name);
+      b.addEventListener("click", () => setTool(name));
+      gt.appendChild(b);
+      if (name === "text" || name === "triangle") { const s = document.createElement("div"); s.className = "sep"; gt.insertBefore(s, b.nextSibling); }
+    });
+    const sw_ = $("#swatches");
+    COLORS.forEach((c) => {
+      const b = document.createElement("button");
+      b.className = "swatch"; b.style.background = c; b.dataset.color = c; b.title = c;
+      b.addEventListener("click", () => { color = c; refreshUI(); applyStyleToSelection(); });
+      sw_.appendChild(b);
+    });
+    $("#btnUndo").innerHTML = svg("undo"); $("#btnRedo").innerHTML = svg("redo");
+    $("#btnDelete").innerHTML = svg("trash"); $("#btnClear").innerHTML = svg("clear"); $("#btnExport").innerHTML = svg("download");
+    $("#btnUndo").onclick = undo; $("#btnRedo").onclick = redo;
+    $("#btnDelete").onclick = deleteSelected; $("#btnClear").onclick = clearBoard; $("#btnExport").onclick = exportPNG;
+    $("#btnLock").onclick = toggleLock; $("#btnUnlockAll").onclick = unlockAll;
+    $("#btnNew").onclick = newSession;
+    $("#btnSessions").onclick = () => { panel.classList.toggle("open"); renderList(); };
+    $("#size").addEventListener("change", (e) => { sw = +e.target.value; applyStyleToSelection(); });
+    nameInput.addEventListener("input", () => { session.name = nameInput.value || "Untitled"; scheduleSave(); renderList(); });
+    nameInput.addEventListener("keydown", (e) => { e.stopPropagation(); if (e.key === "Enter") nameInput.blur(); });
+  }
+  function setTool(t) {
+    commitEditor(); tool = t;
+    if (t !== "select") selId = null;
+    canvas.style.cursor = { select: "default", pen: "crosshair", eraser: "cell", text: "text" }[t] || "crosshair";
+    refreshUI(); render();
+  }
+  function refreshUI() {
+    document.querySelectorAll("#gTools .btn").forEach((b) => b.classList.toggle("active", b.dataset.tool === tool));
+    document.querySelectorAll(".swatch").forEach((b) => b.classList.toggle("active", b.dataset.color === color));
+    $("#size").value = String(sw);
+    if (document.activeElement !== nameInput) nameInput.value = session.name;
+    const h = H_();
+    $("#btnUndo").disabled = !h.undo.length; $("#btnRedo").disabled = !h.redo.length;
+    const sel = objs.find((o) => o.id === selId);
+    $("#btnDelete").disabled = !sel || !!sel.locked;
+    $("#btnClear").disabled = !objs.some((o) => !o.locked);
+    $("#btnLock").innerHTML = svg(sel && sel.locked ? "unlock" : "lock");
+    $("#btnLock").disabled = !sel;
+    $("#btnLock").classList.toggle("active", !!(sel && sel.locked));
+    $("#btnLock").title = sel && sel.locked ? "Unlock the selected item (K)" : "Lock the selected item in place (K)";
+    $("#btnUnlockAll").style.display = objs.some((o) => o.locked) ? "" : "none";
+    if (panel.classList.contains("open")) renderList();
+  }
+  const closePanel = () => panel.classList.remove("open");
+  function ago(t) {
+    const s = Math.max(0, (Date.now() - t) / 1000);
+    if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + " min ago";
+    if (s < 86400) return Math.floor(s / 3600) + " h ago"; return Math.floor(s / 86400) + " d ago";
+  }
+  function renderList() {
+    listEl.innerHTML = "";
+    store.sessions.slice().sort((a, b) => b.updated - a.updated).forEach((s) => {
+      const row = document.createElement("div");
+      row.className = "sess" + (s.id === session.id ? " current" : "");
+      const nm = document.createElement("span"); nm.className = "nm"; nm.textContent = s.name;
+      const when = document.createElement("span"); when.className = "when"; when.textContent = ago(s.updated);
+      const del = document.createElement("button"); del.className = "btn del"; del.title = "Delete session"; del.innerHTML = svg("close");
+      let armed = null;
+      del.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (del.classList.contains("sure")) { clearTimeout(armed); deleteSession(s.id); return; }
+        del.classList.add("sure"); del.textContent = "Delete?";
+        armed = setTimeout(() => { del.classList.remove("sure"); del.innerHTML = svg("close"); }, 2500);
+      });
+      row.append(nm, when, del);
+      row.addEventListener("click", () => { switchTo(s.id); closePanel(); });
+      listEl.appendChild(row);
+    });
+  }
+
+  // ---------- keyboard ----------
+  document.addEventListener("keydown", (e) => {
+    const tag = (document.activeElement && document.activeElement.tagName) || "";
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+    const mod = e.ctrlKey || e.metaKey, k = e.key.toLowerCase();
+    if (mod && k === "z") { e.preventDefault(); e.shiftKey ? redo() : undo(); return; }
+    if (mod && k === "y") { e.preventDefault(); redo(); return; }
+    if (mod) return;
+    if (e.key === "Delete" || e.key === "Backspace") { e.preventDefault(); deleteSelected(); return; }
+    if (k === "k") { toggleLock(); return; }
+    if (e.key.startsWith("Arrow")) {          // nudge the selected item (Shift = 10px)
+      const o = objs.find((x) => x.id === selId);
+      if (o && !o.locked) {
+        e.preventDefault();
+        const d = e.shiftKey ? 10 : 1;
+        begin(); translate(o, e.key === "ArrowLeft" ? -d : e.key === "ArrowRight" ? d : 0, e.key === "ArrowUp" ? -d : e.key === "ArrowDown" ? d : 0); end(); render();
+      }
+      return;
+    }
+    if (e.key === "Escape") { selId = null; closePanel(); render(); refreshUI(); return; }
+    const t = TOOLS.find((x) => x[2] === k);
+    if (t) setTool(t[0]);
+  });
+
+  // ---------- lock the page: no scroll, bounce or zoom ----------
+  document.addEventListener("wheel", (e) => e.preventDefault(), { passive: false });
+  document.addEventListener("touchmove", (e) => { if (e.target === canvas) e.preventDefault(); }, { passive: false });
+  ["gesturestart", "gesturechange", "gestureend"].forEach((n) => document.addEventListener(n, (e) => e.preventDefault()));
+  document.addEventListener("contextmenu", (e) => { if (e.target === canvas) e.preventDefault(); });
+  window.addEventListener("scroll", () => window.scrollTo(0, 0));
+  window.addEventListener("resize", resize);
+  window.addEventListener("beforeunload", () => { commitEditor(); saveNow(); });
+  document.addEventListener("visibilitychange", () => { if (document.hidden) { commitEditor(); saveNow(); } });
+  document.addEventListener("pointerdown", (e) => { if (!panel.contains(e.target) && e.target.id !== "btnSessions" && !$("#btnSessions").contains(e.target)) closePanel(); });
+
+  // ---------- go ----------
+  buildUI();
+  setTool("pen");
+  resize();
+  refreshUI();
+})();
+</script>
+</body>
+</html>
