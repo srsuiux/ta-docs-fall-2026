@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Todo Board</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Todo Board</h1>
+    <input id="search" type="search" placeholder="Search tasks" aria-label="Search tasks">
+    <button id="clear-done" type="button">Clear done</button>
+  </header>
+
+  <main class="board">
+    <section class="column" data-status="todo">
+      <header class="column-head">
+        <h2>To do</h2><span class="count" id="count-todo">0</span>
+      </header>
+      <ul class="list" id="list-todo" aria-label="To do"></ul>
+      <form class="add-form" data-status="todo">
+        <input type="text" placeholder="Add a task" aria-label="Add a task to To do" maxlength="200" required>
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section class="column" data-status="doing">
+      <header class="column-head">
+        <h2>In progress</h2><span class="count" id="count-doing">0</span>
+      </header>
+      <ul class="list" id="list-doing" aria-label="In progress"></ul>
+      <form class="add-form" data-status="doing">
+        <input type="text" placeholder="Add a task" aria-label="Add a task to In progress" maxlength="200" required>
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section class="column" data-status="done">
+      <header class="column-head">
+        <h2>Done</h2><span class="count" id="count-done">0</span>
+      </header>
+      <ul class="list" id="list-done" aria-label="Done"></ul>
+      <form class="add-form" data-status="done">
+        <input type="text" placeholder="Add a task" aria-label="Add a task to Done" maxlength="200" required>
+        <button type="submit">Add</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
